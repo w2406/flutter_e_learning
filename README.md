@@ -1,16 +1,108 @@
-# flutter_e_learning
+# Flutter学習eラーニングアプリ（Dify連携）
 
-A new Flutter project.
+## 1. 概要
 
-## Getting Started
+### 目的  
+Flutter初心者～中級者向けに、学習セクションごとにFlutterの技術を解説し、  
+コード入力→AIによる自動添削→フィードバックを受け取れるアプリを提供する。
 
-This project is a starting point for a Flutter application.
+### 対象ユーザー  
+- Flutter初学者～中級者  
+- モバイルアプリ開発学習者  
+- プログラミングの自己学習者
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 2. 使用技術
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### フロントエンド（アプリ）
+- Flutter（iOS / Android ※Webにも対応予定）
+- 状態管理：Riverpod
+- 画面遷移：GoRouter
+- コード入力欄：`flutter_code_editor` or `code_text_field`
+- HTTP通信：`retrofit`、`dio`
+- DB：`sqflite`
+### バックエンド（AI添削）
+- Dify（カスタムGPTアプリ）
+- API連携（REST API）
+- モデル：gpt-4 / gpt-4o 推奨
+
+---
+
+## 3. 機能要件
+
+### 3.1 セクション/学習構造
+| 要素           | 内容                                     |
+|----------------|------------------------------------------|
+| セクション一覧 | Flutter Roadmapベースで15〜20カテゴリ     |
+| 問題   | 各セクションに複数問題（Markdown形式）    |
+| 進捗管理       | ユーザーごとに進捗・履歴を記録（ローカル or Firebase） |
+
+---
+
+### 3.2 UI機能一覧
+
+#### ホーム画面（セクション一覧）
+- セクションタイトル表示（アイコン＋進捗％）
+- タップで詳細へ遷移
+
+#### セクション画面
+- 問題一覧
+- 問題をタップすると問題画面へ遷移
+
+#### 問題画面
+- 問題の説明（タイトル、解説、課題文）
+- 回答欄（問題によって回答方式を変える）
+    - コード入力欄（Flutterコード、入力テンプレートコードあり）
+    - 選択欄
+- 「回答する」ボタン → 判定 or Dify API呼び出し
+
+#### 問題画面 フィードバック表示
+- 正誤判定
+- 改善点・推奨される書き方の提案
+- 必要に応じて模範コード
+
+#### 学習履歴一覧画面
+- 問題を解いた履歴一覧を表示
+- 履歴を選択することで振り返ることで添削時の問題画面を表示
+
+---
+
+### 3.3 非機能要件
+- オフライン時は問題の判定・添削不可
+- 学習履歴は永続化（ローカル or Firebase）
+- レスポンシブなレイアウト対応
+
+---
+
+## 4. Dify連携仕様
+
+### Difyで用意するアプリ
+- モード：チャット or Completion API
+- モデル：gpt-4 / gpt-4o（推奨）
+- ナレッジベース機能を有効化
+- プロンプト例：
+
+```text
+あなたはFlutter講師です。
+以下の学習課題に対して、ユーザーのコードを丁寧に添削してください。
+
+【課題内容】
+Flutterの${セクション名}
+
+【問題文】
+${問題文}
+
+【提出コード】
+${userCode}
+
+評価軸：
+1. 仕様を満たしているか（正誤）
+2. コードスタイルに問題はあるか（可読性、冗長性）
+3. ナレッジベースを元に、改善点と模範コードの提示
+
+優しい日本語でコメントしてください。
+```
+####  ナレッジベース活用
+Flutterロードマップのセクション・項目ごとにMarkdown形式でナレッジを作成する。  
+ナレッジはDifyのナレッジベース機能を使用して問題の回答根拠として使用する。
