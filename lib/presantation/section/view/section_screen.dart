@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_learning/presantation/question/view/question_screen.dart';
+import 'package:flutter_e_learning/common/route_paths.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SectionScreen extends HookConsumerWidget {
@@ -8,18 +9,20 @@ class SectionScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Section')),
+      appBar: AppBar(
+        title: const Text('Section'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
             Text('Hello, SectionScreen!'),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const QuestionScreen(),
-                  ),
-                );
+                context.push(AppRoutes.questionPath);
               },
               child: Text("問題画面へ"),
             ),
