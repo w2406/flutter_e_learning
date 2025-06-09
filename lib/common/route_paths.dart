@@ -3,6 +3,7 @@ class AppRoutes {
   // GoRouterの設定で使う絶対パス
   static const String homePath = '/';
   static const String historyListPath = '/history_list';
+  static const String settingPath = '/setting';
   static const String historyPath = '/history_list/history';
   static const String sectionListPath = '/section_list';
   static const String sectionPath = '/section_list/section';

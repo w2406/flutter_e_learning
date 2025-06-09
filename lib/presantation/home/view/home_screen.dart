@@ -48,6 +48,14 @@ class HomeScreen extends HookConsumerWidget {
               },
               child: Text("履歴一覧画面へ"),
             ),
+            SizedBox(height: 16),
+            // 設定画面へ遷移ボタン
+            ElevatedButton(
+              onPressed: () {
+                context.push('/setting');
+              },
+              child: Text("設定画面へ"),
+            ),
           ],
         ),
       ),
