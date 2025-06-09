@@ -9,25 +9,21 @@ class SectionScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Section'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Text('Hello, SectionScreen!'),
-            ElevatedButton(
-              onPressed: () {
+      appBar: AppBar(title: const Text('問題リスト')),
+      body: ListView.builder(
+        itemCount: 5, // 仮の問題数
+        itemBuilder: (context, index) {
+          return Card(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: ListTile(
+              title: Text('問題${index + 1}'),
+              subtitle: Text('問題${index + 1}の説明'),
+              onTap: () {
                 context.push(AppRoutes.questionPath);
               },
-              child: Text("問題画面へ"),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -16,18 +16,21 @@ class HistoryListScreen extends HookConsumerWidget {
           onPressed: () => context.pop(),
         ),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text('Hello, HistoryListScreen!'),
-            ElevatedButton(
-              onPressed: () {
+      body: ListView.builder(
+        itemCount: 8, // 仮の履歴数
+        itemBuilder: (context, index) {
+          return Card(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: ListTile(
+              title: Text('解いた問題${index + 1}'),
+              subtitle: Text('解答日: 2025/06/0${(index % 9) + 1}'),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
                 context.push(AppRoutes.historyPath);
               },
-              child: Text("問題画面(回答時の内容)へ"),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
