@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_learning/common/route_paths.dart';
+import 'package:flutter_e_learning/presantation/history_list/view_model/history_list_screen_view_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,6 +9,7 @@ class HistoryListScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(historyListScreenViewModelProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('HistoryList'),
@@ -17,13 +19,26 @@ class HistoryListScreen extends HookConsumerWidget {
         ),
       ),
       body: ListView.builder(
-        itemCount: 8, // 仮の履歴数
+        itemCount: state.items.length,
         itemBuilder: (context, index) {
+          final item = state.items[index];
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListTile(
-              title: Text('解いた問題${index + 1}'),
-              subtitle: Text('解答日: 2025/06/0${(index % 9) + 1}'),
+              title: Text(item.questionTitle),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('解答日: ${item.answeredAt}'),
+                  Text(
+                    item.isCorrect ? '正解' : '不正解',
+                    style: TextStyle(
+                      color: item.isCorrect ? Colors.green : Colors.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
               trailing: Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {
                 context.push(AppRoutes.historyPath);
