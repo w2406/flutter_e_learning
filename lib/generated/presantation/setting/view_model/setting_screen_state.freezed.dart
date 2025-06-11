@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SettingScreenState {
 
- String get apiKey; String get appVersion; bool get isFileLoaded; String? get fileName;
+ String? get apiKey; String get appVersion; bool get isFileLoaded; String? get fileName;
 /// Create a copy of SettingScreenState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,7 +46,7 @@ abstract mixin class $SettingScreenStateCopyWith<$Res>  {
   factory $SettingScreenStateCopyWith(SettingScreenState value, $Res Function(SettingScreenState) _then) = _$SettingScreenStateCopyWithImpl;
 @useResult
 $Res call({
- String apiKey, String appVersion, bool isFileLoaded, String? fileName
+ String? apiKey, String appVersion, bool isFileLoaded, String? fileName
 });
 
 
@@ -63,10 +63,10 @@ class _$SettingScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? apiKey = null,Object? appVersion = null,Object? isFileLoaded = null,Object? fileName = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? apiKey = freezed,Object? appVersion = null,Object? isFileLoaded = null,Object? fileName = freezed,}) {
   return _then(_self.copyWith(
-apiKey: null == apiKey ? _self.apiKey : apiKey // ignore: cast_nullable_to_non_nullable
-as String,appVersion: null == appVersion ? _self.appVersion : appVersion // ignore: cast_nullable_to_non_nullable
+apiKey: freezed == apiKey ? _self.apiKey : apiKey // ignore: cast_nullable_to_non_nullable
+as String?,appVersion: null == appVersion ? _self.appVersion : appVersion // ignore: cast_nullable_to_non_nullable
 as String,isFileLoaded: null == isFileLoaded ? _self.isFileLoaded : isFileLoaded // ignore: cast_nullable_to_non_nullable
 as bool,fileName: freezed == fileName ? _self.fileName : fileName // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -83,7 +83,7 @@ class _SettingScreenState implements SettingScreenState {
   const _SettingScreenState({required this.apiKey, required this.appVersion, required this.isFileLoaded, this.fileName});
   
 
-@override final  String apiKey;
+@override final  String? apiKey;
 @override final  String appVersion;
 @override final  bool isFileLoaded;
 @override final  String? fileName;
@@ -118,7 +118,7 @@ abstract mixin class _$SettingScreenStateCopyWith<$Res> implements $SettingScree
   factory _$SettingScreenStateCopyWith(_SettingScreenState value, $Res Function(_SettingScreenState) _then) = __$SettingScreenStateCopyWithImpl;
 @override @useResult
 $Res call({
- String apiKey, String appVersion, bool isFileLoaded, String? fileName
+ String? apiKey, String appVersion, bool isFileLoaded, String? fileName
 });
 
 
@@ -135,10 +135,10 @@ class __$SettingScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingScreenState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? apiKey = null,Object? appVersion = null,Object? isFileLoaded = null,Object? fileName = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? apiKey = freezed,Object? appVersion = null,Object? isFileLoaded = null,Object? fileName = freezed,}) {
   return _then(_SettingScreenState(
-apiKey: null == apiKey ? _self.apiKey : apiKey // ignore: cast_nullable_to_non_nullable
-as String,appVersion: null == appVersion ? _self.appVersion : appVersion // ignore: cast_nullable_to_non_nullable
+apiKey: freezed == apiKey ? _self.apiKey : apiKey // ignore: cast_nullable_to_non_nullable
+as String?,appVersion: null == appVersion ? _self.appVersion : appVersion // ignore: cast_nullable_to_non_nullable
 as String,isFileLoaded: null == isFileLoaded ? _self.isFileLoaded : isFileLoaded // ignore: cast_nullable_to_non_nullable
 as bool,fileName: freezed == fileName ? _self.fileName : fileName // ignore: cast_nullable_to_non_nullable
 as String?,

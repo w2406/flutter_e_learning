@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_learning/common/route_paths.dart';
+import 'package:flutter_e_learning/common/constants/route_paths.dart';
 import 'package:flutter_e_learning/presantation/history_list/view_model/history_list_screen_view_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -5,7 +5,7 @@ part '../../../generated/presantation/setting/view_model/setting_screen_state.fr
 @freezed
 abstract class SettingScreenState with _$SettingScreenState {
   const factory SettingScreenState({
-    required String apiKey,
+    required String? apiKey,
     required String appVersion,
     required bool isFileLoaded,
     String? fileName,

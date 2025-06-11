@@ -7,12 +7,12 @@ part of '../../../../presantation/setting/view_model/setting_screen_view_model.d
 // **************************************************************************
 
 String _$settingScreenViewModelHash() =>
-    r'167569001dffb9a61ee8db5f364a67fa7a34f44f';
+    r'9099461fd11fa7e90299da087de57d2af199861d';
 
 /// See also [SettingScreenViewModel].
 @ProviderFor(SettingScreenViewModel)
 final settingScreenViewModelProvider =
-    AutoDisposeNotifierProvider<
+    AutoDisposeAsyncNotifierProvider<
       SettingScreenViewModel,
       SettingScreenState
     >.internal(
@@ -25,6 +25,6 @@ final settingScreenViewModelProvider =
       allTransitiveDependencies: null,
     );
 
-typedef _$SettingScreenViewModel = AutoDisposeNotifier<SettingScreenState>;
+typedef _$SettingScreenViewModel = AutoDisposeAsyncNotifier<SettingScreenState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

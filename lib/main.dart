@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_e_learning/common/app_router.dart';
+import 'package:flutter_e_learning/common/router/app_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
