@@ -1,4 +1,5 @@
 import 'package:flutter_e_learning/common/provider/repository_provider.dart';
+import 'package:flutter_e_learning/usecase/question/get_questions_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/get_sections_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/update_questions_usecase.dart';
 import 'package:flutter_e_learning/usecase/setting/get_api_key_usecase.dart';
@@ -37,4 +38,10 @@ GetAppVersionUsecase getAppVersionUsecase(Ref ref) {
 GetSectionsUseCase getSectionsUseCase(Ref ref) {
   final repository = ref.watch(sectionRepositoryProvider);
   return GetSectionsUseCase(repository);
+}
+
+@Riverpod(keepAlive: true)
+GetQuestionsUseCase getQuestionsUseCase(Ref ref) {
+  final repository = ref.watch(questionsRepositoryProvider);
+  return GetQuestionsUseCase(repository);
 }

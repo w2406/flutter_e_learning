@@ -96,5 +96,23 @@ final getSectionsUseCaseProvider = Provider<GetSectionsUseCase>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetSectionsUseCaseRef = ProviderRef<GetSectionsUseCase>;
+String _$getQuestionsUseCaseHash() =>
+    r'058e88afb7d93be59f2da934b350524c8f239323';
+
+/// See also [getQuestionsUseCase].
+@ProviderFor(getQuestionsUseCase)
+final getQuestionsUseCaseProvider = Provider<GetQuestionsUseCase>.internal(
+  getQuestionsUseCase,
+  name: r'getQuestionsUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getQuestionsUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetQuestionsUseCaseRef = ProviderRef<GetQuestionsUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

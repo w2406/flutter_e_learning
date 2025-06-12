@@ -7,7 +7,7 @@ part of '../../../../presantation/section_list/view_model/section_list_screen_vi
 // **************************************************************************
 
 String _$sectionListScreenViewModelHash() =>
-    r'06bd2952b89b0b4e0c01023997be2423a95254e9';
+    r'477b809c19b491708db7b812e5c1a9d7eefeb064';
 
 /// See also [SectionListScreenViewModel].
 @ProviderFor(SectionListScreenViewModel)

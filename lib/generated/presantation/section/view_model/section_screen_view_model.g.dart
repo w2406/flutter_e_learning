@@ -7,12 +7,12 @@ part of '../../../../presantation/section/view_model/section_screen_view_model.d
 // **************************************************************************
 
 String _$sectionScreenViewModelHash() =>
-    r'454d9aaef53519ce927a025b43909fba63af18db';
+    r'b948885bc8f05d902a39071537a05703b0c58fea';
 
 /// See also [SectionScreenViewModel].
 @ProviderFor(SectionScreenViewModel)
 final sectionScreenViewModelProvider =
-    AutoDisposeNotifierProvider<
+    AutoDisposeAsyncNotifierProvider<
       SectionScreenViewModel,
       SectionScreenState
     >.internal(
@@ -25,6 +25,6 @@ final sectionScreenViewModelProvider =
       allTransitiveDependencies: null,
     );
 
-typedef _$SectionScreenViewModel = AutoDisposeNotifier<SectionScreenState>;
+typedef _$SectionScreenViewModel = AutoDisposeAsyncNotifier<SectionScreenState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
