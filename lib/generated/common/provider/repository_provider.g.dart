@@ -59,5 +59,22 @@ final appVersionRepositoryProvider = Provider<AppVersionRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AppVersionRepositoryRef = ProviderRef<AppVersionRepository>;
+String _$sectionRepositoryHash() => r'2f32ad92290aa9267224b38f047aa95916e58f65';
+
+/// See also [sectionRepository].
+@ProviderFor(sectionRepository)
+final sectionRepositoryProvider = Provider<SectionRepository>.internal(
+  sectionRepository,
+  name: r'sectionRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$sectionRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef SectionRepositoryRef = ProviderRef<SectionRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

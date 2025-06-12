@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../domain/setting/question/entity/question.dart';
+part of '../../../../../domain/question/question/entity/question.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
