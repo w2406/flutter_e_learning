@@ -7,12 +7,12 @@ part of '../../../../presantation/history_list/view_model/history_list_screen_vi
 // **************************************************************************
 
 String _$historyListScreenViewModelHash() =>
-    r'3c809d2d329db68190e21ffd703ab35f09ef21b3';
+    r'a068482b7409670333dabb859e30f31d4015b3ac';
 
 /// See also [HistoryListScreenViewModel].
 @ProviderFor(HistoryListScreenViewModel)
 final historyListScreenViewModelProvider =
-    AutoDisposeNotifierProvider<
+    AutoDisposeAsyncNotifierProvider<
       HistoryListScreenViewModel,
       HistoryListScreenState
     >.internal(
@@ -26,6 +26,6 @@ final historyListScreenViewModelProvider =
     );
 
 typedef _$HistoryListScreenViewModel =
-    AutoDisposeNotifier<HistoryListScreenState>;
+    AutoDisposeAsyncNotifier<HistoryListScreenState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

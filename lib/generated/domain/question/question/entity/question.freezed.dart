@@ -12,11 +12,34 @@ part of '../../../../../domain/question/question/entity/question.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+Question _$QuestionFromJson(
+  Map<String, dynamic> json
+) {
+        switch (json['runtimeType']) {
+                  case 'choice':
+          return ChoiceQuestion.fromJson(
+            json
+          );
+                case 'code':
+          return CodeQuestion.fromJson(
+            json
+          );
+        
+          default:
+            throw CheckedFromJsonException(
+  json,
+  'runtimeType',
+  'Question',
+  'Invalid union type "${json['runtimeType']}"!'
+);
+        }
+      
+}
 
 /// @nodoc
 mixin _$Question {
 
- Id get id; String get title; String get description; String get task; Choices get choices;
+ Id get id; String get title; String get questionText;
 /// Create a copy of Question
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +52,16 @@ $QuestionCopyWith<Question> get copyWith => _$QuestionCopyWithImpl<Question>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Question&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.task, task) || other.task == task)&&(identical(other.choices, choices) || other.choices == choices));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Question&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,description,task,choices);
+int get hashCode => Object.hash(runtimeType,id,title,questionText);
 
 @override
 String toString() {
-  return 'Question(id: $id, title: $title, description: $description, task: $task, choices: $choices)';
+  return 'Question(id: $id, title: $title, questionText: $questionText)';
 }
 
 
@@ -49,11 +72,11 @@ abstract mixin class $QuestionCopyWith<$Res>  {
   factory $QuestionCopyWith(Question value, $Res Function(Question) _then) = _$QuestionCopyWithImpl;
 @useResult
 $Res call({
- Id id, String title, String description, String task, Choices choices
+ Id id, String title, String questionText
 });
 
 
-$IdCopyWith<$Res> get id;$ChoicesCopyWith<$Res> get choices;
+$IdCopyWith<$Res> get id;
 
 }
 /// @nodoc
@@ -66,14 +89,12 @@ class _$QuestionCopyWithImpl<$Res>
 
 /// Create a copy of Question
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = null,Object? task = null,Object? choices = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? questionText = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as Id,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,task: null == task ? _self.task : task // ignore: cast_nullable_to_non_nullable
-as String,choices: null == choices ? _self.choices : choices // ignore: cast_nullable_to_non_nullable
-as Choices,
+as String,questionText: null == questionText ? _self.questionText : questionText // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 /// Create a copy of Question
@@ -84,15 +105,6 @@ $IdCopyWith<$Res> get id {
   
   return $IdCopyWith<$Res>(_self.id, (value) {
     return _then(_self.copyWith(id: value));
-  });
-}/// Create a copy of Question
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$ChoicesCopyWith<$Res> get choices {
-  
-  return $ChoicesCopyWith<$Res>(_self.choices, (value) {
-    return _then(_self.copyWith(choices: value));
   });
 }
 }
@@ -101,72 +113,74 @@ $ChoicesCopyWith<$Res> get choices {
 /// @nodoc
 @JsonSerializable()
 
-class _Question implements Question {
-  const _Question({required this.id, required this.title, required this.description, required this.task, required this.choices});
-  factory _Question.fromJson(Map<String, dynamic> json) => _$QuestionFromJson(json);
+class ChoiceQuestion implements Question {
+  const ChoiceQuestion({required this.id, required this.title, required this.questionText, required this.choices, final  String? $type}): $type = $type ?? 'choice';
+  factory ChoiceQuestion.fromJson(Map<String, dynamic> json) => _$ChoiceQuestionFromJson(json);
 
 @override final  Id id;
 @override final  String title;
-@override final  String description;
-@override final  String task;
-@override final  Choices choices;
+@override final  String questionText;
+ final  Choices choices;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
 
 /// Create a copy of Question
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$QuestionCopyWith<_Question> get copyWith => __$QuestionCopyWithImpl<_Question>(this, _$identity);
+$ChoiceQuestionCopyWith<ChoiceQuestion> get copyWith => _$ChoiceQuestionCopyWithImpl<ChoiceQuestion>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$QuestionToJson(this, );
+  return _$ChoiceQuestionToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Question&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.task, task) || other.task == task)&&(identical(other.choices, choices) || other.choices == choices));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChoiceQuestion&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText)&&(identical(other.choices, choices) || other.choices == choices));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,description,task,choices);
+int get hashCode => Object.hash(runtimeType,id,title,questionText,choices);
 
 @override
 String toString() {
-  return 'Question(id: $id, title: $title, description: $description, task: $task, choices: $choices)';
+  return 'Question.choice(id: $id, title: $title, questionText: $questionText, choices: $choices)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
-  factory _$QuestionCopyWith(_Question value, $Res Function(_Question) _then) = __$QuestionCopyWithImpl;
+abstract mixin class $ChoiceQuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
+  factory $ChoiceQuestionCopyWith(ChoiceQuestion value, $Res Function(ChoiceQuestion) _then) = _$ChoiceQuestionCopyWithImpl;
 @override @useResult
 $Res call({
- Id id, String title, String description, String task, Choices choices
+ Id id, String title, String questionText, Choices choices
 });
 
 
-@override $IdCopyWith<$Res> get id;@override $ChoicesCopyWith<$Res> get choices;
+@override $IdCopyWith<$Res> get id;$ChoicesCopyWith<$Res> get choices;
 
 }
 /// @nodoc
-class __$QuestionCopyWithImpl<$Res>
-    implements _$QuestionCopyWith<$Res> {
-  __$QuestionCopyWithImpl(this._self, this._then);
+class _$ChoiceQuestionCopyWithImpl<$Res>
+    implements $ChoiceQuestionCopyWith<$Res> {
+  _$ChoiceQuestionCopyWithImpl(this._self, this._then);
 
-  final _Question _self;
-  final $Res Function(_Question) _then;
+  final ChoiceQuestion _self;
+  final $Res Function(ChoiceQuestion) _then;
 
 /// Create a copy of Question
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = null,Object? task = null,Object? choices = null,}) {
-  return _then(_Question(
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? questionText = null,Object? choices = null,}) {
+  return _then(ChoiceQuestion(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as Id,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,task: null == task ? _self.task : task // ignore: cast_nullable_to_non_nullable
+as String,questionText: null == questionText ? _self.questionText : questionText // ignore: cast_nullable_to_non_nullable
 as String,choices: null == choices ? _self.choices : choices // ignore: cast_nullable_to_non_nullable
 as Choices,
   ));
@@ -189,6 +203,92 @@ $ChoicesCopyWith<$Res> get choices {
   
   return $ChoicesCopyWith<$Res>(_self.choices, (value) {
     return _then(_self.copyWith(choices: value));
+  });
+}
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class CodeQuestion implements Question {
+  const CodeQuestion({required this.id, required this.title, required this.questionText, final  String? $type}): $type = $type ?? 'code';
+  factory CodeQuestion.fromJson(Map<String, dynamic> json) => _$CodeQuestionFromJson(json);
+
+@override final  Id id;
+@override final  String title;
+@override final  String questionText;
+
+@JsonKey(name: 'runtimeType')
+final String $type;
+
+
+/// Create a copy of Question
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CodeQuestionCopyWith<CodeQuestion> get copyWith => _$CodeQuestionCopyWithImpl<CodeQuestion>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$CodeQuestionToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CodeQuestion&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,title,questionText);
+
+@override
+String toString() {
+  return 'Question.code(id: $id, title: $title, questionText: $questionText)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CodeQuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
+  factory $CodeQuestionCopyWith(CodeQuestion value, $Res Function(CodeQuestion) _then) = _$CodeQuestionCopyWithImpl;
+@override @useResult
+$Res call({
+ Id id, String title, String questionText
+});
+
+
+@override $IdCopyWith<$Res> get id;
+
+}
+/// @nodoc
+class _$CodeQuestionCopyWithImpl<$Res>
+    implements $CodeQuestionCopyWith<$Res> {
+  _$CodeQuestionCopyWithImpl(this._self, this._then);
+
+  final CodeQuestion _self;
+  final $Res Function(CodeQuestion) _then;
+
+/// Create a copy of Question
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? questionText = null,}) {
+  return _then(CodeQuestion(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as Id,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,questionText: null == questionText ? _self.questionText : questionText // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+/// Create a copy of Question
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$IdCopyWith<$Res> get id {
+  
+  return $IdCopyWith<$Res>(_self.id, (value) {
+    return _then(_self.copyWith(id: value));
   });
 }
 }

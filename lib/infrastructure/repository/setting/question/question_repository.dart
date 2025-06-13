@@ -11,13 +11,12 @@ class QuestionRepositoryImpl implements QuestionRepository {
   }
 
   @override
-  Future<Question> getQuestion() async {
+  Future<Question> getQuestion(Id id) async {
     // 仮のデータ例
-    return Question(
-      id: Id(value: '1'),
+    return Question.choice(
+      id: id,
       title: 'Flutter Basics',
-      description: 'A question about the Flutter framework.',
-      task: 'Explain what Flutter is.',
+      questionText: 'Flutterとは何か説明してください。',
       choices: Choices(
         values: [
           Choice(label: 'A framework', isCorrect: true),
@@ -33,11 +32,10 @@ class QuestionRepositoryImpl implements QuestionRepository {
   Future<List<Question>> getQuestions() {
     // 仮のデータ例
     return Future.value([
-      Question(
+      Question.choice(
         id: Id(value: '1'),
         title: 'Flutter Basics',
-        description: 'A question about the Flutter framework.',
-        task: 'Explain what Flutter is.',
+        questionText: 'Flutterとは何か説明してください。',
         choices: Choices(
           values: [
             Choice(label: 'A framework', isCorrect: true),
@@ -47,11 +45,10 @@ class QuestionRepositoryImpl implements QuestionRepository {
           ],
         ),
       ),
-      Question(
+      Question.choice(
         id: Id(value: '2'),
         title: 'Dart Fundamentals',
-        description: 'A question about the Dart programming language.',
-        task: 'What is Dart used for?',
+        questionText: 'Dartは何に使われる言語ですか？',
         choices: Choices(
           values: [
             Choice(label: 'Web development', isCorrect: false),
@@ -61,17 +58,16 @@ class QuestionRepositoryImpl implements QuestionRepository {
           ],
         ),
       ),
-      Question(
+      Question.choice(
         id: Id(value: '3'),
         title: 'State Management in Flutter',
-        description: 'A question about state management techniques in Flutter.',
-        task: 'What is the purpose of state management in Flutter?',
+        questionText: 'Flutterの状態管理の目的は何ですか？',
         choices: Choices(
           values: [
-            Choice(label: 'To manage UI updates', isCorrect: true),
-            Choice(label: 'To handle network requests', isCorrect: false),
-            Choice(label: 'To store data locally', isCorrect: false),
-            Choice(label: 'To create animations', isCorrect: false),
+            Choice(label: 'UI更新を管理する', isCorrect: true),
+            Choice(label: 'ネットワーク通信を行う', isCorrect: false),
+            Choice(label: 'ローカルデータを保存する', isCorrect: false),
+            Choice(label: 'アニメーションを作成する', isCorrect: false),
           ],
         ),
       ),

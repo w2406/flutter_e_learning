@@ -7,14 +7,19 @@ part '../../../../generated/domain/question/question/entity/question.freezed.dar
 part '../../../../generated/domain/question/question/entity/question.g.dart';
 
 @freezed
-abstract class Question with _$Question {
-  const factory Question({
+sealed class Question with _$Question {
+  const factory Question.choice({
     required Id id,
     required String title,
-    required String description,
-    required String task,
+    required String questionText,
     required Choices choices,
-  }) = _Question;
+  }) = ChoiceQuestion;
+
+  const factory Question.code({
+    required Id id,
+    required String title,
+    required String questionText,
+  }) = CodeQuestion;
 
   factory Question.fromJson(Map<String, dynamic> json) =>
       _$QuestionFromJson(json);

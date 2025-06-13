@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_e_learning/common/constants/route_paths.dart';
 import 'package:flutter_e_learning/presantation/history/view/history_screen.dart';
 import 'package:flutter_e_learning/presantation/history_list/view/history_list_screen.dart';
@@ -11,34 +12,54 @@ import 'package:go_router/go_router.dart';
 final GoRouter router = GoRouter(
   routes: [
     GoRoute(
-      path: AppRoutes.homePath,
+      name: AppRoutes.home,
+      path: '/',
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      path: AppRoutes.settingPath,
+      name: AppRoutes.setting,
+      path: '/${AppRoutes.setting}',
       builder: (context, state) => const SettingScreen(),
     ),
     GoRoute(
-      path: AppRoutes.historyListPath,
+      name: AppRoutes.historyList,
+      path: '/${AppRoutes.historyList}',
       builder: (context, state) => const HistoryListScreen(),
       routes: [
         GoRoute(
-          path: AppRoutes.history,
-          builder: (context, state) => const HistoryScreen(),
+          name: AppRoutes.history,
+          path: '${AppRoutes.history}/:${AppRoutes.historyId}',
+          builder: (context, state) {
+            final id = state.pathParameters[AppRoutes.historyId];
+            if (id == null) {
+              return Center(child: Text('History ID  not found'));
+            }
+
+            return HistoryScreen(id: id);
+          },
         ),
       ],
     ),
     GoRoute(
-      path: AppRoutes.sectionListPath,
+      name: AppRoutes.sectionList,
+      path: '/${AppRoutes.sectionList}',
       builder: (context, state) => const SectionListScreen(),
       routes: [
         GoRoute(
+          name: AppRoutes.section,
           path: AppRoutes.section,
           builder: (context, state) => const SectionScreen(),
           routes: [
             GoRoute(
-              path: AppRoutes.question,
-              builder: (context, state) => const QuestionScreen(),
+              name: AppRoutes.question,
+              path: '${AppRoutes.question}/:${AppRoutes.questionId}',
+              builder: (context, state) {
+                final id = state.pathParameters[AppRoutes.questionId];
+                if (id == null) {
+                  return Center(child: Text('Question ID not found'));
+                }
+                return QuestionScreen(id);
+              },
             ),
           ],
         ),

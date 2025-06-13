@@ -16,8 +16,9 @@ class SectionScreenViewModel extends _$SectionScreenViewModel {
       questions: questions
           .map(
             (question) => SectionQuestionItem(
-              questionTitle: question.title,
-              questionDescription: question.description,
+              questionId: question.id.value,
+              title: question.title,
+              questionText: question.questionText,
             ),
           )
           .toList(),

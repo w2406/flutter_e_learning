@@ -76,5 +76,22 @@ final sectionRepositoryProvider = Provider<SectionRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SectionRepositoryRef = ProviderRef<SectionRepository>;
+String _$historyRepositoryHash() => r'310d2aab4b10e0ae34ad3c473666dd63b8029c87';
+
+/// See also [historyRepository].
+@ProviderFor(historyRepository)
+final historyRepositoryProvider = Provider<HistoryRepository>.internal(
+  historyRepository,
+  name: r'historyRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$historyRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef HistoryRepositoryRef = ProviderRef<HistoryRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

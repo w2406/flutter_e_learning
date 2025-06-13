@@ -36,7 +36,7 @@ class HomeScreen extends HookConsumerWidget {
             // セクション一覧画面へ遷移ボタン
             ElevatedButton(
               onPressed: () {
-                context.push(AppRoutes.sectionListPath);
+                context.pushNamed(AppRoutes.sectionList);
               },
               child: Text("セクション一覧画面へ"),
             ),
@@ -44,7 +44,7 @@ class HomeScreen extends HookConsumerWidget {
             // 履歴一覧画面へ遷移ボタン
             ElevatedButton(
               onPressed: () {
-                context.push(AppRoutes.historyListPath);
+                context.pushNamed(AppRoutes.historyList);
               },
               child: Text("履歴一覧画面へ"),
             ),
@@ -52,7 +52,7 @@ class HomeScreen extends HookConsumerWidget {
             // 設定画面へ遷移ボタン
             ElevatedButton(
               onPressed: () {
-                context.push('/setting');
+                context.pushNamed(AppRoutes.setting);
               },
               child: Text("設定画面へ"),
             ),

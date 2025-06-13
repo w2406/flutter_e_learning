@@ -20,10 +20,13 @@ class SectionScreen extends HookConsumerWidget {
             return Card(
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: ListTile(
-                title: Text(item.questionTitle),
-                subtitle: Text(item.questionDescription),
+                title: Text(item.title),
+                subtitle: Text(item.questionText),
                 onTap: () {
-                  context.push(AppRoutes.questionPath);
+                  context.pushNamed(
+                    AppRoutes.question,
+                    pathParameters: {AppRoutes.questionId: item.questionId},
+                  );
                 },
               ),
             );

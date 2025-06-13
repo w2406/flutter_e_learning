@@ -5,12 +5,11 @@ part '../../../generated/presantation/question/view_model/question_screen_state.
 @freezed
 abstract class QuestionScreenState with _$QuestionScreenState {
   const factory QuestionScreenState({
-    required String questionTitle,
-    required String description,
-    required String task,
+    required String title,
+    required String questionText,
     required String codeAnswer,
     required int selectedChoice,
-    required List<String> choices,
+    required List<String>? choices,
     required bool isAnswered,
     required String feedbackResult,
     required String feedbackAdvice,

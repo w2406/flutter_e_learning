@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_e_learning/presantation/question/view_model/question_screen_view_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class QuestionScreen extends HookConsumerWidget {
-  const QuestionScreen({super.key});
+  const QuestionScreen(this.id, {super.key});
+
+  final String id;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(questionScreenViewModelProvider(id));
     final feedbackVisible = useState(false);
     final scrollController = useScrollController();
     int groupValue = 1;
@@ -22,102 +26,94 @@ class QuestionScreen extends HookConsumerWidget {
       });
     }
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('問題詳細')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          controller: scrollController,
-          children: [
-            Text(
-              '問題タイトル: FlutterのState管理',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '解説: Flutterで状態管理を行う方法について学びます。',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '課題文: 以下のカウンターアプリに状態管理を追加してください。',
-              style: TextStyle(fontSize: 16),
-            ),
-            Divider(height: 32),
-            Text('コード回答欄', style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            TextField(
-              maxLines: 8,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText:
-                    '// ここにFlutterコードを入力\nvoid main() {\n  runApp(MyApp());\n}\n',
+    return state.when(
+      data: (state) => Scaffold(
+        appBar: AppBar(title: const Text('問題詳細')),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(
+            controller: scrollController,
+            children: [
+              Text(
+                state.title,
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-            ),
-            SizedBox(height: 24),
-            Text('選択肢から選ぶ', style: TextStyle(fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Column(
-              children: [
-                RadioListTile(
-                  value: 1,
-                  groupValue: groupValue,
-                  onChanged: (v) {},
-                  title: Text('Provider'),
+              SizedBox(height: 8),
+              Text(
+                '問題文: ${state.questionText}',
+                style: TextStyle(fontSize: 18),
+              ),
+              Divider(height: 32),
+              // QuestionScreenState.choicesがnullかどうかで分岐
+              if (state.choices != null) ...[
+                Text('選択肢から選ぶ', style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(height: 8),
+                Column(
+                  children: List.generate(
+                    state.choices!.length,
+                    (i) => RadioListTile(
+                      value: i,
+                      groupValue: groupValue,
+                      onChanged: (v) {},
+                      title: Text(state.choices![i]),
+                    ),
+                  ),
                 ),
-                RadioListTile(
-                  value: 2,
-                  groupValue: groupValue,
-                  onChanged: (v) {},
-                  title: Text('Riverpod'),
-                ),
-                RadioListTile(
-                  value: 3,
-                  groupValue: groupValue,
-                  onChanged: (v) {},
-                  title: Text('setState'),
+              ] else ...[
+                Text('コード回答欄', style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(height: 8),
+                TextField(
+                  maxLines: 8,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText:
+                        '// ここにFlutterコードを入力\nvoid main() {\n  runApp(MyApp());\n}\n',
+                  ),
                 ),
               ],
-            ),
-            SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: showFeedbackAndScroll,
-              child: Text('回答する'),
-            ),
-            if (feedbackVisible.value) ...[
-              Divider(height: 40),
-              Text(
-                'フィードバック',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: showFeedbackAndScroll,
+                child: Text('回答する'),
               ),
-              SizedBox(height: 8),
-              Text(
-                '正誤判定: 正解',
-                style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
+              if (feedbackVisible.value) ...[
+                Divider(height: 40),
+                Text(
+                  'フィードバック',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              ),
-              SizedBox(height: 8),
-              Text('改善点: コードの可読性を高めるためにWidgetを分割しましょう。'),
-              SizedBox(height: 8),
-              Text('推奨される書き方: setStateよりもRiverpodやProviderを使うと良いです。'),
-              SizedBox(height: 8),
-              Text('模範コード:', style: TextStyle(fontWeight: FontWeight.bold)),
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 4),
-                padding: EdgeInsets.all(8),
-                color: Colors.grey[200],
-                child: Text(
-                  '''void main() {\n  runApp(MyApp());\n}\n// ...模範コード...''',
-                  style: TextStyle(fontFamily: 'monospace'),
+                SizedBox(height: 8),
+                Text(
+                  '正誤判定: ${state.feedbackResult}',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
+                SizedBox(height: 8),
+                Text('改善点: ${state.feedbackAdvice}'),
+                SizedBox(height: 8),
+                Text('推奨される書き方: ${state.feedbackRecommendation}'),
+                SizedBox(height: 8),
+                Text('模範コード:', style: TextStyle(fontWeight: FontWeight.bold)),
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top: 4),
+                  padding: EdgeInsets.all(8),
+                  color: Colors.grey[200],
+                  child: Text(
+                    state.modelCode,
+                    style: TextStyle(fontFamily: 'monospace'),
+                  ),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
+      loading: () =>
+          const Scaffold(body: Center(child: CircularProgressIndicator())),
+      error: (e, st) => Scaffold(body: Center(child: Text('エラー: $e'))),
     );
   }
 }

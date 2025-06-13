@@ -18,34 +18,41 @@ class HistoryListScreen extends HookConsumerWidget {
           onPressed: () => context.pop(),
         ),
       ),
-      body: ListView.builder(
-        itemCount: state.items.length,
-        itemBuilder: (context, index) {
-          final item = state.items[index];
-          return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: ListTile(
-              title: Text(item.questionTitle),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('解答日: ${item.answeredAt}'),
-                  Text(
-                    item.isCorrect ? '正解' : '不正解',
-                    style: TextStyle(
-                      color: item.isCorrect ? Colors.green : Colors.red,
-                      fontWeight: FontWeight.bold,
+      body: state.when(
+        data: (state) => ListView.builder(
+          itemCount: state.items.length,
+          itemBuilder: (context, index) {
+            final item = state.items[index];
+            return Card(
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: ListTile(
+                title: Text(item.historyTitle),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('解答日: ${item.answeredAt}'),
+                    Text(
+                      item.isCorrect ? '正解' : '不正解',
+                      style: TextStyle(
+                        color: item.isCorrect ? Colors.green : Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () {
+                  context.pushNamed(
+                    AppRoutes.history,
+                    pathParameters: {AppRoutes.historyId: item.historyId},
+                  );
+                },
               ),
-              trailing: Icon(Icons.arrow_forward_ios, size: 16),
-              onTap: () {
-                context.push(AppRoutes.historyPath);
-              },
-            ),
-          );
-        },
+            );
+          },
+        ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, st) => Center(child: Text('エラー: $e')),
       ),
     );
   }

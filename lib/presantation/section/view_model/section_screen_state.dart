@@ -13,7 +13,8 @@ abstract class SectionScreenState with _$SectionScreenState {
 @freezed
 abstract class SectionQuestionItem with _$SectionQuestionItem {
   const factory SectionQuestionItem({
-    required String questionTitle,
-    required String questionDescription,
+    required String questionId,
+    required String title,
+    required String questionText,
   }) = _SectionQuestionItem;
 }

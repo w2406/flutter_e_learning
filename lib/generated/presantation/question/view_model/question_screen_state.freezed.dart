@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$QuestionScreenState {
 
- String get questionTitle; String get description; String get task; String get codeAnswer; int get selectedChoice; List<String> get choices; bool get isAnswered; String get feedbackResult; String get feedbackAdvice; String get feedbackRecommendation; String get modelCode;
+ String get title; String get questionText; String get codeAnswer; int get selectedChoice; List<String>? get choices; bool get isAnswered; String get feedbackResult; String get feedbackAdvice; String get feedbackRecommendation; String get modelCode;
 /// Create a copy of QuestionScreenState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $QuestionScreenStateCopyWith<QuestionScreenState> get copyWith => _$QuestionScre
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuestionScreenState&&(identical(other.questionTitle, questionTitle) || other.questionTitle == questionTitle)&&(identical(other.description, description) || other.description == description)&&(identical(other.task, task) || other.task == task)&&(identical(other.codeAnswer, codeAnswer) || other.codeAnswer == codeAnswer)&&(identical(other.selectedChoice, selectedChoice) || other.selectedChoice == selectedChoice)&&const DeepCollectionEquality().equals(other.choices, choices)&&(identical(other.isAnswered, isAnswered) || other.isAnswered == isAnswered)&&(identical(other.feedbackResult, feedbackResult) || other.feedbackResult == feedbackResult)&&(identical(other.feedbackAdvice, feedbackAdvice) || other.feedbackAdvice == feedbackAdvice)&&(identical(other.feedbackRecommendation, feedbackRecommendation) || other.feedbackRecommendation == feedbackRecommendation)&&(identical(other.modelCode, modelCode) || other.modelCode == modelCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuestionScreenState&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText)&&(identical(other.codeAnswer, codeAnswer) || other.codeAnswer == codeAnswer)&&(identical(other.selectedChoice, selectedChoice) || other.selectedChoice == selectedChoice)&&const DeepCollectionEquality().equals(other.choices, choices)&&(identical(other.isAnswered, isAnswered) || other.isAnswered == isAnswered)&&(identical(other.feedbackResult, feedbackResult) || other.feedbackResult == feedbackResult)&&(identical(other.feedbackAdvice, feedbackAdvice) || other.feedbackAdvice == feedbackAdvice)&&(identical(other.feedbackRecommendation, feedbackRecommendation) || other.feedbackRecommendation == feedbackRecommendation)&&(identical(other.modelCode, modelCode) || other.modelCode == modelCode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,questionTitle,description,task,codeAnswer,selectedChoice,const DeepCollectionEquality().hash(choices),isAnswered,feedbackResult,feedbackAdvice,feedbackRecommendation,modelCode);
+int get hashCode => Object.hash(runtimeType,title,questionText,codeAnswer,selectedChoice,const DeepCollectionEquality().hash(choices),isAnswered,feedbackResult,feedbackAdvice,feedbackRecommendation,modelCode);
 
 @override
 String toString() {
-  return 'QuestionScreenState(questionTitle: $questionTitle, description: $description, task: $task, codeAnswer: $codeAnswer, selectedChoice: $selectedChoice, choices: $choices, isAnswered: $isAnswered, feedbackResult: $feedbackResult, feedbackAdvice: $feedbackAdvice, feedbackRecommendation: $feedbackRecommendation, modelCode: $modelCode)';
+  return 'QuestionScreenState(title: $title, questionText: $questionText, codeAnswer: $codeAnswer, selectedChoice: $selectedChoice, choices: $choices, isAnswered: $isAnswered, feedbackResult: $feedbackResult, feedbackAdvice: $feedbackAdvice, feedbackRecommendation: $feedbackRecommendation, modelCode: $modelCode)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $QuestionScreenStateCopyWith<$Res>  {
   factory $QuestionScreenStateCopyWith(QuestionScreenState value, $Res Function(QuestionScreenState) _then) = _$QuestionScreenStateCopyWithImpl;
 @useResult
 $Res call({
- String questionTitle, String description, String task, String codeAnswer, int selectedChoice, List<String> choices, bool isAnswered, String feedbackResult, String feedbackAdvice, String feedbackRecommendation, String modelCode
+ String title, String questionText, String codeAnswer, int selectedChoice, List<String>? choices, bool isAnswered, String feedbackResult, String feedbackAdvice, String feedbackRecommendation, String modelCode
 });
 
 
@@ -63,15 +63,14 @@ class _$QuestionScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of QuestionScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? questionTitle = null,Object? description = null,Object? task = null,Object? codeAnswer = null,Object? selectedChoice = null,Object? choices = null,Object? isAnswered = null,Object? feedbackResult = null,Object? feedbackAdvice = null,Object? feedbackRecommendation = null,Object? modelCode = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? questionText = null,Object? codeAnswer = null,Object? selectedChoice = null,Object? choices = freezed,Object? isAnswered = null,Object? feedbackResult = null,Object? feedbackAdvice = null,Object? feedbackRecommendation = null,Object? modelCode = null,}) {
   return _then(_self.copyWith(
-questionTitle: null == questionTitle ? _self.questionTitle : questionTitle // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,task: null == task ? _self.task : task // ignore: cast_nullable_to_non_nullable
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,questionText: null == questionText ? _self.questionText : questionText // ignore: cast_nullable_to_non_nullable
 as String,codeAnswer: null == codeAnswer ? _self.codeAnswer : codeAnswer // ignore: cast_nullable_to_non_nullable
 as String,selectedChoice: null == selectedChoice ? _self.selectedChoice : selectedChoice // ignore: cast_nullable_to_non_nullable
-as int,choices: null == choices ? _self.choices : choices // ignore: cast_nullable_to_non_nullable
-as List<String>,isAnswered: null == isAnswered ? _self.isAnswered : isAnswered // ignore: cast_nullable_to_non_nullable
+as int,choices: freezed == choices ? _self.choices : choices // ignore: cast_nullable_to_non_nullable
+as List<String>?,isAnswered: null == isAnswered ? _self.isAnswered : isAnswered // ignore: cast_nullable_to_non_nullable
 as bool,feedbackResult: null == feedbackResult ? _self.feedbackResult : feedbackResult // ignore: cast_nullable_to_non_nullable
 as String,feedbackAdvice: null == feedbackAdvice ? _self.feedbackAdvice : feedbackAdvice // ignore: cast_nullable_to_non_nullable
 as String,feedbackRecommendation: null == feedbackRecommendation ? _self.feedbackRecommendation : feedbackRecommendation // ignore: cast_nullable_to_non_nullable
@@ -87,19 +86,20 @@ as String,
 
 
 class _QuestionScreenState implements QuestionScreenState {
-  const _QuestionScreenState({required this.questionTitle, required this.description, required this.task, required this.codeAnswer, required this.selectedChoice, required final  List<String> choices, required this.isAnswered, required this.feedbackResult, required this.feedbackAdvice, required this.feedbackRecommendation, required this.modelCode}): _choices = choices;
+  const _QuestionScreenState({required this.title, required this.questionText, required this.codeAnswer, required this.selectedChoice, required final  List<String>? choices, required this.isAnswered, required this.feedbackResult, required this.feedbackAdvice, required this.feedbackRecommendation, required this.modelCode}): _choices = choices;
   
 
-@override final  String questionTitle;
-@override final  String description;
-@override final  String task;
+@override final  String title;
+@override final  String questionText;
 @override final  String codeAnswer;
 @override final  int selectedChoice;
- final  List<String> _choices;
-@override List<String> get choices {
+ final  List<String>? _choices;
+@override List<String>? get choices {
+  final value = _choices;
+  if (value == null) return null;
   if (_choices is EqualUnmodifiableListView) return _choices;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_choices);
+  return EqualUnmodifiableListView(value);
 }
 
 @override final  bool isAnswered;
@@ -118,16 +118,16 @@ _$QuestionScreenStateCopyWith<_QuestionScreenState> get copyWith => __$QuestionS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuestionScreenState&&(identical(other.questionTitle, questionTitle) || other.questionTitle == questionTitle)&&(identical(other.description, description) || other.description == description)&&(identical(other.task, task) || other.task == task)&&(identical(other.codeAnswer, codeAnswer) || other.codeAnswer == codeAnswer)&&(identical(other.selectedChoice, selectedChoice) || other.selectedChoice == selectedChoice)&&const DeepCollectionEquality().equals(other._choices, _choices)&&(identical(other.isAnswered, isAnswered) || other.isAnswered == isAnswered)&&(identical(other.feedbackResult, feedbackResult) || other.feedbackResult == feedbackResult)&&(identical(other.feedbackAdvice, feedbackAdvice) || other.feedbackAdvice == feedbackAdvice)&&(identical(other.feedbackRecommendation, feedbackRecommendation) || other.feedbackRecommendation == feedbackRecommendation)&&(identical(other.modelCode, modelCode) || other.modelCode == modelCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuestionScreenState&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText)&&(identical(other.codeAnswer, codeAnswer) || other.codeAnswer == codeAnswer)&&(identical(other.selectedChoice, selectedChoice) || other.selectedChoice == selectedChoice)&&const DeepCollectionEquality().equals(other._choices, _choices)&&(identical(other.isAnswered, isAnswered) || other.isAnswered == isAnswered)&&(identical(other.feedbackResult, feedbackResult) || other.feedbackResult == feedbackResult)&&(identical(other.feedbackAdvice, feedbackAdvice) || other.feedbackAdvice == feedbackAdvice)&&(identical(other.feedbackRecommendation, feedbackRecommendation) || other.feedbackRecommendation == feedbackRecommendation)&&(identical(other.modelCode, modelCode) || other.modelCode == modelCode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,questionTitle,description,task,codeAnswer,selectedChoice,const DeepCollectionEquality().hash(_choices),isAnswered,feedbackResult,feedbackAdvice,feedbackRecommendation,modelCode);
+int get hashCode => Object.hash(runtimeType,title,questionText,codeAnswer,selectedChoice,const DeepCollectionEquality().hash(_choices),isAnswered,feedbackResult,feedbackAdvice,feedbackRecommendation,modelCode);
 
 @override
 String toString() {
-  return 'QuestionScreenState(questionTitle: $questionTitle, description: $description, task: $task, codeAnswer: $codeAnswer, selectedChoice: $selectedChoice, choices: $choices, isAnswered: $isAnswered, feedbackResult: $feedbackResult, feedbackAdvice: $feedbackAdvice, feedbackRecommendation: $feedbackRecommendation, modelCode: $modelCode)';
+  return 'QuestionScreenState(title: $title, questionText: $questionText, codeAnswer: $codeAnswer, selectedChoice: $selectedChoice, choices: $choices, isAnswered: $isAnswered, feedbackResult: $feedbackResult, feedbackAdvice: $feedbackAdvice, feedbackRecommendation: $feedbackRecommendation, modelCode: $modelCode)';
 }
 
 
@@ -138,7 +138,7 @@ abstract mixin class _$QuestionScreenStateCopyWith<$Res> implements $QuestionScr
   factory _$QuestionScreenStateCopyWith(_QuestionScreenState value, $Res Function(_QuestionScreenState) _then) = __$QuestionScreenStateCopyWithImpl;
 @override @useResult
 $Res call({
- String questionTitle, String description, String task, String codeAnswer, int selectedChoice, List<String> choices, bool isAnswered, String feedbackResult, String feedbackAdvice, String feedbackRecommendation, String modelCode
+ String title, String questionText, String codeAnswer, int selectedChoice, List<String>? choices, bool isAnswered, String feedbackResult, String feedbackAdvice, String feedbackRecommendation, String modelCode
 });
 
 
@@ -155,15 +155,14 @@ class __$QuestionScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of QuestionScreenState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? questionTitle = null,Object? description = null,Object? task = null,Object? codeAnswer = null,Object? selectedChoice = null,Object? choices = null,Object? isAnswered = null,Object? feedbackResult = null,Object? feedbackAdvice = null,Object? feedbackRecommendation = null,Object? modelCode = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? title = null,Object? questionText = null,Object? codeAnswer = null,Object? selectedChoice = null,Object? choices = freezed,Object? isAnswered = null,Object? feedbackResult = null,Object? feedbackAdvice = null,Object? feedbackRecommendation = null,Object? modelCode = null,}) {
   return _then(_QuestionScreenState(
-questionTitle: null == questionTitle ? _self.questionTitle : questionTitle // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,task: null == task ? _self.task : task // ignore: cast_nullable_to_non_nullable
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,questionText: null == questionText ? _self.questionText : questionText // ignore: cast_nullable_to_non_nullable
 as String,codeAnswer: null == codeAnswer ? _self.codeAnswer : codeAnswer // ignore: cast_nullable_to_non_nullable
 as String,selectedChoice: null == selectedChoice ? _self.selectedChoice : selectedChoice // ignore: cast_nullable_to_non_nullable
-as int,choices: null == choices ? _self._choices : choices // ignore: cast_nullable_to_non_nullable
-as List<String>,isAnswered: null == isAnswered ? _self.isAnswered : isAnswered // ignore: cast_nullable_to_non_nullable
+as int,choices: freezed == choices ? _self._choices : choices // ignore: cast_nullable_to_non_nullable
+as List<String>?,isAnswered: null == isAnswered ? _self.isAnswered : isAnswered // ignore: cast_nullable_to_non_nullable
 as bool,feedbackResult: null == feedbackResult ? _self.feedbackResult : feedbackResult // ignore: cast_nullable_to_non_nullable
 as String,feedbackAdvice: null == feedbackAdvice ? _self.feedbackAdvice : feedbackAdvice // ignore: cast_nullable_to_non_nullable
 as String,feedbackRecommendation: null == feedbackRecommendation ? _self.feedbackRecommendation : feedbackRecommendation // ignore: cast_nullable_to_non_nullable

@@ -148,7 +148,8 @@ as List<HistoryListItem>,
 /// @nodoc
 mixin _$HistoryListItem {
 
- String get questionTitle; String get answeredAt; bool get isCorrect;
+ String get historyId; String get historyTitle; String get answeredAt; bool get isCorrect;// 正解ならtrue, 不正解ならfalse
+ String? get feedbackExplanation; String? get feedbackAdvice; String? get feedbackSampleCode;
 /// Create a copy of HistoryListItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -159,16 +160,16 @@ $HistoryListItemCopyWith<HistoryListItem> get copyWith => _$HistoryListItemCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryListItem&&(identical(other.questionTitle, questionTitle) || other.questionTitle == questionTitle)&&(identical(other.answeredAt, answeredAt) || other.answeredAt == answeredAt)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryListItem&&(identical(other.historyId, historyId) || other.historyId == historyId)&&(identical(other.historyTitle, historyTitle) || other.historyTitle == historyTitle)&&(identical(other.answeredAt, answeredAt) || other.answeredAt == answeredAt)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect)&&(identical(other.feedbackExplanation, feedbackExplanation) || other.feedbackExplanation == feedbackExplanation)&&(identical(other.feedbackAdvice, feedbackAdvice) || other.feedbackAdvice == feedbackAdvice)&&(identical(other.feedbackSampleCode, feedbackSampleCode) || other.feedbackSampleCode == feedbackSampleCode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,questionTitle,answeredAt,isCorrect);
+int get hashCode => Object.hash(runtimeType,historyId,historyTitle,answeredAt,isCorrect,feedbackExplanation,feedbackAdvice,feedbackSampleCode);
 
 @override
 String toString() {
-  return 'HistoryListItem(questionTitle: $questionTitle, answeredAt: $answeredAt, isCorrect: $isCorrect)';
+  return 'HistoryListItem(historyId: $historyId, historyTitle: $historyTitle, answeredAt: $answeredAt, isCorrect: $isCorrect, feedbackExplanation: $feedbackExplanation, feedbackAdvice: $feedbackAdvice, feedbackSampleCode: $feedbackSampleCode)';
 }
 
 
@@ -179,7 +180,7 @@ abstract mixin class $HistoryListItemCopyWith<$Res>  {
   factory $HistoryListItemCopyWith(HistoryListItem value, $Res Function(HistoryListItem) _then) = _$HistoryListItemCopyWithImpl;
 @useResult
 $Res call({
- String questionTitle, String answeredAt, bool isCorrect
+ String historyId, String historyTitle, String answeredAt, bool isCorrect, String? feedbackExplanation, String? feedbackAdvice, String? feedbackSampleCode
 });
 
 
@@ -196,12 +197,16 @@ class _$HistoryListItemCopyWithImpl<$Res>
 
 /// Create a copy of HistoryListItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? questionTitle = null,Object? answeredAt = null,Object? isCorrect = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? historyId = null,Object? historyTitle = null,Object? answeredAt = null,Object? isCorrect = null,Object? feedbackExplanation = freezed,Object? feedbackAdvice = freezed,Object? feedbackSampleCode = freezed,}) {
   return _then(_self.copyWith(
-questionTitle: null == questionTitle ? _self.questionTitle : questionTitle // ignore: cast_nullable_to_non_nullable
+historyId: null == historyId ? _self.historyId : historyId // ignore: cast_nullable_to_non_nullable
+as String,historyTitle: null == historyTitle ? _self.historyTitle : historyTitle // ignore: cast_nullable_to_non_nullable
 as String,answeredAt: null == answeredAt ? _self.answeredAt : answeredAt // ignore: cast_nullable_to_non_nullable
 as String,isCorrect: null == isCorrect ? _self.isCorrect : isCorrect // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,feedbackExplanation: freezed == feedbackExplanation ? _self.feedbackExplanation : feedbackExplanation // ignore: cast_nullable_to_non_nullable
+as String?,feedbackAdvice: freezed == feedbackAdvice ? _self.feedbackAdvice : feedbackAdvice // ignore: cast_nullable_to_non_nullable
+as String?,feedbackSampleCode: freezed == feedbackSampleCode ? _self.feedbackSampleCode : feedbackSampleCode // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -212,12 +217,17 @@ as bool,
 
 
 class _HistoryListItem implements HistoryListItem {
-  const _HistoryListItem({required this.questionTitle, required this.answeredAt, required this.isCorrect});
+  const _HistoryListItem({required this.historyId, required this.historyTitle, required this.answeredAt, required this.isCorrect, this.feedbackExplanation, this.feedbackAdvice, this.feedbackSampleCode});
   
 
-@override final  String questionTitle;
+@override final  String historyId;
+@override final  String historyTitle;
 @override final  String answeredAt;
 @override final  bool isCorrect;
+// 正解ならtrue, 不正解ならfalse
+@override final  String? feedbackExplanation;
+@override final  String? feedbackAdvice;
+@override final  String? feedbackSampleCode;
 
 /// Create a copy of HistoryListItem
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +239,16 @@ _$HistoryListItemCopyWith<_HistoryListItem> get copyWith => __$HistoryListItemCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoryListItem&&(identical(other.questionTitle, questionTitle) || other.questionTitle == questionTitle)&&(identical(other.answeredAt, answeredAt) || other.answeredAt == answeredAt)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HistoryListItem&&(identical(other.historyId, historyId) || other.historyId == historyId)&&(identical(other.historyTitle, historyTitle) || other.historyTitle == historyTitle)&&(identical(other.answeredAt, answeredAt) || other.answeredAt == answeredAt)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect)&&(identical(other.feedbackExplanation, feedbackExplanation) || other.feedbackExplanation == feedbackExplanation)&&(identical(other.feedbackAdvice, feedbackAdvice) || other.feedbackAdvice == feedbackAdvice)&&(identical(other.feedbackSampleCode, feedbackSampleCode) || other.feedbackSampleCode == feedbackSampleCode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,questionTitle,answeredAt,isCorrect);
+int get hashCode => Object.hash(runtimeType,historyId,historyTitle,answeredAt,isCorrect,feedbackExplanation,feedbackAdvice,feedbackSampleCode);
 
 @override
 String toString() {
-  return 'HistoryListItem(questionTitle: $questionTitle, answeredAt: $answeredAt, isCorrect: $isCorrect)';
+  return 'HistoryListItem(historyId: $historyId, historyTitle: $historyTitle, answeredAt: $answeredAt, isCorrect: $isCorrect, feedbackExplanation: $feedbackExplanation, feedbackAdvice: $feedbackAdvice, feedbackSampleCode: $feedbackSampleCode)';
 }
 
 
@@ -249,7 +259,7 @@ abstract mixin class _$HistoryListItemCopyWith<$Res> implements $HistoryListItem
   factory _$HistoryListItemCopyWith(_HistoryListItem value, $Res Function(_HistoryListItem) _then) = __$HistoryListItemCopyWithImpl;
 @override @useResult
 $Res call({
- String questionTitle, String answeredAt, bool isCorrect
+ String historyId, String historyTitle, String answeredAt, bool isCorrect, String? feedbackExplanation, String? feedbackAdvice, String? feedbackSampleCode
 });
 
 
@@ -266,12 +276,16 @@ class __$HistoryListItemCopyWithImpl<$Res>
 
 /// Create a copy of HistoryListItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? questionTitle = null,Object? answeredAt = null,Object? isCorrect = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? historyId = null,Object? historyTitle = null,Object? answeredAt = null,Object? isCorrect = null,Object? feedbackExplanation = freezed,Object? feedbackAdvice = freezed,Object? feedbackSampleCode = freezed,}) {
   return _then(_HistoryListItem(
-questionTitle: null == questionTitle ? _self.questionTitle : questionTitle // ignore: cast_nullable_to_non_nullable
+historyId: null == historyId ? _self.historyId : historyId // ignore: cast_nullable_to_non_nullable
+as String,historyTitle: null == historyTitle ? _self.historyTitle : historyTitle // ignore: cast_nullable_to_non_nullable
 as String,answeredAt: null == answeredAt ? _self.answeredAt : answeredAt // ignore: cast_nullable_to_non_nullable
 as String,isCorrect: null == isCorrect ? _self.isCorrect : isCorrect // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,feedbackExplanation: freezed == feedbackExplanation ? _self.feedbackExplanation : feedbackExplanation // ignore: cast_nullable_to_non_nullable
+as String?,feedbackAdvice: freezed == feedbackAdvice ? _self.feedbackAdvice : feedbackAdvice // ignore: cast_nullable_to_non_nullable
+as String?,feedbackSampleCode: freezed == feedbackSampleCode ? _self.feedbackSampleCode : feedbackSampleCode // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

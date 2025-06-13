@@ -1,16 +1,15 @@
 /// GoRouterのパスを定数化したファイル
 class AppRoutes {
-  // GoRouterの設定で使う絶対パス
-  static const String homePath = '/';
-  static const String historyListPath = '/history_list';
-  static const String settingPath = '/setting';
-  static const String historyPath = '/history_list/history';
-  static const String sectionListPath = '/section_list';
-  static const String sectionPath = '/section_list/section';
-  static const String questionPath = '/section_list/section/question';
-
-  // GoRouteのpath引数で使う相対パス
+  // GoRouteのnameとpathで使う定数
+  static const String home = 'home';
+  static const String historyList = 'history_list';
+  static const String setting = 'setting';
   static const String history = 'history';
   static const String section = 'section';
+  static const String sectionList = 'section_list';
   static const String question = 'question';
+
+  // パスパラメーター
+  static const String questionId = 'questionId';
+  static const String historyId = 'historyId';
 }

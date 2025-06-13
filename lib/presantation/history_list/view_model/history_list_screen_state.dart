@@ -11,8 +11,12 @@ abstract class HistoryListScreenState with _$HistoryListScreenState {
 @freezed
 abstract class HistoryListItem with _$HistoryListItem {
   const factory HistoryListItem({
-    required String questionTitle,
+    required String historyId,
+    required String historyTitle,
     required String answeredAt,
     required bool isCorrect, // 正解ならtrue, 不正解ならfalse
+    String? feedbackExplanation,
+    String? feedbackAdvice,
+    String? feedbackSampleCode,
   }) = _HistoryListItem;
 }

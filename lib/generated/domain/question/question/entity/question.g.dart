@@ -6,18 +6,35 @@ part of '../../../../../domain/question/question/entity/question.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Question _$QuestionFromJson(Map<String, dynamic> json) => _Question(
+ChoiceQuestion _$ChoiceQuestionFromJson(Map<String, dynamic> json) =>
+    ChoiceQuestion(
+      id: Id.fromJson(json['id'] as Map<String, dynamic>),
+      title: json['title'] as String,
+      questionText: json['questionText'] as String,
+      choices: Choices.fromJson(json['choices'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$ChoiceQuestionToJson(ChoiceQuestion instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'questionText': instance.questionText,
+      'choices': instance.choices,
+      'runtimeType': instance.$type,
+    };
+
+CodeQuestion _$CodeQuestionFromJson(Map<String, dynamic> json) => CodeQuestion(
   id: Id.fromJson(json['id'] as Map<String, dynamic>),
   title: json['title'] as String,
-  description: json['description'] as String,
-  task: json['task'] as String,
-  choices: Choices.fromJson(json['choices'] as Map<String, dynamic>),
+  questionText: json['questionText'] as String,
+  $type: json['runtimeType'] as String?,
 );
 
-Map<String, dynamic> _$QuestionToJson(_Question instance) => <String, dynamic>{
-  'id': instance.id,
-  'title': instance.title,
-  'description': instance.description,
-  'task': instance.task,
-  'choices': instance.choices,
-};
+Map<String, dynamic> _$CodeQuestionToJson(CodeQuestion instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'questionText': instance.questionText,
+      'runtimeType': instance.$type,
+    };
