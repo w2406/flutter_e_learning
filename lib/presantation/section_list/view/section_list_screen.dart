@@ -23,7 +23,10 @@ class SectionListScreen extends HookConsumerWidget {
                 title: Text(item.sectionTitle),
                 subtitle: Text(item.sectionDescription),
                 onTap: () {
-                  context.pushNamed(AppRoutes.section);
+                  context.pushNamed(
+                    AppRoutes.section,
+                    pathParameters: {AppRoutes.sectionId: item.sectionId},
+                  );
                 },
               ),
             );

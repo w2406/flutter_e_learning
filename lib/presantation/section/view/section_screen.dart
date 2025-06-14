@@ -5,11 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SectionScreen extends HookConsumerWidget {
-  const SectionScreen({super.key});
+  final String id;
+  const SectionScreen({super.key, required this.id});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(sectionScreenViewModelProvider);
+    final state = ref.watch(sectionScreenViewModelProvider(id));
     return Scaffold(
       appBar: AppBar(title: const Text('セクション')),
       body: state.when(
@@ -25,7 +26,10 @@ class SectionScreen extends HookConsumerWidget {
                 onTap: () {
                   context.pushNamed(
                     AppRoutes.question,
-                    pathParameters: {AppRoutes.questionId: item.questionId},
+                    pathParameters: {
+                      AppRoutes.sectionId: id,
+                      AppRoutes.questionId: item.questionId,
+                    },
                   );
                 },
               ),

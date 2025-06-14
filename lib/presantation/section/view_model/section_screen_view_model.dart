@@ -8,11 +8,18 @@ part '../../../generated/presantation/section/view_model/section_screen_view_mod
 @riverpod
 class SectionScreenViewModel extends _$SectionScreenViewModel {
   @override
-  Future<SectionScreenState> build() async {
-    final getQuestionsUseCase = ref.read(getQuestionsUseCaseProvider);
-    final questions = await getQuestionsUseCase.execute();
+  Future<SectionScreenState> build(String sectionId) async {
+    final section = await ref
+        .read(getSectionUsecaseProvider)
+        .execute(sectionId);
+    if (section == null) {
+      return SectionScreenState(sectionTitle: 'Unknown Section', questions: []);
+    }
+    final questions = await ref
+        .read(getQuestionsUseCaseProvider)
+        .execute(section);
     return SectionScreenState(
-      sectionTitle: 'サンプルセクション',
+      sectionTitle: section.title,
       questions: questions
           .map(
             (question) => SectionQuestionItem(

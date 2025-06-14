@@ -12,6 +12,7 @@ abstract class SectionListScreenState with _$SectionListScreenState {
 @freezed
 abstract class SectionListItem with _$SectionListItem {
   const factory SectionListItem({
+    required String sectionId,
     required String sectionTitle,
     required String sectionDescription,
   }) = _SectionListItem;

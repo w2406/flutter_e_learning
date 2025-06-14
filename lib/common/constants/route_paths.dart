@@ -12,4 +12,5 @@ class AppRoutes {
   // パスパラメーター
   static const String questionId = 'questionId';
   static const String historyId = 'historyId';
+  static const String sectionId = 'sectionId';
 }

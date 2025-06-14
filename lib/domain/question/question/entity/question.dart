@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../section/value_object/section.dart';
 import '../value_object/choice.dart';
 import '../value_object/id.dart';
 import 'choices.dart';
@@ -13,6 +14,7 @@ sealed class Question with _$Question {
     @IdConverter() required Id id,
     required String title,
     required String questionText,
+    required Section section,
     @ChoicesConverter() required Choices choices,
   }) = ChoiceQuestion;
 
@@ -20,6 +22,7 @@ sealed class Question with _$Question {
     @IdConverter() required Id id,
     required String title,
     required String questionText,
+    required Section section,
   }) = CodeQuestion;
 
   factory Question.fromJson(Map<String, dynamic> json) =>

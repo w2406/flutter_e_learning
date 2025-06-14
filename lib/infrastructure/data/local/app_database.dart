@@ -41,7 +41,7 @@ class AppDatabase {
         question_id TEXT NOT NULL,
         label TEXT NOT NULL,
         is_correct INTEGER NOT NULL,
-        FOREIGN KEY(question_id) REFERENCES questions(id)
+        FOREIGN KEY(question_id) REFERENCES questions(id) ON DELETE CASCADE
       )
     ''');
     // Sectionテーブル
@@ -57,11 +57,21 @@ class AppDatabase {
       CREATE TABLE histories (
         id TEXT PRIMARY KEY,
         question_id TEXT NOT NULL,
-        answer TEXT,
+        answer_id TEXT,
         is_correct INTEGER,
         feedback TEXT,
         answered_at TEXT,
-        FOREIGN KEY(question_id) REFERENCES questions(id)
+        FOREIGN KEY(question_id) REFERENCES questions(id) ON DELETE CASCADE,
+        FOREIGN KEY(answer_id) REFERENCES answers(id) ON DELETE SET NULL
+      )
+    ''');
+    // Answerテーブル
+    await db.execute('''
+      CREATE TABLE answers (
+        id TEXT PRIMARY KEY,
+        answer_code TEXT,
+        choice_id INTEGER,
+        FOREIGN KEY(choice_id) REFERENCES choices(id)
       )
     ''');
     // AppSettingテーブル
@@ -97,6 +107,11 @@ class AppDatabase {
   ) async {
     final db = await instance.database;
     return await db.delete(table, where: where, whereArgs: whereArgs);
+  }
+
+  Future<int> deleteAll(String table) async {
+    final db = await instance.database;
+    return await db.delete(table);
   }
 
   Future<List<Map<String, dynamic>>> query(

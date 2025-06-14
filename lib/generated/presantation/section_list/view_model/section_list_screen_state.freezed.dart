@@ -148,7 +148,7 @@ as List<SectionListItem>,
 /// @nodoc
 mixin _$SectionListItem {
 
- String get sectionTitle; String get sectionDescription;
+ String get sectionId; String get sectionTitle; String get sectionDescription;
 /// Create a copy of SectionListItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -159,16 +159,16 @@ $SectionListItemCopyWith<SectionListItem> get copyWith => _$SectionListItemCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SectionListItem&&(identical(other.sectionTitle, sectionTitle) || other.sectionTitle == sectionTitle)&&(identical(other.sectionDescription, sectionDescription) || other.sectionDescription == sectionDescription));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SectionListItem&&(identical(other.sectionId, sectionId) || other.sectionId == sectionId)&&(identical(other.sectionTitle, sectionTitle) || other.sectionTitle == sectionTitle)&&(identical(other.sectionDescription, sectionDescription) || other.sectionDescription == sectionDescription));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sectionTitle,sectionDescription);
+int get hashCode => Object.hash(runtimeType,sectionId,sectionTitle,sectionDescription);
 
 @override
 String toString() {
-  return 'SectionListItem(sectionTitle: $sectionTitle, sectionDescription: $sectionDescription)';
+  return 'SectionListItem(sectionId: $sectionId, sectionTitle: $sectionTitle, sectionDescription: $sectionDescription)';
 }
 
 
@@ -179,7 +179,7 @@ abstract mixin class $SectionListItemCopyWith<$Res>  {
   factory $SectionListItemCopyWith(SectionListItem value, $Res Function(SectionListItem) _then) = _$SectionListItemCopyWithImpl;
 @useResult
 $Res call({
- String sectionTitle, String sectionDescription
+ String sectionId, String sectionTitle, String sectionDescription
 });
 
 
@@ -196,9 +196,10 @@ class _$SectionListItemCopyWithImpl<$Res>
 
 /// Create a copy of SectionListItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? sectionTitle = null,Object? sectionDescription = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? sectionId = null,Object? sectionTitle = null,Object? sectionDescription = null,}) {
   return _then(_self.copyWith(
-sectionTitle: null == sectionTitle ? _self.sectionTitle : sectionTitle // ignore: cast_nullable_to_non_nullable
+sectionId: null == sectionId ? _self.sectionId : sectionId // ignore: cast_nullable_to_non_nullable
+as String,sectionTitle: null == sectionTitle ? _self.sectionTitle : sectionTitle // ignore: cast_nullable_to_non_nullable
 as String,sectionDescription: null == sectionDescription ? _self.sectionDescription : sectionDescription // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -211,9 +212,10 @@ as String,
 
 
 class _SectionListItem implements SectionListItem {
-  const _SectionListItem({required this.sectionTitle, required this.sectionDescription});
+  const _SectionListItem({required this.sectionId, required this.sectionTitle, required this.sectionDescription});
   
 
+@override final  String sectionId;
 @override final  String sectionTitle;
 @override final  String sectionDescription;
 
@@ -227,16 +229,16 @@ _$SectionListItemCopyWith<_SectionListItem> get copyWith => __$SectionListItemCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SectionListItem&&(identical(other.sectionTitle, sectionTitle) || other.sectionTitle == sectionTitle)&&(identical(other.sectionDescription, sectionDescription) || other.sectionDescription == sectionDescription));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SectionListItem&&(identical(other.sectionId, sectionId) || other.sectionId == sectionId)&&(identical(other.sectionTitle, sectionTitle) || other.sectionTitle == sectionTitle)&&(identical(other.sectionDescription, sectionDescription) || other.sectionDescription == sectionDescription));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sectionTitle,sectionDescription);
+int get hashCode => Object.hash(runtimeType,sectionId,sectionTitle,sectionDescription);
 
 @override
 String toString() {
-  return 'SectionListItem(sectionTitle: $sectionTitle, sectionDescription: $sectionDescription)';
+  return 'SectionListItem(sectionId: $sectionId, sectionTitle: $sectionTitle, sectionDescription: $sectionDescription)';
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$SectionListItemCopyWith<$Res> implements $SectionListItem
   factory _$SectionListItemCopyWith(_SectionListItem value, $Res Function(_SectionListItem) _then) = __$SectionListItemCopyWithImpl;
 @override @useResult
 $Res call({
- String sectionTitle, String sectionDescription
+ String sectionId, String sectionTitle, String sectionDescription
 });
 
 
@@ -264,9 +266,10 @@ class __$SectionListItemCopyWithImpl<$Res>
 
 /// Create a copy of SectionListItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? sectionTitle = null,Object? sectionDescription = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? sectionId = null,Object? sectionTitle = null,Object? sectionDescription = null,}) {
   return _then(_SectionListItem(
-sectionTitle: null == sectionTitle ? _self.sectionTitle : sectionTitle // ignore: cast_nullable_to_non_nullable
+sectionId: null == sectionId ? _self.sectionId : sectionId // ignore: cast_nullable_to_non_nullable
+as String,sectionTitle: null == sectionTitle ? _self.sectionTitle : sectionTitle // ignore: cast_nullable_to_non_nullable
 as String,sectionDescription: null == sectionDescription ? _self.sectionDescription : sectionDescription // ignore: cast_nullable_to_non_nullable
 as String,
   ));

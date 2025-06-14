@@ -47,8 +47,14 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           name: AppRoutes.section,
-          path: AppRoutes.section,
-          builder: (context, state) => const SectionScreen(),
+          path: '${AppRoutes.section}/:${AppRoutes.sectionId}',
+          builder: (context, state) {
+            final sectionId = state.pathParameters[AppRoutes.sectionId];
+            if (sectionId == null) {
+              return Center(child: Text('Section ID not found'));
+            }
+            return SectionScreen(id: sectionId);
+          },
           routes: [
             GoRoute(
               name: AppRoutes.question,

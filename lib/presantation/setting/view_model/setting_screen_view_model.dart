@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_e_learning/common/provider/usecase_provider.dart';
 import 'package:flutter_e_learning/domain/question/question/entity/question.dart';
+import 'package:flutter_e_learning/domain/question/section/value_object/section.dart';
 import 'package:flutter_e_learning/domain/setting/api_key/value_object/api_key.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -43,22 +44,41 @@ class SettingScreenViewModel extends _$SettingScreenViewModel {
         try {
           final content = utf8.decode(file.bytes!);
           final jsonData = json.decode(content);
-          if (jsonData is! List) {
-            throw Exception('JSONファイルは配列形式である必要があります');
+          // question_sample.json形式（sections+questions）対応
+          if (jsonData is Map<String, dynamic> &&
+              jsonData.containsKey('questions') &&
+              jsonData.containsKey('sections')) {
+            final sectionList = (jsonData['sections'] as List)
+                .map((e) => Section.fromJson(e as Map<String, dynamic>))
+                .toList();
+            final questions = (jsonData['questions'] as List).map((e) {
+              final qMap = e as Map<String, dynamic>;
+              final section = sectionList.firstWhere(
+                (s) => s.id == qMap['sectionId'],
+                orElse: () => throw Exception('Section not found for question'),
+              );
+              if (qMap.containsKey('choices')) {
+                return ChoiceQuestion.fromJson({
+                  ...qMap,
+                  'section': section.toJson(),
+                });
+              } else {
+                return CodeQuestion.fromJson({
+                  ...qMap,
+                  'section': section.toJson(),
+                });
+              }
+            }).toList();
+            await ref.read(updateSectionsUsecaseProvider).execute(sectionList);
+            await ref.read(updateQuestionsUsecaseProvider).execute(questions);
+            state = AsyncValue.data(
+              state.value!.copyWith(isFileLoaded: true, fileName: file.name),
+            );
+          } else {
+            throw Exception(
+              'question_sample.json形式（sections+questions）である必要があります',
+            );
           }
-          final questions = (jsonData).map((e) {
-            final jsonMap = e as Map<String, dynamic>;
-            final hasChoicesKey = jsonMap.containsKey('choices');
-            if (hasChoicesKey) {
-              return ChoiceQuestion.fromJson(jsonMap);
-            } else {
-              return CodeQuestion.fromJson(jsonMap);
-            }
-          }).toList();
-          await ref.read(updateQuestionsUsecaseProvider).execute(questions);
-          state = AsyncValue.data(
-            state.value!.copyWith(isFileLoaded: true, fileName: file.name),
-          );
         } catch (exception, stackTrace) {
           state = AsyncValue.error(exception, stackTrace);
         }

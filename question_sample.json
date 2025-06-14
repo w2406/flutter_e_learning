@@ -1,30 +1,136 @@
-[
-    {
-        "id": "q1",
-        "title": "Dartの基本型",
-        "questionText": "Dartで整数を表す型はどれですか？",
-        "choices": [
-            {
-                "label": "String",
-                "isCorrect": false
-            },
-            {
-                "label": "int",
-                "isCorrect": true
-            },
-            {
-                "label": "double",
-                "isCorrect": false
-            },
-            {
-                "label": "bool",
-                "isCorrect": false
-            }
-        ]
-    },
-    {
-        "id": "q2",
-        "title": "合計を返す関数",
-        "questionText": "2つの整数a, bを受け取り、その和を返すDart関数sumを実装してください。"
-    }
-]
+{
+    "sections": [
+        {
+            "id": "s1",
+            "title": "Dart基礎",
+            "description": "Dart言語の基本的な型について学ぶセクション"
+        },
+        {
+            "id": "s2",
+            "title": "Dart関数",
+            "description": "Dartでの関数定義について学ぶセクション"
+        },
+        {
+            "id": "s3",
+            "title": "制御構文",
+            "description": "if文やfor文などの制御構文について学ぶセクション"
+        },
+        {
+            "id": "s4",
+            "title": "クラス・オブジェクト",
+            "description": "Dartのクラスやオブジェクト指向について学ぶセクション"
+        }
+    ],
+    "questions": [
+        {
+            "id": "q1",
+            "title": "Dartの基本型",
+            "questionText": "Dartで整数を表す型はどれですか？",
+            "sectionId": "s1",
+            "choices": [
+                {
+                    "label": "String",
+                    "isCorrect": false
+                },
+                {
+                    "label": "int",
+                    "isCorrect": true
+                },
+                {
+                    "label": "double",
+                    "isCorrect": false
+                },
+                {
+                    "label": "bool",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": "q2",
+            "title": "合計を返す関数",
+            "questionText": "2つの整数a, bを受け取り、その和を返すDart関数sumを実装してください。",
+            "sectionId": "s2"
+        },
+        {
+            "id": "q3",
+            "title": "if文の使い方",
+            "questionText": "Dartでif文の基本的な構文はどれですか？",
+            "sectionId": "s3",
+            "choices": [
+                {
+                    "label": "if (条件) { ... }",
+                    "isCorrect": true
+                },
+                {
+                    "label": "if 条件 then { ... }",
+                    "isCorrect": false
+                },
+                {
+                    "label": "if: 条件 { ... }",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": "q4",
+            "title": "for文の使い方",
+            "questionText": "Dartで0から9まで繰り返すfor文の正しい書き方は？",
+            "sectionId": "s3",
+            "choices": [
+                {
+                    "label": "for (var i = 0; i < 10; i++) { ... }",
+                    "isCorrect": true
+                },
+                {
+                    "label": "for i in 0..9 { ... }",
+                    "isCorrect": false
+                },
+                {
+                    "label": "foreach (i in 0..9) { ... }",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": "q5",
+            "title": "クラスの定義",
+            "questionText": "Dartでクラスを定義するキーワードは？",
+            "sectionId": "s4",
+            "choices": [
+                {
+                    "label": "class",
+                    "isCorrect": true
+                },
+                {
+                    "label": "struct",
+                    "isCorrect": false
+                },
+                {
+                    "label": "object",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": "q6",
+            "title": "オブジェクト生成",
+            "questionText": "Dartでクラスからインスタンスを生成する方法は？",
+            "sectionId": "s4",
+            "choices": [
+                {
+                    "label": "new クラス名()",
+                    "isCorrect": true
+                },
+                {
+                    "label": "create クラス名()",
+                    "isCorrect": false
+                },
+                {
+                    "label": "make クラス名()",
+                    "isCorrect": false
+                }
+            ]
+        }
+    ]
+}

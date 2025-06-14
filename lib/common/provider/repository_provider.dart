@@ -1,3 +1,4 @@
+import 'package:flutter_e_learning/common/provider/common_provider.dart';
 import 'package:flutter_e_learning/domain/history/history/repository/history_repository.dart';
 import 'package:flutter_e_learning/domain/question/question/repository/question_respository.dart';
 import 'package:flutter_e_learning/domain/question/section/repository/section_repository.dart';
@@ -20,7 +21,8 @@ ApiKeyRepository apiKeyRepository(Ref ref) {
 
 @Riverpod(keepAlive: true)
 QuestionRepository questionsRepository(Ref ref) {
-  return QuestionRepositoryImpl();
+  final database = ref.watch(databaseProvider);
+  return QuestionRepositoryImpl(database: database);
 }
 
 @Riverpod(keepAlive: true)
@@ -30,10 +32,12 @@ AppVersionRepository appVersionRepository(Ref ref) {
 
 @Riverpod(keepAlive: true)
 SectionRepository sectionRepository(Ref ref) {
-  return SectionRepositoryImpl();
+  final database = ref.watch(databaseProvider);
+  return SectionRepositoryImpl(database: database);
 }
 
 @Riverpod(keepAlive: true)
 HistoryRepository historyRepository(Ref ref) {
-  return HistoryRepositoryImpl();
+  final database = ref.watch(databaseProvider);
+  return HistoryRepositoryImpl(database: database);
 }

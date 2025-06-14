@@ -4,8 +4,10 @@ import 'package:flutter_e_learning/usecase/history/get_histories_usecase.dart';
 import 'package:flutter_e_learning/usecase/history/get_history_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/get_question_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/get_questions_usecase.dart';
+import 'package:flutter_e_learning/usecase/question/get_section_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/get_sections_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/update_questions_usecase.dart';
+import 'package:flutter_e_learning/usecase/question/update_sections_usecase.dart';
 import 'package:flutter_e_learning/usecase/setting/get_api_key_usecase.dart';
 import 'package:flutter_e_learning/usecase/setting/get_app_version_usecase.dart';
 import 'package:flutter_e_learning/usecase/setting/update_api_key_usecase.dart';
@@ -39,7 +41,7 @@ GetAppVersionUsecase getAppVersionUsecase(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
-GetSectionsUseCase getSectionsUseCase(Ref ref) {
+GetSectionsUseCase getSectionsUsecase(Ref ref) {
   final repository = ref.watch(sectionRepositoryProvider);
   return GetSectionsUseCase(repository);
 }
@@ -72,4 +74,16 @@ GetHistoryUseCase getHistoryUseCase(Ref ref) {
 AddHistoryUseCase addHistoryUseCase(Ref ref) {
   final repository = ref.watch(historyRepositoryProvider);
   return AddHistoryUseCase(repository);
+}
+
+@Riverpod(keepAlive: true)
+UpdateSectionsUsecase updateSectionsUsecase(Ref ref) {
+  final repository = ref.watch(sectionRepositoryProvider);
+  return UpdateSectionsUsecase(repository: repository);
+}
+
+@Riverpod(keepAlive: true)
+GetSectionUsecase getSectionUsecase(Ref ref) {
+  final repository = ref.watch(sectionRepositoryProvider);
+  return GetSectionUsecase(repository: repository);
 }

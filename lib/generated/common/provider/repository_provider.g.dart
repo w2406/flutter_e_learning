@@ -24,7 +24,7 @@ final apiKeyRepositoryProvider = Provider<ApiKeyRepository>.internal(
 // ignore: unused_element
 typedef ApiKeyRepositoryRef = ProviderRef<ApiKeyRepository>;
 String _$questionsRepositoryHash() =>
-    r'920fcafa016164b0b0c08c542e9b503256962b65';
+    r'919d233efb98489f118fe9e81728c910a6e06799';
 
 /// See also [questionsRepository].
 @ProviderFor(questionsRepository)
@@ -59,7 +59,7 @@ final appVersionRepositoryProvider = Provider<AppVersionRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AppVersionRepositoryRef = ProviderRef<AppVersionRepository>;
-String _$sectionRepositoryHash() => r'2f32ad92290aa9267224b38f047aa95916e58f65';
+String _$sectionRepositoryHash() => r'bd419778eb16f1b5daf8ec061d3b6055a8de665b';
 
 /// See also [sectionRepository].
 @ProviderFor(sectionRepository)
@@ -76,7 +76,7 @@ final sectionRepositoryProvider = Provider<SectionRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SectionRepositoryRef = ProviderRef<SectionRepository>;
-String _$historyRepositoryHash() => r'310d2aab4b10e0ae34ad3c473666dd63b8029c87';
+String _$historyRepositoryHash() => r'27759a564e1477a829ba1260bc51fac2953af0f5';
 
 /// See also [historyRepository].
 @ProviderFor(historyRepository)
