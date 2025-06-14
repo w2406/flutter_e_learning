@@ -51,6 +51,8 @@ dependencies:
   flutter_highlight: ^0.7.0
   flutter_code_editor: ^0.3.3
   highlight: ^0.7.0
+  sqflite: ^2.4.2
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
