@@ -39,7 +39,7 @@ Question _$QuestionFromJson(
 /// @nodoc
 mixin _$Question {
 
- Id get id; String get title; String get questionText;
+@IdConverter() Id get id; String get title; String get questionText;
 /// Create a copy of Question
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -72,7 +72,7 @@ abstract mixin class $QuestionCopyWith<$Res>  {
   factory $QuestionCopyWith(Question value, $Res Function(Question) _then) = _$QuestionCopyWithImpl;
 @useResult
 $Res call({
- Id id, String title, String questionText
+@IdConverter() Id id, String title, String questionText
 });
 
 
@@ -114,13 +114,13 @@ $IdCopyWith<$Res> get id {
 @JsonSerializable()
 
 class ChoiceQuestion implements Question {
-  const ChoiceQuestion({required this.id, required this.title, required this.questionText, required this.choices, final  String? $type}): $type = $type ?? 'choice';
+  const ChoiceQuestion({@IdConverter() required this.id, required this.title, required this.questionText, @ChoicesConverter() required this.choices, final  String? $type}): $type = $type ?? 'choice';
   factory ChoiceQuestion.fromJson(Map<String, dynamic> json) => _$ChoiceQuestionFromJson(json);
 
-@override final  Id id;
+@override@IdConverter() final  Id id;
 @override final  String title;
 @override final  String questionText;
- final  Choices choices;
+@ChoicesConverter() final  Choices choices;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -159,7 +159,7 @@ abstract mixin class $ChoiceQuestionCopyWith<$Res> implements $QuestionCopyWith<
   factory $ChoiceQuestionCopyWith(ChoiceQuestion value, $Res Function(ChoiceQuestion) _then) = _$ChoiceQuestionCopyWithImpl;
 @override @useResult
 $Res call({
- Id id, String title, String questionText, Choices choices
+@IdConverter() Id id, String title, String questionText,@ChoicesConverter() Choices choices
 });
 
 
@@ -211,10 +211,10 @@ $ChoicesCopyWith<$Res> get choices {
 @JsonSerializable()
 
 class CodeQuestion implements Question {
-  const CodeQuestion({required this.id, required this.title, required this.questionText, final  String? $type}): $type = $type ?? 'code';
+  const CodeQuestion({@IdConverter() required this.id, required this.title, required this.questionText, final  String? $type}): $type = $type ?? 'code';
   factory CodeQuestion.fromJson(Map<String, dynamic> json) => _$CodeQuestionFromJson(json);
 
-@override final  Id id;
+@override@IdConverter() final  Id id;
 @override final  String title;
 @override final  String questionText;
 
@@ -255,7 +255,7 @@ abstract mixin class $CodeQuestionCopyWith<$Res> implements $QuestionCopyWith<$R
   factory $CodeQuestionCopyWith(CodeQuestion value, $Res Function(CodeQuestion) _then) = _$CodeQuestionCopyWithImpl;
 @override @useResult
 $Res call({
- Id id, String title, String questionText
+@IdConverter() Id id, String title, String questionText
 });
 
 

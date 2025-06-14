@@ -7,7 +7,7 @@ part of '../../../../presantation/history_list/view_model/history_list_screen_vi
 // **************************************************************************
 
 String _$historyListScreenViewModelHash() =>
-    r'a068482b7409670333dabb859e30f31d4015b3ac';
+    r'f895871cd3cde1b61c70fb15064c9826e50bc171';
 
 /// See also [HistoryListScreenViewModel].
 @ProviderFor(HistoryListScreenViewModel)

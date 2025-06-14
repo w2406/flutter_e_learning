@@ -30,6 +30,7 @@ class SettingScreenViewModel extends _$SettingScreenViewModel {
     state = AsyncValue.data(state.value!.copyWith(apiKey: apiKey));
   }
 
+  // TODO: ロード処理は別のUseCaseに切り出す
   Future<void> loadQuestionFile() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
@@ -45,9 +46,15 @@ class SettingScreenViewModel extends _$SettingScreenViewModel {
           if (jsonData is! List) {
             throw Exception('JSONファイルは配列形式である必要があります');
           }
-          final questions = (jsonData)
-              .map((e) => Question.fromJson(e as Map<String, dynamic>))
-              .toList();
+          final questions = (jsonData).map((e) {
+            final jsonMap = e as Map<String, dynamic>;
+            final hasChoicesKey = jsonMap.containsKey('choices');
+            if (hasChoicesKey) {
+              return ChoiceQuestion.fromJson(jsonMap);
+            } else {
+              return CodeQuestion.fromJson(jsonMap);
+            }
+          }).toList();
           await ref.read(updateQuestionsUsecaseProvider).execute(questions);
           state = AsyncValue.data(
             state.value!.copyWith(isFileLoaded: true, fileName: file.name),

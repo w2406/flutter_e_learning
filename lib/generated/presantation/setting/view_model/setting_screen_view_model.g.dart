@@ -7,7 +7,7 @@ part of '../../../../presantation/setting/view_model/setting_screen_view_model.d
 // **************************************************************************
 
 String _$settingScreenViewModelHash() =>
-    r'8b471ee1c98f9b395ad00ffc99ad047efd884b24';
+    r'69218eed9a470402f3cbf0eb2cc8b90e4c0196e1';
 
 /// See also [SettingScreenViewModel].
 @ProviderFor(SettingScreenViewModel)

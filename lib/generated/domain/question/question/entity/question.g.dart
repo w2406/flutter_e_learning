@@ -8,24 +8,24 @@ part of '../../../../../domain/question/question/entity/question.dart';
 
 ChoiceQuestion _$ChoiceQuestionFromJson(Map<String, dynamic> json) =>
     ChoiceQuestion(
-      id: Id.fromJson(json['id'] as Map<String, dynamic>),
+      id: const IdConverter().fromJson(json['id'] as Object),
       title: json['title'] as String,
       questionText: json['questionText'] as String,
-      choices: Choices.fromJson(json['choices'] as Map<String, dynamic>),
+      choices: const ChoicesConverter().fromJson(json['choices'] as Object),
       $type: json['runtimeType'] as String?,
     );
 
 Map<String, dynamic> _$ChoiceQuestionToJson(ChoiceQuestion instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'id': const IdConverter().toJson(instance.id),
       'title': instance.title,
       'questionText': instance.questionText,
-      'choices': instance.choices,
+      'choices': const ChoicesConverter().toJson(instance.choices),
       'runtimeType': instance.$type,
     };
 
 CodeQuestion _$CodeQuestionFromJson(Map<String, dynamic> json) => CodeQuestion(
-  id: Id.fromJson(json['id'] as Map<String, dynamic>),
+  id: const IdConverter().fromJson(json['id'] as Object),
   title: json['title'] as String,
   questionText: json['questionText'] as String,
   $type: json['runtimeType'] as String?,
@@ -33,7 +33,7 @@ CodeQuestion _$CodeQuestionFromJson(Map<String, dynamic> json) => CodeQuestion(
 
 Map<String, dynamic> _$CodeQuestionToJson(CodeQuestion instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'id': const IdConverter().toJson(instance.id),
       'title': instance.title,
       'questionText': instance.questionText,
       'runtimeType': instance.$type,

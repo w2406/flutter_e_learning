@@ -1,0 +1,30 @@
+[
+    {
+        "id": "q1",
+        "title": "Dartの基本型",
+        "questionText": "Dartで整数を表す型はどれですか？",
+        "choices": [
+            {
+                "label": "String",
+                "isCorrect": false
+            },
+            {
+                "label": "int",
+                "isCorrect": true
+            },
+            {
+                "label": "double",
+                "isCorrect": false
+            },
+            {
+                "label": "bool",
+                "isCorrect": false
+            }
+        ]
+    },
+    {
+        "id": "q2",
+        "title": "合計を返す関数",
+        "questionText": "2つの整数a, bを受け取り、その和を返すDart関数sumを実装してください。"
+    }
+]
