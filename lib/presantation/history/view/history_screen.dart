@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:flutter_e_learning/presantation/history/view_model/history_screen_view_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -35,13 +36,17 @@ class HistoryScreen extends HookConsumerWidget {
               ),
               Divider(height: 32),
               Text('【あなたの回答】', style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(height: 8),
               if (state.answerCode != null && state.answerCode!.isNotEmpty)
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(vertical: 4),
-                  padding: EdgeInsets.all(8),
-                  color: Colors.grey[100],
-                  child: Text(state.answerCode!),
+                CodeField(
+                  controller: CodeController(
+                    text: state.answerCode!,
+                    language: null, // 必要ならdartなど指定可
+                  ),
+                  readOnly: true,
+                  expands: false,
+                  maxLines: null,
+                  textStyle: const TextStyle(fontFamily: 'monospace'),
                 ),
               if (state.answerChoice != null && state.answerChoice!.isNotEmpty)
                 Text(
@@ -62,15 +67,16 @@ class HistoryScreen extends HookConsumerWidget {
               Text('改善点: ${state.feedbackAdvice}'),
               SizedBox(height: 4),
               Text('模範コード:', style: TextStyle(fontWeight: FontWeight.bold)),
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.only(top: 2),
-                padding: EdgeInsets.all(8),
-                color: Colors.grey[200],
-                child: Text(
-                  state.feedbackSampleCode,
-                  style: TextStyle(fontFamily: 'monospace'),
+              SizedBox(height: 8),
+              CodeField(
+                controller: CodeController(
+                  text: state.feedbackSampleCode,
+                  language: null, // 必要ならdartなど指定可
                 ),
+                readOnly: true,
+                expands: false,
+                maxLines: null,
+                textStyle: const TextStyle(fontFamily: 'monospace'),
               ),
             ],
           ),
