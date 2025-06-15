@@ -7,7 +7,8 @@ part of '../../../../../domain/history/history/entity/history.dart';
 // **************************************************************************
 
 _History _$HistoryFromJson(Map<String, dynamic> json) => _History(
-  id: json['id'] as String,
+  id: json['id'] as String?,
+  questionId: json['questionId'] as String,
   historyTitle: json['historyTitle'] as String,
   historyContent: json['historyContent'] as String,
   answer: Answer.fromJson(json['answer'] as Map<String, dynamic>),
@@ -18,6 +19,7 @@ _History _$HistoryFromJson(Map<String, dynamic> json) => _History(
 
 Map<String, dynamic> _$HistoryToJson(_History instance) => <String, dynamic>{
   'id': instance.id,
+  'questionId': instance.questionId,
   'historyTitle': instance.historyTitle,
   'historyContent': instance.historyContent,
   'answer': instance.answer,

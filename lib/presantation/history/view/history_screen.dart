@@ -48,10 +48,62 @@ class HistoryScreen extends HookConsumerWidget {
                   maxLines: null,
                   textStyle: const TextStyle(fontFamily: 'monospace'),
                 ),
-              if (state.answerChoice != null && state.answerChoice!.isNotEmpty)
-                Text(
-                  '選択肢: ${state.answerChoice}',
-                  style: TextStyle(color: Colors.blue),
+              // 選択肢回答時のみ「選択肢:」を表示
+              if (state.answerChoiceIndex != null &&
+                  (state.answerCode == null || state.answerCode!.isEmpty))
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('選択肢:', style: TextStyle(fontWeight: FontWeight.bold)),
+                    SizedBox(height: 8),
+                    ...state.choices.map((choice) {
+                      final idx = choice.id;
+                      final isSelected = state.answerChoiceIndex == idx;
+                      final isCorrect = (choice as dynamic).isCorrect ?? false;
+                      Color? textColor;
+                      if (isCorrect) {
+                        textColor = Colors.green;
+                      } else if (isSelected) {
+                        textColor = Colors.red;
+                      }
+                      return Row(
+                        children: [
+                          Icon(
+                            isSelected
+                                ? Icons.radio_button_checked
+                                : Icons.radio_button_unchecked,
+                            color: isSelected
+                                ? (isCorrect ? Colors.green : Colors.red)
+                                : Colors.grey,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            choice.label,
+                            style: TextStyle(
+                              color: textColor,
+                              fontWeight: isSelected ? FontWeight.bold : null,
+                            ),
+                          ),
+                          if (isCorrect)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text(
+                                '（正解）',
+                                style: TextStyle(color: Colors.green),
+                              ),
+                            ),
+                          if (isSelected && !isCorrect)
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text(
+                                '（あなたの選択）',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                        ],
+                      );
+                    }),
+                  ],
                 ),
               Divider(height: 32),
               Text('【フィードバック】', style: TextStyle(fontWeight: FontWeight.bold)),

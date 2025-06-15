@@ -8,10 +8,11 @@ abstract class HistoryScreenState with _$HistoryScreenState {
     required String historyTitle,
     required String historyContent,
     String? answerCode,
-    String? answerChoice,
+    int? answerChoiceIndex,
     required String feedbackResult,
     required String feedbackExplanation,
     required String feedbackAdvice,
     required String feedbackSampleCode,
+    @Default([]) List<({int id, String label, bool isCorrect})> choices,
   }) = _HistoryScreenState;
 }

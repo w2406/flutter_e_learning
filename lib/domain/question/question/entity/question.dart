@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../section/value_object/section.dart';
-import '../value_object/choice.dart';
 import '../value_object/id.dart';
+import 'choice.dart';
 import 'choices.dart';
 
 part '../../../../generated/domain/question/question/entity/question.freezed.dart';

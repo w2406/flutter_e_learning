@@ -7,7 +7,7 @@ part of '../../../../presantation/history/view_model/history_screen_view_model.d
 // **************************************************************************
 
 String _$historyScreenViewModelHash() =>
-    r'4ad01904d6d39dc950510f6f85fb1d8088cb3848';
+    r'0ac864a3ea54b8730c68b36e4dff29be82b293e7';
 
 /// Copied from Dart SDK
 class _SystemHash {

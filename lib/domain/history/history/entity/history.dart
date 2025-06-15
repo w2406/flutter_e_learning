@@ -8,7 +8,8 @@ part '../../../../generated/domain/history/history/entity/history.g.dart';
 @freezed
 abstract class History with _$History {
   const factory History({
-    required String id,
+    required String? id,
+    required String questionId,
     required String historyTitle,
     required String historyContent,
     required Answer answer,

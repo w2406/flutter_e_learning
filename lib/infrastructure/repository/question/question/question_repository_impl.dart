@@ -1,7 +1,7 @@
+import 'package:flutter_e_learning/domain/question/question/entity/choice.dart';
 import 'package:flutter_e_learning/domain/question/question/entity/choices.dart';
 import 'package:flutter_e_learning/domain/question/question/entity/question.dart';
 import 'package:flutter_e_learning/domain/question/question/repository/question_respository.dart';
-import 'package:flutter_e_learning/domain/question/question/value_object/choice.dart';
 import 'package:flutter_e_learning/domain/question/question/value_object/id.dart';
 import 'package:flutter_e_learning/domain/question/section/value_object/section.dart';
 import 'package:flutter_e_learning/infrastructure/data/local/app_database.dart';
@@ -58,7 +58,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
       throw Exception('Section not found for question: \\${qMap['id']}');
     }
     final section = Section(
-      id: sectionMaps.first['id'] as String,
+      id: sectionMaps.first['id'].toString(),
       title: sectionMaps.first['title'] as String,
       description: sectionMaps.first['description'] as String?,
     );
@@ -72,6 +72,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
         values: choiceMaps
             .map(
               (c) => Choice(
+                id: c['id'].toString(),
                 label: c['label'] as String,
                 isCorrect: (c['is_correct'] as int) == 1,
               ),
@@ -79,7 +80,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
             .toList(),
       );
       return Question.choice(
-        id: Id(value: qMap['id'] as String),
+        id: Id(value: qMap['id'].toString()),
         title: qMap['title'] as String,
         questionText: qMap['question_text'] as String,
         section: section,
@@ -87,7 +88,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
       );
     } else {
       return Question.code(
-        id: Id(value: qMap['id'] as String),
+        id: Id(value: qMap['id'].toString()),
         title: qMap['title'] as String,
         questionText: qMap['question_text'] as String,
         section: section,
@@ -115,6 +116,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
           values: choiceMaps
               .map(
                 (c) => Choice(
+                  id: c['id'].toString(),
                   label: c['label'] as String,
                   isCorrect: (c['is_correct'] as int) == 1,
                 ),
@@ -123,7 +125,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
         );
         questions.add(
           Question.choice(
-            id: Id(value: qMap['id'] as String),
+            id: Id(value: qMap['id'].toString()),
             title: qMap['title'] as String,
             questionText: qMap['question_text'] as String,
             section: section,
@@ -133,7 +135,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
       } else {
         questions.add(
           Question.code(
-            id: Id(value: qMap['id'] as String),
+            id: Id(value: qMap['id'].toString()),
             title: qMap['title'] as String,
             questionText: qMap['question_text'] as String,
             section: section,

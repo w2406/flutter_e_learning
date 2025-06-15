@@ -11,7 +11,7 @@ abstract class HistoryListScreenState with _$HistoryListScreenState {
 @freezed
 abstract class HistoryListItem with _$HistoryListItem {
   const factory HistoryListItem({
-    required String historyId,
+    required String? historyId,
     required String historyTitle,
     required String answeredAt,
     required bool isCorrect, // 正解ならtrue, 不正解ならfalse

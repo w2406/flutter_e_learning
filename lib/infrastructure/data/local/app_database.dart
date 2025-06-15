@@ -40,8 +40,7 @@ class AppDatabase {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         question_id TEXT NOT NULL,
         label TEXT NOT NULL,
-        is_correct INTEGER NOT NULL,
-        FOREIGN KEY(question_id) REFERENCES questions(id) ON DELETE CASCADE
+        is_correct INTEGER NOT NULL
       )
     ''');
     // Sectionテーブル
@@ -55,20 +54,23 @@ class AppDatabase {
     // Historyテーブル
     await db.execute('''
       CREATE TABLE histories (
-        id TEXT PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         question_id TEXT NOT NULL,
         answer_id TEXT,
-        is_correct INTEGER,
-        feedback TEXT,
+        is_correct INTEGER NOT NULL,
+        feedback_id INTEGER NOT NULL,
+        historyTitle TEXT,
+        historyContent TEXT,
         answered_at TEXT,
         FOREIGN KEY(question_id) REFERENCES questions(id) ON DELETE CASCADE,
-        FOREIGN KEY(answer_id) REFERENCES answers(id) ON DELETE SET NULL
+        FOREIGN KEY(answer_id) REFERENCES answers(id) ON DELETE SET NULL,
+        FOREIGN KEY(feedback_id) REFERENCES feedbacks(id) ON DELETE SET NULL
       )
     ''');
     // Answerテーブル
     await db.execute('''
       CREATE TABLE answers (
-        id TEXT PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         answer_code TEXT,
         choice_id INTEGER,
         FOREIGN KEY(choice_id) REFERENCES choices(id)
@@ -80,6 +82,15 @@ class AppDatabase {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         api_key TEXT,
         app_version TEXT
+      )
+    ''');
+    // Feedbackテーブル
+    await db.execute('''
+      CREATE TABLE feedbacks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        explanation TEXT NOT NULL,
+        advice TEXT,
+        sample_code TEXT
       )
     ''');
   }

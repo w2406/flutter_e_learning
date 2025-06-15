@@ -148,7 +148,7 @@ as List<HistoryListItem>,
 /// @nodoc
 mixin _$HistoryListItem {
 
- String get historyId; String get historyTitle; String get answeredAt; bool get isCorrect;// 正解ならtrue, 不正解ならfalse
+ String? get historyId; String get historyTitle; String get answeredAt; bool get isCorrect;// 正解ならtrue, 不正解ならfalse
  String? get feedbackExplanation; String? get feedbackAdvice; String? get feedbackSampleCode;
 /// Create a copy of HistoryListItem
 /// with the given fields replaced by the non-null parameter values.
@@ -180,7 +180,7 @@ abstract mixin class $HistoryListItemCopyWith<$Res>  {
   factory $HistoryListItemCopyWith(HistoryListItem value, $Res Function(HistoryListItem) _then) = _$HistoryListItemCopyWithImpl;
 @useResult
 $Res call({
- String historyId, String historyTitle, String answeredAt, bool isCorrect, String? feedbackExplanation, String? feedbackAdvice, String? feedbackSampleCode
+ String? historyId, String historyTitle, String answeredAt, bool isCorrect, String? feedbackExplanation, String? feedbackAdvice, String? feedbackSampleCode
 });
 
 
@@ -197,10 +197,10 @@ class _$HistoryListItemCopyWithImpl<$Res>
 
 /// Create a copy of HistoryListItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? historyId = null,Object? historyTitle = null,Object? answeredAt = null,Object? isCorrect = null,Object? feedbackExplanation = freezed,Object? feedbackAdvice = freezed,Object? feedbackSampleCode = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? historyId = freezed,Object? historyTitle = null,Object? answeredAt = null,Object? isCorrect = null,Object? feedbackExplanation = freezed,Object? feedbackAdvice = freezed,Object? feedbackSampleCode = freezed,}) {
   return _then(_self.copyWith(
-historyId: null == historyId ? _self.historyId : historyId // ignore: cast_nullable_to_non_nullable
-as String,historyTitle: null == historyTitle ? _self.historyTitle : historyTitle // ignore: cast_nullable_to_non_nullable
+historyId: freezed == historyId ? _self.historyId : historyId // ignore: cast_nullable_to_non_nullable
+as String?,historyTitle: null == historyTitle ? _self.historyTitle : historyTitle // ignore: cast_nullable_to_non_nullable
 as String,answeredAt: null == answeredAt ? _self.answeredAt : answeredAt // ignore: cast_nullable_to_non_nullable
 as String,isCorrect: null == isCorrect ? _self.isCorrect : isCorrect // ignore: cast_nullable_to_non_nullable
 as bool,feedbackExplanation: freezed == feedbackExplanation ? _self.feedbackExplanation : feedbackExplanation // ignore: cast_nullable_to_non_nullable
@@ -220,7 +220,7 @@ class _HistoryListItem implements HistoryListItem {
   const _HistoryListItem({required this.historyId, required this.historyTitle, required this.answeredAt, required this.isCorrect, this.feedbackExplanation, this.feedbackAdvice, this.feedbackSampleCode});
   
 
-@override final  String historyId;
+@override final  String? historyId;
 @override final  String historyTitle;
 @override final  String answeredAt;
 @override final  bool isCorrect;
@@ -259,7 +259,7 @@ abstract mixin class _$HistoryListItemCopyWith<$Res> implements $HistoryListItem
   factory _$HistoryListItemCopyWith(_HistoryListItem value, $Res Function(_HistoryListItem) _then) = __$HistoryListItemCopyWithImpl;
 @override @useResult
 $Res call({
- String historyId, String historyTitle, String answeredAt, bool isCorrect, String? feedbackExplanation, String? feedbackAdvice, String? feedbackSampleCode
+ String? historyId, String historyTitle, String answeredAt, bool isCorrect, String? feedbackExplanation, String? feedbackAdvice, String? feedbackSampleCode
 });
 
 
@@ -276,10 +276,10 @@ class __$HistoryListItemCopyWithImpl<$Res>
 
 /// Create a copy of HistoryListItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? historyId = null,Object? historyTitle = null,Object? answeredAt = null,Object? isCorrect = null,Object? feedbackExplanation = freezed,Object? feedbackAdvice = freezed,Object? feedbackSampleCode = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? historyId = freezed,Object? historyTitle = null,Object? answeredAt = null,Object? isCorrect = null,Object? feedbackExplanation = freezed,Object? feedbackAdvice = freezed,Object? feedbackSampleCode = freezed,}) {
   return _then(_HistoryListItem(
-historyId: null == historyId ? _self.historyId : historyId // ignore: cast_nullable_to_non_nullable
-as String,historyTitle: null == historyTitle ? _self.historyTitle : historyTitle // ignore: cast_nullable_to_non_nullable
+historyId: freezed == historyId ? _self.historyId : historyId // ignore: cast_nullable_to_non_nullable
+as String?,historyTitle: null == historyTitle ? _self.historyTitle : historyTitle // ignore: cast_nullable_to_non_nullable
 as String,answeredAt: null == answeredAt ? _self.answeredAt : answeredAt // ignore: cast_nullable_to_non_nullable
 as String,isCorrect: null == isCorrect ? _self.isCorrect : isCorrect // ignore: cast_nullable_to_non_nullable
 as bool,feedbackExplanation: freezed == feedbackExplanation ? _self.feedbackExplanation : feedbackExplanation // ignore: cast_nullable_to_non_nullable

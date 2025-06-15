@@ -8,12 +8,12 @@ abstract class QuestionScreenState with _$QuestionScreenState {
     required String title,
     required String questionText,
     required String codeAnswer,
-    required int selectedChoice,
-    required List<String>? choices,
+    required int? selectedChoiceIndex,
+    required List<({String id, String label, bool isCorrect})>? choices,
     required bool isAnswered,
     required String feedbackResult,
+    required String feedbackExplanation,
     required String feedbackAdvice,
-    required String feedbackRecommendation,
     required String modelCode,
   }) = _QuestionScreenState;
 }

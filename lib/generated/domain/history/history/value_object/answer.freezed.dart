@@ -145,11 +145,10 @@ as String,
 @JsonSerializable()
 
 class ChoiceAnswer implements Answer {
-  const ChoiceAnswer({required this.selectedIndex, required this.choices, final  String? $type}): $type = $type ?? 'choice';
+  const ChoiceAnswer({required this.choice, final  String? $type}): $type = $type ?? 'choice';
   factory ChoiceAnswer.fromJson(Map<String, dynamic> json) => _$ChoiceAnswerFromJson(json);
 
- final  int selectedIndex;
- final  Choices choices;
+ final  Choice choice;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
@@ -168,16 +167,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChoiceAnswer&&(identical(other.selectedIndex, selectedIndex) || other.selectedIndex == selectedIndex)&&(identical(other.choices, choices) || other.choices == choices));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChoiceAnswer&&(identical(other.choice, choice) || other.choice == choice));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,selectedIndex,choices);
+int get hashCode => Object.hash(runtimeType,choice);
 
 @override
 String toString() {
-  return 'Answer.choice(selectedIndex: $selectedIndex, choices: $choices)';
+  return 'Answer.choice(choice: $choice)';
 }
 
 
@@ -188,11 +187,11 @@ abstract mixin class $ChoiceAnswerCopyWith<$Res> implements $AnswerCopyWith<$Res
   factory $ChoiceAnswerCopyWith(ChoiceAnswer value, $Res Function(ChoiceAnswer) _then) = _$ChoiceAnswerCopyWithImpl;
 @useResult
 $Res call({
- int selectedIndex, Choices choices
+ Choice choice
 });
 
 
-$ChoicesCopyWith<$Res> get choices;
+$ChoiceCopyWith<$Res> get choice;
 
 }
 /// @nodoc
@@ -205,11 +204,10 @@ class _$ChoiceAnswerCopyWithImpl<$Res>
 
 /// Create a copy of Answer
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? selectedIndex = null,Object? choices = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? choice = null,}) {
   return _then(ChoiceAnswer(
-selectedIndex: null == selectedIndex ? _self.selectedIndex : selectedIndex // ignore: cast_nullable_to_non_nullable
-as int,choices: null == choices ? _self.choices : choices // ignore: cast_nullable_to_non_nullable
-as Choices,
+choice: null == choice ? _self.choice : choice // ignore: cast_nullable_to_non_nullable
+as Choice,
   ));
 }
 
@@ -217,10 +215,10 @@ as Choices,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$ChoicesCopyWith<$Res> get choices {
+$ChoiceCopyWith<$Res> get choice {
   
-  return $ChoicesCopyWith<$Res>(_self.choices, (value) {
-    return _then(_self.copyWith(choices: value));
+  return $ChoiceCopyWith<$Res>(_self.choice, (value) {
+    return _then(_self.copyWith(choice: value));
   });
 }
 }

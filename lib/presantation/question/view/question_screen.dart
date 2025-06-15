@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
+import 'package:flutter_e_learning/presantation/question/view_model/question_screen_state.dart';
 import 'package:flutter_e_learning/presantation/question/view_model/question_screen_view_model.dart';
 import 'package:flutter_highlight/themes/monokai-sublime.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -19,7 +20,6 @@ class QuestionScreen extends HookConsumerWidget {
     final codeController = useMemoized(
       () => CodeController(text: '', language: dart),
     );
-    int groupValue = 1;
 
     void showFeedbackAndScroll() {
       feedbackVisible.value = true;
@@ -30,6 +30,19 @@ class QuestionScreen extends HookConsumerWidget {
           curve: Curves.easeOut,
         );
       });
+    }
+
+    void onAnswer(QuestionScreenState state) async {
+      if (state.choices == null) {
+        // コード回答の場合はViewModelのupdateCodeAnswerを呼ぶ
+        ref
+            .read(questionScreenViewModelProvider(id).notifier)
+            .updateCodeAnswer(codeController.text);
+      }
+      await ref
+          .read(questionScreenViewModelProvider(id).notifier)
+          .saveHistory();
+      showFeedbackAndScroll();
     }
 
     return state.when(
@@ -62,11 +75,17 @@ class QuestionScreen extends HookConsumerWidget {
                   Column(
                     children: List.generate(
                       state.choices!.length,
-                      (i) => RadioListTile(
+                      (i) => RadioListTile<int>(
                         value: i,
-                        groupValue: groupValue,
-                        onChanged: (v) {},
-                        title: Text(state.choices![i]),
+                        groupValue: state.selectedChoiceIndex,
+                        onChanged: (v) {
+                          ref
+                              .read(
+                                questionScreenViewModelProvider(id).notifier,
+                              )
+                              .updateSelectedChoiceIndex(v);
+                        },
+                        title: Text(state.choices![i].label),
                       ),
                     ),
                   ),
@@ -79,7 +98,12 @@ class QuestionScreen extends HookConsumerWidget {
                 ],
                 SizedBox(height: 32),
                 ElevatedButton(
-                  onPressed: showFeedbackAndScroll,
+                  onPressed:
+                      (state.choices != null &&
+                              state.selectedChoiceIndex != null) ||
+                          state.choices == null
+                      ? () => onAnswer(state)
+                      : null,
                   child: Text('回答する'),
                 ),
                 if (feedbackVisible.value) ...[
@@ -97,9 +121,9 @@ class QuestionScreen extends HookConsumerWidget {
                     ),
                   ),
                   SizedBox(height: 8),
-                  Text('改善点: ${state.feedbackAdvice}'),
+                  Text('解説: ${state.feedbackExplanation}'),
                   SizedBox(height: 8),
-                  Text('推奨される書き方: ${state.feedbackRecommendation}'),
+                  Text('アドバイス: ${state.feedbackAdvice}'),
                   SizedBox(height: 8),
                   Text('模範コード:', style: TextStyle(fontWeight: FontWeight.bold)),
                   Container(

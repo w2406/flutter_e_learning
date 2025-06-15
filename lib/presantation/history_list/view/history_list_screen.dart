@@ -44,7 +44,7 @@ class HistoryListScreen extends HookConsumerWidget {
                 onTap: () {
                   context.pushNamed(
                     AppRoutes.history,
-                    pathParameters: {AppRoutes.historyId: item.historyId},
+                    pathParameters: {AppRoutes.historyId: item.historyId!},
                   );
                 },
               ),

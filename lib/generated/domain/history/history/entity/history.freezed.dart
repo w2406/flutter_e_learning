@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$History {
 
- String get id; String get historyTitle; String get historyContent; Answer get answer; bool get isCorrect; Feedback get feedback; DateTime get answeredAt;
+ String? get id; String get questionId; String get historyTitle; String get historyContent; Answer get answer; bool get isCorrect; Feedback get feedback; DateTime get answeredAt;
 /// Create a copy of History
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $HistoryCopyWith<History> get copyWith => _$HistoryCopyWithImpl<History>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is History&&(identical(other.id, id) || other.id == id)&&(identical(other.historyTitle, historyTitle) || other.historyTitle == historyTitle)&&(identical(other.historyContent, historyContent) || other.historyContent == historyContent)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect)&&(identical(other.feedback, feedback) || other.feedback == feedback)&&(identical(other.answeredAt, answeredAt) || other.answeredAt == answeredAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is History&&(identical(other.id, id) || other.id == id)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.historyTitle, historyTitle) || other.historyTitle == historyTitle)&&(identical(other.historyContent, historyContent) || other.historyContent == historyContent)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect)&&(identical(other.feedback, feedback) || other.feedback == feedback)&&(identical(other.answeredAt, answeredAt) || other.answeredAt == answeredAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,historyTitle,historyContent,answer,isCorrect,feedback,answeredAt);
+int get hashCode => Object.hash(runtimeType,id,questionId,historyTitle,historyContent,answer,isCorrect,feedback,answeredAt);
 
 @override
 String toString() {
-  return 'History(id: $id, historyTitle: $historyTitle, historyContent: $historyContent, answer: $answer, isCorrect: $isCorrect, feedback: $feedback, answeredAt: $answeredAt)';
+  return 'History(id: $id, questionId: $questionId, historyTitle: $historyTitle, historyContent: $historyContent, answer: $answer, isCorrect: $isCorrect, feedback: $feedback, answeredAt: $answeredAt)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $HistoryCopyWith<$Res>  {
   factory $HistoryCopyWith(History value, $Res Function(History) _then) = _$HistoryCopyWithImpl;
 @useResult
 $Res call({
- String id, String historyTitle, String historyContent, Answer answer, bool isCorrect, Feedback feedback, DateTime answeredAt
+ String? id, String questionId, String historyTitle, String historyContent, Answer answer, bool isCorrect, Feedback feedback, DateTime answeredAt
 });
 
 
@@ -66,9 +66,10 @@ class _$HistoryCopyWithImpl<$Res>
 
 /// Create a copy of History
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? historyTitle = null,Object? historyContent = null,Object? answer = null,Object? isCorrect = null,Object? feedback = null,Object? answeredAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? questionId = null,Object? historyTitle = null,Object? historyContent = null,Object? answer = null,Object? isCorrect = null,Object? feedback = null,Object? answeredAt = null,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,questionId: null == questionId ? _self.questionId : questionId // ignore: cast_nullable_to_non_nullable
 as String,historyTitle: null == historyTitle ? _self.historyTitle : historyTitle // ignore: cast_nullable_to_non_nullable
 as String,historyContent: null == historyContent ? _self.historyContent : historyContent // ignore: cast_nullable_to_non_nullable
 as String,answer: null == answer ? _self.answer : answer // ignore: cast_nullable_to_non_nullable
@@ -104,10 +105,11 @@ $FeedbackCopyWith<$Res> get feedback {
 @JsonSerializable()
 
 class _History implements History {
-  const _History({required this.id, required this.historyTitle, required this.historyContent, required this.answer, required this.isCorrect, required this.feedback, required this.answeredAt});
+  const _History({required this.id, required this.questionId, required this.historyTitle, required this.historyContent, required this.answer, required this.isCorrect, required this.feedback, required this.answeredAt});
   factory _History.fromJson(Map<String, dynamic> json) => _$HistoryFromJson(json);
 
-@override final  String id;
+@override final  String? id;
+@override final  String questionId;
 @override final  String historyTitle;
 @override final  String historyContent;
 @override final  Answer answer;
@@ -128,16 +130,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _History&&(identical(other.id, id) || other.id == id)&&(identical(other.historyTitle, historyTitle) || other.historyTitle == historyTitle)&&(identical(other.historyContent, historyContent) || other.historyContent == historyContent)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect)&&(identical(other.feedback, feedback) || other.feedback == feedback)&&(identical(other.answeredAt, answeredAt) || other.answeredAt == answeredAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _History&&(identical(other.id, id) || other.id == id)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.historyTitle, historyTitle) || other.historyTitle == historyTitle)&&(identical(other.historyContent, historyContent) || other.historyContent == historyContent)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect)&&(identical(other.feedback, feedback) || other.feedback == feedback)&&(identical(other.answeredAt, answeredAt) || other.answeredAt == answeredAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,historyTitle,historyContent,answer,isCorrect,feedback,answeredAt);
+int get hashCode => Object.hash(runtimeType,id,questionId,historyTitle,historyContent,answer,isCorrect,feedback,answeredAt);
 
 @override
 String toString() {
-  return 'History(id: $id, historyTitle: $historyTitle, historyContent: $historyContent, answer: $answer, isCorrect: $isCorrect, feedback: $feedback, answeredAt: $answeredAt)';
+  return 'History(id: $id, questionId: $questionId, historyTitle: $historyTitle, historyContent: $historyContent, answer: $answer, isCorrect: $isCorrect, feedback: $feedback, answeredAt: $answeredAt)';
 }
 
 
@@ -148,7 +150,7 @@ abstract mixin class _$HistoryCopyWith<$Res> implements $HistoryCopyWith<$Res> {
   factory _$HistoryCopyWith(_History value, $Res Function(_History) _then) = __$HistoryCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String historyTitle, String historyContent, Answer answer, bool isCorrect, Feedback feedback, DateTime answeredAt
+ String? id, String questionId, String historyTitle, String historyContent, Answer answer, bool isCorrect, Feedback feedback, DateTime answeredAt
 });
 
 
@@ -165,9 +167,10 @@ class __$HistoryCopyWithImpl<$Res>
 
 /// Create a copy of History
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? historyTitle = null,Object? historyContent = null,Object? answer = null,Object? isCorrect = null,Object? feedback = null,Object? answeredAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? questionId = null,Object? historyTitle = null,Object? historyContent = null,Object? answer = null,Object? isCorrect = null,Object? feedback = null,Object? answeredAt = null,}) {
   return _then(_History(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,questionId: null == questionId ? _self.questionId : questionId // ignore: cast_nullable_to_non_nullable
 as String,historyTitle: null == historyTitle ? _self.historyTitle : historyTitle // ignore: cast_nullable_to_non_nullable
 as String,historyContent: null == historyContent ? _self.historyContent : historyContent // ignore: cast_nullable_to_non_nullable
 as String,answer: null == answer ? _self.answer : answer // ignore: cast_nullable_to_non_nullable
