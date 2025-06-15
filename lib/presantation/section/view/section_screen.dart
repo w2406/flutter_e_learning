@@ -28,7 +28,7 @@ class SectionScreen extends HookConsumerWidget {
     }, []);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('セクション')),
+      appBar: AppBar(title: const Text('セクション'), centerTitle: true),
       body: state.when(
         data: (state) => ListView.builder(
           itemCount: state.questions.length,

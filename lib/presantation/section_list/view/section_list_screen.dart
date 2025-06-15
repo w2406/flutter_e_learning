@@ -11,7 +11,7 @@ class SectionListScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(sectionListScreenViewModelProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('セクション一覧')),
+      appBar: AppBar(title: const Text('セクション一覧'), centerTitle: true),
       body: state.when(
         data: (state) => ListView.builder(
           itemCount: state.sections.length,

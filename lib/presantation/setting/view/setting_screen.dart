@@ -9,7 +9,7 @@ class SettingScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(settingScreenViewModelProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('設定')),
+      appBar: AppBar(title: const Text('設定'), centerTitle: true),
       body: state.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, st) => Center(child: Text('エラー: $e')),

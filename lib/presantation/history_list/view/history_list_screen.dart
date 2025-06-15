@@ -12,7 +12,8 @@ class HistoryListScreen extends HookConsumerWidget {
     final state = ref.watch(historyListScreenViewModelProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HistoryList'),
+        title: const Text('履歴一覧'),
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.pop(),

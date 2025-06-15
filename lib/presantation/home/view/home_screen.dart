@@ -27,7 +27,19 @@ class HomeScreen extends HookConsumerWidget {
     }, []);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: AppBar(
+        title: const Text('Flutter Eラーニング'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: '設定',
+            onPressed: () {
+              context.pushNamed(AppRoutes.setting);
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,14 +87,6 @@ class HomeScreen extends HookConsumerWidget {
                 context.pushNamed(AppRoutes.historyList);
               },
               child: Text("履歴一覧画面へ"),
-            ),
-            SizedBox(height: 16),
-            // 設定画面へ遷移ボタン
-            ElevatedButton(
-              onPressed: () {
-                context.pushNamed(AppRoutes.setting);
-              },
-              child: Text("設定画面へ"),
             ),
           ],
         ),

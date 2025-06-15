@@ -49,7 +49,7 @@ class QuestionScreen extends HookConsumerWidget {
 
     return state.when(
       data: (state) => Scaffold(
-        appBar: AppBar(title: const Text('問題詳細')),
+        appBar: AppBar(title: const Text('問題'), centerTitle: true),
         body: CodeTheme(
           data: CodeThemeData(styles: monokaiSublimeTheme),
           child: Padding(

@@ -15,7 +15,8 @@ class HistoryScreen extends HookConsumerWidget {
     return asyncState.when(
       data: (state) => Scaffold(
         appBar: AppBar(
-          title: const Text('History'),
+          title: const Text('履歴'),
+          centerTitle: true,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () => context.pop(),
