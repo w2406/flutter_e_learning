@@ -80,8 +80,7 @@ class AppDatabase {
     await db.execute('''
       CREATE TABLE app_settings (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        api_key TEXT,
-        app_version TEXT
+        api_key TEXT
       )
     ''');
     // Feedbackテーブル
@@ -91,6 +90,16 @@ class AppDatabase {
         explanation TEXT NOT NULL,
         advice TEXT,
         sample_code TEXT
+      )
+    ''');
+    // SolvedQuestionsテーブル
+    await db.execute('''
+      CREATE TABLE solved_questions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        question_id TEXT NOT NULL,
+        solved_at TEXT NOT NULL,
+        isCorrect INTEGER,
+        UNIQUE(question_id) ON CONFLICT REPLACE
       )
     ''');
   }

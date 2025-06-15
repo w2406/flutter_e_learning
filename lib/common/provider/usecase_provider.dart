@@ -2,6 +2,10 @@ import 'package:flutter_e_learning/common/provider/repository_provider.dart';
 import 'package:flutter_e_learning/usecase/history/add_history_usecase.dart';
 import 'package:flutter_e_learning/usecase/history/get_histories_usecase.dart';
 import 'package:flutter_e_learning/usecase/history/get_history_usecase.dart';
+import 'package:flutter_e_learning/usecase/progress/check_solved_question.dart';
+import 'package:flutter_e_learning/usecase/progress/get_solved_question_count.dart';
+import 'package:flutter_e_learning/usecase/progress/update_solved_question.dart';
+import 'package:flutter_e_learning/usecase/question/get_all_question_count_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/get_question_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/get_questions_usecase.dart';
 import 'package:flutter_e_learning/usecase/question/get_section_usecase.dart';
@@ -86,4 +90,28 @@ UpdateSectionsUsecase updateSectionsUsecase(Ref ref) {
 GetSectionUsecase getSectionUsecase(Ref ref) {
   final repository = ref.watch(sectionRepositoryProvider);
   return GetSectionUsecase(repository: repository);
+}
+
+@Riverpod(keepAlive: true)
+GetSolvedQuestionCountUseCase getSolvedQuestionCountUseCase(Ref ref) {
+  final repository = ref.watch(solvedQuestionRepositoryProvider);
+  return GetSolvedQuestionCountUseCase(repository);
+}
+
+@Riverpod(keepAlive: true)
+GetAllQuestionCountUseCase getAllQuestionCountUseCase(Ref ref) {
+  final repository = ref.watch(questionsRepositoryProvider);
+  return GetAllQuestionCountUseCase(repository);
+}
+
+@Riverpod(keepAlive: true)
+UpdateSolvedQuestionUseCase updateSolvedQuestionUseCase(Ref ref) {
+  final repository = ref.watch(solvedQuestionRepositoryProvider);
+  return UpdateSolvedQuestionUseCase(repository);
+}
+
+@Riverpod(keepAlive: true)
+CheckSolvedQuestionUseCase checkSolvedQuestionUseCase(Ref ref) {
+  final repository = ref.watch(solvedQuestionRepositoryProvider);
+  return CheckSolvedQuestionUseCase(repository);
 }

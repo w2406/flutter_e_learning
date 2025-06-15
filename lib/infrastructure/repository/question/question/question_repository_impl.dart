@@ -17,6 +17,7 @@ class QuestionRepositoryImpl implements QuestionRepository {
     await _database.deleteAll('questions');
     await _database.deleteAll('choices');
     await _database.deleteAll('histories');
+    await _database.deleteAll('solved_questions');
     for (final q in questions) {
       await _database.insert('questions', {
         'id': q.id.value,
@@ -144,5 +145,11 @@ class QuestionRepositoryImpl implements QuestionRepository {
       }
     }
     return questions;
+  }
+
+  @override
+  Future<int> getAllQuestionCount() async {
+    final questionMaps = await _database.query('questions');
+    return questionMaps.length;
   }
 }

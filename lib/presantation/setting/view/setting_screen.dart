@@ -44,10 +44,31 @@ class SettingScreen extends HookConsumerWidget {
                 ),
                 SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () {
-                    ref
-                        .read(settingScreenViewModelProvider.notifier)
-                        .loadQuestionFile();
+                  onPressed: () async {
+                    final confirmed = await showDialog<bool>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('確認'),
+                        content: Text(
+                          '問題ファイルを読み込みますか？すべての現在の問題・履歴は失われて、新しい問題が読み込まれます。',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: Text('キャンセル'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                    if (confirmed == true) {
+                      ref
+                          .read(settingScreenViewModelProvider.notifier)
+                          .loadQuestionFile();
+                    }
                   },
                   child: Text('問題ファイルを読み込む'),
                 ),
@@ -58,9 +79,7 @@ class SettingScreen extends HookConsumerWidget {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  data.isFileLoaded
-                      ? 'ファイル読込済み: ${data.fileName ?? ''}'
-                      : 'ファイル未読込',
+                  data.isFileLoaded ? 'ファイル読込済み' : 'ファイル未読込',
                   style: TextStyle(
                     color: data.isFileLoaded ? Colors.green : Colors.red,
                   ),

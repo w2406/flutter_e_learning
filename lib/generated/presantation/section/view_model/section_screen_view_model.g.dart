@@ -7,7 +7,7 @@ part of '../../../../presantation/section/view_model/section_screen_view_model.d
 // **************************************************************************
 
 String _$sectionScreenViewModelHash() =>
-    r'2d13ee2ef2e90b7af6f9511b83273123f61e1f7c';
+    r'5d93d8668c572d9af9d4e5a339f67b8f8db39259';
 
 /// Copied from Dart SDK
 class _SystemHash {

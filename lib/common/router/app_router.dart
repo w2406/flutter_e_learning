@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_e_learning/common/constants/route_paths.dart';
+import 'package:flutter_e_learning/common/provider/common_provider.dart';
 import 'package:flutter_e_learning/presantation/history/view/history_screen.dart';
 import 'package:flutter_e_learning/presantation/history_list/view/history_list_screen.dart';
 import 'package:flutter_e_learning/presantation/home/view/home_screen.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_e_learning/presantation/setting/view/setting_screen.dart
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
+  observers: [routeObserver],
   routes: [
     GoRoute(
       name: AppRoutes.home,

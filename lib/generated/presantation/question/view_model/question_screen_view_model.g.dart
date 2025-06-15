@@ -7,7 +7,7 @@ part of '../../../../presantation/question/view_model/question_screen_view_model
 // **************************************************************************
 
 String _$questionScreenViewModelHash() =>
-    r'a8db0fbd465c7a971d0d5bb50c24ba0fdfd3d8e3';
+    r'ce716fbce72f11fdd5bde4b20940cdb7ca3946cd';
 
 /// Copied from Dart SDK
 class _SystemHash {

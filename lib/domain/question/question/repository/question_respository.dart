@@ -6,4 +6,5 @@ abstract interface class QuestionRepository {
   Future<void> saveQuestions(List<Question> questions);
   Future<Question> getQuestion(Id id);
   Future<List<Question>> getQuestions(Section section);
+  Future<int> getAllQuestionCount();
 }

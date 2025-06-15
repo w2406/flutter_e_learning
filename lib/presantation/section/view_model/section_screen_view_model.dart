@@ -20,15 +20,19 @@ class SectionScreenViewModel extends _$SectionScreenViewModel {
         .execute(section);
     return SectionScreenState(
       sectionTitle: section.title,
-      questions: questions
-          .map(
-            (question) => SectionQuestionItem(
-              questionId: question.id.value,
-              title: question.title,
-              questionText: question.questionText,
-            ),
-          )
-          .toList(),
+      questions: await Future.wait(
+        questions.map((question) async {
+          final isCorrect = await ref
+              .read(checkSolvedQuestionUseCaseProvider)
+              .execute(question.id.value);
+          return SectionQuestionItem(
+            questionId: question.id.value,
+            title: question.title,
+            questionText: question.questionText,
+            isCorrect: isCorrect,
+          );
+        }),
+      ),
     );
   }
 }

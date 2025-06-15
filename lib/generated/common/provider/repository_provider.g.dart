@@ -93,5 +93,42 @@ final historyRepositoryProvider = Provider<HistoryRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef HistoryRepositoryRef = ProviderRef<HistoryRepository>;
+String _$solvedQuestionRepositoryHash() =>
+    r'97e5bbb00c51ddc566a64dc2b63482cf685b6c7d';
+
+/// See also [solvedQuestionRepository].
+@ProviderFor(solvedQuestionRepository)
+final solvedQuestionRepositoryProvider =
+    Provider<SolvedQuestionRepository>.internal(
+      solvedQuestionRepository,
+      name: r'solvedQuestionRepositoryProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$solvedQuestionRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef SolvedQuestionRepositoryRef = ProviderRef<SolvedQuestionRepository>;
+String _$apiKeyRepositoryImplHash() =>
+    r'46f9b83b23d9bf6e6ba1b3fc577f3f0490297386';
+
+/// See also [apiKeyRepositoryImpl].
+@ProviderFor(apiKeyRepositoryImpl)
+final apiKeyRepositoryImplProvider = Provider<ApiKeyRepositoryImpl>.internal(
+  apiKeyRepositoryImpl,
+  name: r'apiKeyRepositoryImplProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$apiKeyRepositoryImplHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ApiKeyRepositoryImplRef = ProviderRef<ApiKeyRepositoryImpl>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

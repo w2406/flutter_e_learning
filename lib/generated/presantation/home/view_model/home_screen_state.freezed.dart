@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeScreenState {
 
- int get progress;
+ double get progress;
 /// Create a copy of HomeScreenState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,7 +46,7 @@ abstract mixin class $HomeScreenStateCopyWith<$Res>  {
   factory $HomeScreenStateCopyWith(HomeScreenState value, $Res Function(HomeScreenState) _then) = _$HomeScreenStateCopyWithImpl;
 @useResult
 $Res call({
- int progress
+ double progress
 });
 
 
@@ -66,7 +66,7 @@ class _$HomeScreenStateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? progress = null,}) {
   return _then(_self.copyWith(
 progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
-as int,
+as double,
   ));
 }
 
@@ -80,7 +80,7 @@ class _HomeScreenState implements HomeScreenState {
   const _HomeScreenState({required this.progress});
   
 
-@override final  int progress;
+@override final  double progress;
 
 /// Create a copy of HomeScreenState
 /// with the given fields replaced by the non-null parameter values.
@@ -112,7 +112,7 @@ abstract mixin class _$HomeScreenStateCopyWith<$Res> implements $HomeScreenState
   factory _$HomeScreenStateCopyWith(_HomeScreenState value, $Res Function(_HomeScreenState) _then) = __$HomeScreenStateCopyWithImpl;
 @override @useResult
 $Res call({
- int progress
+ double progress
 });
 
 
@@ -132,7 +132,7 @@ class __$HomeScreenStateCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? progress = null,}) {
   return _then(_HomeScreenState(
 progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
-as int,
+as double,
   ));
 }
 

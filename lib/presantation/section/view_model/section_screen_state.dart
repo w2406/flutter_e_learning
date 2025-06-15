@@ -16,5 +16,6 @@ abstract class SectionQuestionItem with _$SectionQuestionItem {
     required String questionId,
     required String title,
     required String questionText,
+    bool? isCorrect,
   }) = _SectionQuestionItem;
 }

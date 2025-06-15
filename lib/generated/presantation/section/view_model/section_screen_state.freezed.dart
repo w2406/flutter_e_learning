@@ -151,7 +151,7 @@ as List<SectionQuestionItem>,
 /// @nodoc
 mixin _$SectionQuestionItem {
 
- String get questionId; String get title; String get questionText;
+ String get questionId; String get title; String get questionText; bool? get isCorrect;
 /// Create a copy of SectionQuestionItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -162,16 +162,16 @@ $SectionQuestionItemCopyWith<SectionQuestionItem> get copyWith => _$SectionQuest
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SectionQuestionItem&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SectionQuestionItem&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,questionId,title,questionText);
+int get hashCode => Object.hash(runtimeType,questionId,title,questionText,isCorrect);
 
 @override
 String toString() {
-  return 'SectionQuestionItem(questionId: $questionId, title: $title, questionText: $questionText)';
+  return 'SectionQuestionItem(questionId: $questionId, title: $title, questionText: $questionText, isCorrect: $isCorrect)';
 }
 
 
@@ -182,7 +182,7 @@ abstract mixin class $SectionQuestionItemCopyWith<$Res>  {
   factory $SectionQuestionItemCopyWith(SectionQuestionItem value, $Res Function(SectionQuestionItem) _then) = _$SectionQuestionItemCopyWithImpl;
 @useResult
 $Res call({
- String questionId, String title, String questionText
+ String questionId, String title, String questionText, bool? isCorrect
 });
 
 
@@ -199,12 +199,13 @@ class _$SectionQuestionItemCopyWithImpl<$Res>
 
 /// Create a copy of SectionQuestionItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? questionId = null,Object? title = null,Object? questionText = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? questionId = null,Object? title = null,Object? questionText = null,Object? isCorrect = freezed,}) {
   return _then(_self.copyWith(
 questionId: null == questionId ? _self.questionId : questionId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,questionText: null == questionText ? _self.questionText : questionText // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isCorrect: freezed == isCorrect ? _self.isCorrect : isCorrect // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 
@@ -215,12 +216,13 @@ as String,
 
 
 class _SectionQuestionItem implements SectionQuestionItem {
-  const _SectionQuestionItem({required this.questionId, required this.title, required this.questionText});
+  const _SectionQuestionItem({required this.questionId, required this.title, required this.questionText, this.isCorrect});
   
 
 @override final  String questionId;
 @override final  String title;
 @override final  String questionText;
+@override final  bool? isCorrect;
 
 /// Create a copy of SectionQuestionItem
 /// with the given fields replaced by the non-null parameter values.
@@ -232,16 +234,16 @@ _$SectionQuestionItemCopyWith<_SectionQuestionItem> get copyWith => __$SectionQu
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SectionQuestionItem&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SectionQuestionItem&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.title, title) || other.title == title)&&(identical(other.questionText, questionText) || other.questionText == questionText)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,questionId,title,questionText);
+int get hashCode => Object.hash(runtimeType,questionId,title,questionText,isCorrect);
 
 @override
 String toString() {
-  return 'SectionQuestionItem(questionId: $questionId, title: $title, questionText: $questionText)';
+  return 'SectionQuestionItem(questionId: $questionId, title: $title, questionText: $questionText, isCorrect: $isCorrect)';
 }
 
 
@@ -252,7 +254,7 @@ abstract mixin class _$SectionQuestionItemCopyWith<$Res> implements $SectionQues
   factory _$SectionQuestionItemCopyWith(_SectionQuestionItem value, $Res Function(_SectionQuestionItem) _then) = __$SectionQuestionItemCopyWithImpl;
 @override @useResult
 $Res call({
- String questionId, String title, String questionText
+ String questionId, String title, String questionText, bool? isCorrect
 });
 
 
@@ -269,12 +271,13 @@ class __$SectionQuestionItemCopyWithImpl<$Res>
 
 /// Create a copy of SectionQuestionItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? questionId = null,Object? title = null,Object? questionText = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? questionId = null,Object? title = null,Object? questionText = null,Object? isCorrect = freezed,}) {
   return _then(_SectionQuestionItem(
 questionId: null == questionId ? _self.questionId : questionId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,questionText: null == questionText ? _self.questionText : questionText // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isCorrect: freezed == isCorrect ? _self.isCorrect : isCorrect // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 

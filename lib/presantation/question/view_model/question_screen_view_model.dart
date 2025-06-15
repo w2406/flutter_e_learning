@@ -2,6 +2,7 @@ import 'package:flutter_e_learning/common/provider/usecase_provider.dart';
 import 'package:flutter_e_learning/domain/history/history/entity/history.dart';
 import 'package:flutter_e_learning/domain/history/history/value_object/answer.dart';
 import 'package:flutter_e_learning/domain/history/history/value_object/feedback.dart';
+import 'package:flutter_e_learning/domain/progress/solved_question/entity/solved_question.dart';
 import 'package:flutter_e_learning/domain/question/question/entity/choice.dart';
 import 'package:flutter_e_learning/domain/question/question/entity/question.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -36,11 +37,9 @@ class QuestionScreenViewModel extends _$QuestionScreenViewModel {
   Future<void> updateFeedback() async {
     final choices = state.value?.choices;
     final selectedChoiceIndex = state.value?.selectedChoiceIndex;
-    if (choices == null || selectedChoiceIndex == null) {
-      // 選択肢がない場合はフィードバックを更新しない
-      return;
-    }
-    final feedbackResult = choices[selectedChoiceIndex].isCorrect
+    final feedbackResult = selectedChoiceIndex == null
+        ? "<noSelectionFeedbackResult>"
+        : choices![selectedChoiceIndex].isCorrect
         ? "<correctFeedbackResult>"
         : "<incorrectFeedbackResult>";
     final feedbackExplanation = "<feedbackExplanation>";
@@ -91,10 +90,21 @@ class QuestionScreenViewModel extends _$QuestionScreenViewModel {
       answer: answer,
       isCorrect: s.choices != null && s.selectedChoiceIndex != null
           ? s.choices![s.selectedChoiceIndex!].isCorrect
-          : false, // コード回答時は適宜判定
+          : true, // コード回答時は適宜判定
       feedback: feedback,
       answeredAt: DateTime.now(),
     );
     await ref.read(addHistoryUseCaseProvider).execute(history);
+
+    // SolvedQuestionエンティティの生成と更新
+    await ref
+        .read(updateSolvedQuestionUseCaseProvider)
+        .execute(
+          SolvedQuestion(
+            questionId: id,
+            solvedAt: DateTime.now(),
+            isCorrect: history.isCorrect,
+          ),
+        );
   }
 }

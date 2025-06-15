@@ -15,14 +15,12 @@ class QuestionScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(questionScreenViewModelProvider(id));
-    final feedbackVisible = useState(false);
     final scrollController = useScrollController();
     final codeController = useMemoized(
       () => CodeController(text: '', language: dart),
     );
 
     void showFeedbackAndScroll() {
-      feedbackVisible.value = true;
       Future.delayed(const Duration(milliseconds: 100), () {
         scrollController.animateTo(
           scrollController.position.maxScrollExtent,
@@ -39,6 +37,10 @@ class QuestionScreen extends HookConsumerWidget {
             .read(questionScreenViewModelProvider(id).notifier)
             .updateCodeAnswer(codeController.text);
       }
+      // フィードバックを更新
+      await ref
+          .read(questionScreenViewModelProvider(id).notifier)
+          .updateFeedback();
       await ref
           .read(questionScreenViewModelProvider(id).notifier)
           .saveHistory();
@@ -106,7 +108,7 @@ class QuestionScreen extends HookConsumerWidget {
                       : null,
                   child: Text('回答する'),
                 ),
-                if (feedbackVisible.value) ...[
+                if (state.feedbackResult.isNotEmpty) ...[
                   Divider(height: 40),
                   Text(
                     'フィードバック',

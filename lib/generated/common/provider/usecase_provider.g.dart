@@ -219,5 +219,83 @@ final getSectionUsecaseProvider = Provider<GetSectionUsecase>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetSectionUsecaseRef = ProviderRef<GetSectionUsecase>;
+String _$getSolvedQuestionCountUseCaseHash() =>
+    r'b40e59858206cac18f9579c89ae4384617dbe806';
+
+/// See also [getSolvedQuestionCountUseCase].
+@ProviderFor(getSolvedQuestionCountUseCase)
+final getSolvedQuestionCountUseCaseProvider =
+    Provider<GetSolvedQuestionCountUseCase>.internal(
+      getSolvedQuestionCountUseCase,
+      name: r'getSolvedQuestionCountUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getSolvedQuestionCountUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetSolvedQuestionCountUseCaseRef =
+    ProviderRef<GetSolvedQuestionCountUseCase>;
+String _$getAllQuestionCountUseCaseHash() =>
+    r'02149e63a7e62e88a05c9918e750966be7294553';
+
+/// See also [getAllQuestionCountUseCase].
+@ProviderFor(getAllQuestionCountUseCase)
+final getAllQuestionCountUseCaseProvider =
+    Provider<GetAllQuestionCountUseCase>.internal(
+      getAllQuestionCountUseCase,
+      name: r'getAllQuestionCountUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getAllQuestionCountUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetAllQuestionCountUseCaseRef = ProviderRef<GetAllQuestionCountUseCase>;
+String _$updateSolvedQuestionUseCaseHash() =>
+    r'b0cb2004055794d6809c5dc528d2f97da14e7cd5';
+
+/// See also [updateSolvedQuestionUseCase].
+@ProviderFor(updateSolvedQuestionUseCase)
+final updateSolvedQuestionUseCaseProvider =
+    Provider<UpdateSolvedQuestionUseCase>.internal(
+      updateSolvedQuestionUseCase,
+      name: r'updateSolvedQuestionUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$updateSolvedQuestionUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef UpdateSolvedQuestionUseCaseRef =
+    ProviderRef<UpdateSolvedQuestionUseCase>;
+String _$checkSolvedQuestionUseCaseHash() =>
+    r'7f6d9242a2eec7a50c1053141d9877db7abd33b4';
+
+/// See also [checkSolvedQuestionUseCase].
+@ProviderFor(checkSolvedQuestionUseCase)
+final checkSolvedQuestionUseCaseProvider =
+    Provider<CheckSolvedQuestionUseCase>.internal(
+      checkSolvedQuestionUseCase,
+      name: r'checkSolvedQuestionUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$checkSolvedQuestionUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef CheckSolvedQuestionUseCaseRef = ProviderRef<CheckSolvedQuestionUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
