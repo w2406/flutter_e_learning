@@ -22,16 +22,6 @@ class QuestionScreen extends HookConsumerWidget {
     );
     final isLoading = useState(false);
 
-    void showFeedbackAndScroll() {
-      Future.delayed(const Duration(milliseconds: 100), () {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 400),
-          curve: Curves.easeOut,
-        );
-      });
-    }
-
     void onAnswer(QuestionScreenState state) async {
       if (isLoading.value) return;
       isLoading.value = true;
@@ -48,7 +38,6 @@ class QuestionScreen extends HookConsumerWidget {
         await ref
             .read(questionScreenViewModelProvider(id).notifier)
             .saveHistory();
-        showFeedbackAndScroll();
       } finally {
         isLoading.value = false;
       }

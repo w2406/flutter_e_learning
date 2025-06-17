@@ -35,6 +35,11 @@ Future<DifyApiClient> apiClient(Ref ref) async {
   return DifyApiClient(dio, baseUrl: baseUrl);
 }
 
+@Riverpod(keepAlive: true)
+Future<void> refreshApiKey(Ref ref) async {
+  ref.invalidate(apiKeyProvider);
+}
+
 // 画面遷移の監視を行うためのRouteObserverを定義
 final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();

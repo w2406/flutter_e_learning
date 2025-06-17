@@ -57,5 +57,22 @@ final apiClientProvider = FutureProvider<DifyApiClient>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ApiClientRef = FutureProviderRef<DifyApiClient>;
+String _$refreshApiKeyHash() => r'63aa72fb457eae8f45e461b440e6f240d04d9bb7';
+
+/// See also [refreshApiKey].
+@ProviderFor(refreshApiKey)
+final refreshApiKeyProvider = FutureProvider<void>.internal(
+  refreshApiKey,
+  name: r'refreshApiKeyProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$refreshApiKeyHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef RefreshApiKeyRef = FutureProviderRef<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

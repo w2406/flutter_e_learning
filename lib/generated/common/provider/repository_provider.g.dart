@@ -112,24 +112,6 @@ final solvedQuestionRepositoryProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SolvedQuestionRepositoryRef = ProviderRef<SolvedQuestionRepository>;
-String _$apiKeyRepositoryImplHash() =>
-    r'9ca71fb24ca6f89380040c0225289c82dab01b9b';
-
-/// See also [apiKeyRepositoryImpl].
-@ProviderFor(apiKeyRepositoryImpl)
-final apiKeyRepositoryImplProvider = Provider<ApiKeyRepository>.internal(
-  apiKeyRepositoryImpl,
-  name: r'apiKeyRepositoryImplProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$apiKeyRepositoryImplHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ApiKeyRepositoryImplRef = ProviderRef<ApiKeyRepository>;
 String _$difyChatMessageRepositoryHash() =>
     r'bb10b4443640375c2342a296340b9674077d6427';
 

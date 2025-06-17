@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_e_learning/common/provider/common_provider.dart';
 import 'package:flutter_e_learning/common/provider/usecase_provider.dart';
 import 'package:flutter_e_learning/domain/question/question/entity/question.dart';
 import 'package:flutter_e_learning/domain/question/section/value_object/section.dart';
@@ -28,6 +29,8 @@ class SettingScreenViewModel extends _$SettingScreenViewModel {
   Future<void> updateApiKey(String apiKey) async {
     await ref.read(updateApiKeyUsecaseProvider).execute(ApiKey(value: apiKey));
     state = AsyncValue.data(state.value!.copyWith(apiKey: apiKey));
+    //  APIキー更新後にDifyのAPIキーをリフレッシュ
+    await ref.read(refreshApiKeyProvider.future);
   }
 
   // TODO: ロード処理は別のUseCaseに切り出す
