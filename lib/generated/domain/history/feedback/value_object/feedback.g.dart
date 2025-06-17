@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../../domain/history/history/value_object/feedback.dart';
+part of '../../../../../domain/history/feedback/value_object/feedback.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

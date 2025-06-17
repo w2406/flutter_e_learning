@@ -1,0 +1,1446 @@
+openapi: 3.0.1
+info:
+  title: DifyチャットアプリケーションAPI
+  version: v1
+  description: |
+    このAPIはDifyチャットアプリケーションとの連携を目的としており、セッションの永続性、メッセージ処理、ファイルアップロード、設定取得など、様々な機能に対応しています。
+
+servers:
+  - url: http://localhost/v1
+    description: ローカルのDify APIサーバー
+
+security:
+  - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API_KEY
+      description: |
+        APIキー認証です。
+        APIキーはサーバー側で厳重に管理し、クライアント側に共有したり保存したりしないことを強く推奨します。
+        APIキーの漏洩は深刻な結果を招く可能性があります。
+
+  schemas:
+    FileObject:
+      type: object
+      description: アップロードされるファイルの情報を定義します。
+      properties:
+        type:
+          type: string
+          description: サポートされるファイルの種類。
+          enum:
+            - document
+            - image
+            - audio
+            - video
+            - custom
+        transfer_method:
+          type: string
+          description: ファイルの転送方法。'remote_url'は画像URL用、'local_file'はファイルアップロード用です。
+          enum:
+            - remote_url
+            - local_file
+        url:
+          type: string
+          description: 画像URL（`transfer_method`が`remote_url`の場合に指定）。
+          format: uri
+        upload_file_id:
+          type: string
+          description: アップロード済みファイルID。事前にファイルアップロードAPIで取得する必要があります（`transfer_method`が`local_file`の場合に指定）。
+      required:
+        - type
+        - transfer_method
+
+    ChatCompletionRequest:
+      type: object
+      description: チャットメッセージを送信する際のリクエストボディを定義します。
+      properties:
+        query:
+          type: string
+          description: ユーザーの入力/質問内容。
+          example: "iPhone 13 Pro Maxの仕様は何ですか？"
+        inputs:
+          type: object
+          description: |
+            アプリで定義された様々な変数値を入力できます。
+            'inputs'パラメータには複数のキー/値のペアが含まれ、各キーが特定の変数に対応し、各値がその変数の具体的な値となります。
+            変数がファイルタイプの場合、後述の'files'で記述されたキーを持つオブジェクトを指定します。
+            デフォルトは {} です。
+          additionalProperties: true
+        response_mode:
+          type: string
+          description: レスポンスの返却モード。'streaming'（推奨）または'blocking'がサポートされています。
+          enum:
+            - streaming
+            - blocking
+          default: streaming
+        user:
+          type: string
+          description: |
+            ユーザー識別子。エンドユーザーの識別のために使用され、統計に利用されます。
+            開発者はアプリケーション内で一意になるように定義する必要があります。
+          example: "abc-123"
+        conversation_id:
+          type: string
+          description: |
+            会話ID。以前のチャット履歴に基づいて会話を続ける場合、
+            以前のメッセージの`conversation_id`を渡す必要があります。
+          example: ""
+        files:
+          type: array
+          description: |
+            ファイルリスト。ファイル入力をテキスト理解や質問応答と組み合わせるのに適しています。
+            モデルがビジョン機能に対応している場合にのみ利用可能です。
+          items:
+            $ref: "#/components/schemas/FileObject"
+          example:
+            - type: "image"
+              transfer_method: "remote_url"
+              url: "https://cloud.dify.ai/logo/logo-site.png"
+        auto_generate_name:
+          type: boolean
+          description: |
+            会話タイトルの自動生成。デフォルトは`true`です。
+            `false`に設定すると、会話名変更APIを呼び出して`auto_generate`を`true`に設定することで非同期にタイトルを生成できます。
+          default: true
+      required:
+        - query
+
+    ChatCompletionResponse:
+      type: object
+      description: チャットメッセージ送信後のレスポンスボディを定義します。
+      properties:
+        event:
+          type: string
+          description: イベントタイプ。常に`message`。
+          example: "message"
+        task_id:
+          type: string
+          description: タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          example: "c3800678-a077-43df-a102-53f23ed20b88"
+        id:
+          type: string
+          description: 一意のID。
+          example: "9da23599-e713-473b-982c-4328d4f5c78a"
+        message_id:
+          type: string
+          description: 一意のメッセージID。
+          example: "9da23599-e713-473b-982c-4328d4f5c78a"
+        conversation_id:
+          type: string
+          description: 会話ID。
+          example: "45701982-8118-4bc5-8e9b-64562b4555f2"
+        mode:
+          type: string
+          description: アプリケーションモード。常に`chat`。
+          example: "chat"
+        answer:
+          type: string
+          description: 完全な応答内容。
+          example: "iPhone 13 Pro Maxの仕様は次のとおりです:..."
+        metadata:
+          type: object
+          description: メタデータ。
+          properties:
+            usage:
+              type: object
+              description: トークン使用量などの情報。
+              properties:
+                prompt_tokens:
+                  type: integer
+                  description: プロンプトのトークン数。
+                prompt_unit_price:
+                  type: string
+                  description: プロンプトの単価。
+                prompt_price_unit:
+                  type: string
+                  description: プロンプトの価格単位。
+                prompt_price:
+                  type: string
+                  description: プロンプトの価格。
+                completion_tokens:
+                  type: integer
+                  description: 完了のトークン数。
+                completion_unit_price:
+                  type: string
+                  description: 完了の単価。
+                completion_price_unit:
+                  type: string
+                  description: 完了の価格単位。
+                completion_price:
+                  type: string
+                  description: 完了の価格。
+                total_tokens:
+                  type: integer
+                  description: 合計トークン数。
+                total_price:
+                  type: string
+                  description: 合計価格。
+                currency:
+                  type: string
+                  description: 通貨。
+                latency:
+                  type: number
+                  description: レイテンシ（処理時間）。
+            retriever_resources:
+              type: array
+              description: 検索されたリソースのリスト。
+              items:
+                $ref: "#/components/schemas/RetrieverResource"
+        created_at:
+          type: integer
+          description: "メッセージ作成時のタイムスタンプ（Unix時間、例: 1705395332）。"
+          example: 1705407629
+
+    RetrieverResource:
+      type: object
+      description: メッセージ生成時に参照された検索リソースの詳細を定義します。
+      properties:
+        position:
+          type: integer
+          description: 検索結果の順位。
+        dataset_id:
+          type: string
+          description: データセットID。
+        dataset_name:
+          type: string
+          description: データセット名。
+        document_id:
+          type: string
+          description: ドキュメントID。
+        document_name:
+          type: string
+          description: ドキュメント名。
+        segment_id:
+          type: string
+          description: セグメントID。
+        score:
+          type: number
+          description: 検索スコア。
+          format: float
+        content:
+          type: string
+          description: 検索されたコンテンツの内容。
+
+    ChunkCompletionResponse:
+      type: string
+      description: |
+        アプリケーションから出力されるストリームのチャンクを定義します。
+        `Content-Type`は`text/event-stream`です。
+        各ストリーミングチャンクは`data:`で始まり、`\n\n`の2つの改行文字で区切られます。
+        ストリーミングチャンクの構造はイベントによって異なります。
+
+        - `event: message`: LLMがテキストチャンクを返すイベント。つまり、完全なテキストがチャンク形式で出力されます。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          - `message_id` (string): 一意のメッセージID。
+          - `conversation_id` (string): 会話ID。
+          - `answer` (string): LLMが返したテキストチャンクの内容。
+          - `created_at` (int): 作成時のタイムスタンプ（Unix時間、例: 1705395332）。
+        - `event: message_file`: メッセージファイルイベント。ツールによって新しいファイルが作成されました。
+          - `id` (string): ファイルの一意のID。
+          - `type` (string): ファイルタイプ。現在`image`のみ許可されています。
+          - `belongs_to` (string): 所属。現在`assistant`のみ。
+          - `url` (string): ファイルのリモートURL。
+          - `conversation_id` (string): 会話ID。
+        - `event: message_end`: メッセージ終了イベント。このイベントを受信するとストリーミングが終了したことを意味します。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          - `message_id` (string): 一意のメッセージID。
+          - `conversation_id` (string): 会話ID。
+          - `metadata` (object): `usage`（使用状況）と`retriever_resources`（RetrieverResourceの配列）を含むメタデータ。
+        - `event: tts_message`: TTS（Text-to-Speech）音声ストリームイベント。音声合成出力です。内容はMp3形式のオーディオブロックで、base64文字列としてエンコードされています。再生時には、base64をデコードしてプレイヤーに供給するだけです。（このメッセージは自動再生が有効な場合にのみ利用可能です）。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の応答停止インターフェースで使用されます。
+          - `message_id` (string): 一意のメッセージID。
+          - `audio` (string): 音声合成後のオーディオ。base64テキストコンテンツとしてエンコードされています。再生時には、base64をデコードしてプレイヤーに供給するだけです。
+          - `created_at` (int): 作成時のタイムスタンプ（Unix時間、例: 1705395332）。
+        - `event: tts_message_end`: TTS音声ストリーム終了イベント。このイベントを受信すると音声ストリームが終了したことを示します。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の応答停止インターフェースで使用されます。
+          - `message_id` (string): 一意のメッセージID。
+          - `audio` (string): 終了イベントにはオーディオがないため空文字列。
+          - `created_at` (int): 作成時のタイムスタンプ（Unix時間、例: 1705395332）。
+        - `event: message_replace`: メッセージコンテンツ置き換えイベント。出力コンテンツのモデレーションが有効な場合、コンテンツがフラグ付けされると、このイベントを介してメッセージコンテンツが事前設定された返信に置き換えられます。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          - `message_id` (string): 一意のメッセージID。
+          - `conversation_id` (string): 会話ID。
+          - `answer` (string): 置き換えコンテンツ（LLMの応答テキスト全体を直接置き換えます）。
+          - `created_at` (int): 作成時のタイムスタンプ（Unix時間、例: 1705395332）。
+        - `event: workflow_started`: ワークフロー実行開始イベント。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          - `workflow_run_id` (string): ワークフロー実行の一意のID。
+          - `event` (string): 固定で`workflow_started`。
+          - `data` (object): `id` (string), `workflow_id` (string), `sequence_number` (int), `created_at` (タイムスタンプ)などの詳細。
+        - `event: node_started`: ノード実行開始イベント。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          - `workflow_run_id` (string): ワークフロー実行の一意のID。
+          - `event` (string): 固定で`node_started`。
+          - `data` (object): `id` (string), `node_id` (string), `node_type` (string), `title` (string), `index` (int), `predecessor_node_id` (string, オプション), `inputs` (object), `created_at` (タイムスタンプ)などの詳細。
+        - `event: node_finished`: ノード実行終了イベント。ステータスによって成功または失敗が示されます。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          - `workflow_run_id` (string): ワークフロー実行の一意のID。
+          - `event` (string): 固定で`node_finished`。
+          - `data` (object): `id` (string), `node_id` (string), `node_type` (string), `title` (string), `index` (int), `predecessor_node_id` (string, オプション), `inputs` (object), `process_data` (json, オプション), `outputs` (json, オプション), `status` (string, `running` / `succeeded` / `failed` / `stopped`), `error` (string, オプション), `elapsed_time` (float, オプション), `execution_metadata` (json), `created_at` (タイムスタンプ)などの詳細。
+        - `event: workflow_finished`: ワークフロー実行終了イベント。ステータスによって成功または失敗が示されます。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          - `workflow_run_id` (string): ワークフロー実行の一意のID。
+          - `event` (string): 固定で`workflow_finished`。
+          - `data` (object): `id` (string), `workflow_id` (string), `status` (string, `running` / `succeeded` / `failed` / `stopped`), `outputs` (json, オプション), `error` (string, オプション), `elapsed_time` (float, オプション), `total_tokens` (int, オプション), `total_steps` (int), `created_at` (タイムスタンプ), `finished_at` (タイムスタンプ)などの詳細。
+        - `event: error`: ストリーミング処理中の例外がストリームイベントとして出力され、エラーイベントを受信するとストリームは終了します。
+          - `task_id` (string): タスクID。リクエストの追跡や、後述の生成停止APIで使用されます。
+          - `message_id` (string): 一意のメッセージID。
+          - `status` (int): HTTPステータスコード。
+          - `code` (string): エラーコード。
+          - `message` (string): エラーメッセージ。
+        - `event: ping`: 接続を維持するために10秒ごとに発生するpingイベント。
+
+    FileUploadResponse:
+      type: object
+      description: ファイルアップロード後のレスポンスを定義します。
+      properties:
+        id:
+          type: string
+          description: ID。
+          format: uuid
+          example: "72fa9618-8f89-4a37-9b33-7e1178a24a67"
+        name:
+          type: string
+          description: ファイル名。
+          example: "example.png"
+        size:
+          type: integer
+          description: ファイルサイズ（バイト単位）。
+          example: 1024
+        extension:
+          type: string
+          description: ファイルの拡張子。
+          example: "png"
+        mime_type:
+          type: string
+          description: ファイルのMIMEタイプ。
+          example: "image/png"
+        created_by:
+          type: string
+          description: エンドユーザーID。
+          format: uuid
+          example: "6ad1ab0a-73ff-4ac1-b9e4-cdb312f71f13"
+        created_at:
+          type: integer
+          description: "作成時のタイムスタンプ（Unix時間、例: 1705395332）。"
+          example: 1577836800
+
+    StopGenerateRequest:
+      type: object
+      description: 生成停止のリクエストボディを定義します。
+      properties:
+        user:
+          type: string
+          description: |
+            ユーザー識別子。エンドユーザーの識別のために使用され、
+            メッセージ送信インターフェースで渡されたユーザーと一致する必要があります。
+          example: "abc-123"
+      required:
+        - user
+
+    SuccessResponse:
+      type: object
+      description: 成功時の汎用レスポンスを定義します。
+      properties:
+        result:
+          type: string
+          description: 常に"success"を返します。
+          example: "success"
+
+    MessageFeedbackRequest:
+      type: object
+      description: メッセージに対するフィードバックを送信する際のリクエストボディを定義します。
+      properties:
+        rating:
+          type: string
+          description: |
+            評価の種類。
+            'like'は高評価、'dislike'は低評価、'null'は高評価のキャンセル。
+          enum:
+            - like
+            - dislike
+            - null
+        user:
+          type: string
+          description: |
+            ユーザー識別子。開発者のルールによって定義され、
+            アプリケーション内で一意である必要があります。
+          example: "abc-123"
+        content:
+          type: string
+          description: メッセージフィードバックの内容。
+          example: "メッセージフィードバック情報"
+      required:
+        - rating
+        - user
+
+    AppFeedbackItem:
+      type: object
+      description: アプリケーションフィードバックの個別の項目を定義します。
+      properties:
+        id:
+          type: string
+          format: uuid
+        app_id:
+          type: string
+          format: uuid
+        conversation_id:
+          type: string
+          format: uuid
+        message_id:
+          type: string
+          format: uuid
+        rating:
+          type: string
+          enum:
+            - like
+            - dislike
+            - null
+        content:
+          type: string
+        from_source:
+          type: string
+        from_end_user_id:
+          type: string
+          format: uuid
+        from_account_id:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    AppFeedbacksResponse:
+      type: object
+      description: アプリケーションフィードバックのリストレスポンスを定義します。
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/AppFeedbackItem"
+
+    SuggestedQuestionsResponse:
+      type: object
+      description: 提案される質問のレスポンスを定義します。
+      properties:
+        result:
+          type: string
+          example: "success"
+        data:
+          type: array
+          items:
+            type: string
+          example:
+            - "a"
+            - "b"
+            - "c"
+
+    MessageFile:
+      type: object
+      description: メッセージに含まれるファイルを定義します。
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: ファイルタイプ。'image'は画像用。
+        url:
+          type: string
+          description: プレビュー画像URL。
+          format: uri
+        belongs_to:
+          type: string
+          description: 所属。'user'または'assistant'。
+
+    MessageHistoryItem:
+      type: object
+      description: メッセージ履歴の個別の項目を定義します。
+      properties:
+        id:
+          type: string
+          description: メッセージID。
+        conversation_id:
+          type: string
+          description: 会話ID。
+        inputs:
+          type: object
+          description: ユーザー入力パラメータ。
+          additionalProperties: true
+        query:
+          type: string
+          description: ユーザーの入力/質問内容。
+        answer:
+          type: string
+          description: 応答メッセージの内容。
+        message_files:
+          type: array
+          items:
+            $ref: "#/components/schemas/MessageFile"
+        feedback:
+          type: object
+          properties:
+            rating:
+              type: string
+              enum:
+                - like
+                - dislike
+          nullable: true
+        retriever_resources:
+          type: array
+          items:
+            $ref: "#/components/schemas/RetrieverResource"
+        created_at:
+          type: integer
+          description: "作成時のタイムスタンプ（Unix時間、例: 1705395332）。"
+
+    MessageHistoryResponse:
+      type: object
+      description: メッセージ履歴のリストレスポンスを定義します。
+      properties:
+        limit:
+          type: integer
+          description: 返されるアイテムの数。入力がシステム制限を超える場合は、システム制限が返されます。
+        has_more:
+          type: boolean
+          description: 次のページが存在するかどうか。
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/MessageHistoryItem"
+
+    ConversationItem:
+      type: object
+      description: 会話の個別の項目を定義します。
+      properties:
+        id:
+          type: string
+          description: 会話ID。
+        name:
+          type: string
+          description: 会話名。デフォルトではLLMによって生成されます。
+        inputs:
+          type: object
+          description: ユーザー入力パラメータ。
+          additionalProperties: true
+        introduction:
+          type: string
+          description: 導入文。
+        status:
+          type: string
+        created_at:
+          type: integer
+          description: "作成時のタイムスタンプ（Unix時間、例: 1705395332）。"
+        updated_at:
+          type: integer
+          description: "更新時のタイムスタンプ（Unix時間、例: 1705395332）。"
+
+    ConversationsResponse:
+      type: object
+      description: 会話のリストレスポンスを定義します。
+      properties:
+        limit:
+          type: integer
+        has_more:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/ConversationItem"
+
+    RenameConversationRequest:
+      type: object
+      description: 会話名を変更する際のリクエストボディを定義します。
+      properties:
+        name:
+          type: string
+          description: (オプション) 会話名。`auto_generate`が`true`に設定されている場合、このパラメータは省略可能です。
+        auto_generate:
+          type: boolean
+          description: (オプション) タイトルを自動生成するかどうか。デフォルトは`false`です。
+          default: false
+        user:
+          type: string
+          description: |
+            ユーザー識別子。開発者によって定義され、
+            アプリケーション内で一意である必要があります。
+      required:
+        - user
+
+    ConversationVariable:
+      type: object
+      description: 会話変数の個別の項目を定義します。
+      properties:
+        id:
+          type: string
+          description: 変数ID。
+        name:
+          type: string
+          description: 変数名。
+        value_type:
+          type: string
+          description: 変数の型（string, number, booleanなど）。
+        value:
+          type: string
+          description: 変数の値。
+        description:
+          type: string
+          description: 変数の説明。
+        created_at:
+          type: integer
+          description: 作成時のタイムスタンプ。
+        updated_at:
+          type: integer
+          description: 最終更新時のタイムスタンプ。
+
+    ConversationVariablesResponse:
+      type: object
+      description: 会話変数のリストレスポンスを定義します。
+      properties:
+        limit:
+          type: integer
+          description: ページあたりのアイテム数。
+        has_more:
+          type: boolean
+          description: さらにアイテムがあるかどうか。
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/ConversationVariable"
+
+    AudioToTextRequest:
+      type: object
+      description: 音声からテキストへの変換リクエストボディを定義します。
+      properties:
+        file:
+          type: string
+          format: binary
+          description: |
+            音声ファイル。サポートされている形式: ['mp3', 'mp4', 'mpeg', 'mpga', 'm4a', 'wav', 'webm']。
+            ファイルサイズ制限: 15MB。
+        user:
+          type: string
+          description: |
+            ユーザー識別子。開発者のルールによって定義され、
+            アプリケーション内で一意である必要があります。
+      required:
+        - file
+        - user
+
+    AudioToTextResponse:
+      type: object
+      description: 音声からテキストへの変換後のレスポンスを定義します。
+      properties:
+        text:
+          type: string
+          description: 出力されたテキスト。
+          example: ""
+
+    TextToAudioRequest:
+      type: object
+      description: テキストから音声への変換リクエストボディを定義します。
+      properties:
+        message_id:
+          type: string
+          description: |
+            Difyによって生成されたテキストメッセージの場合、生成されたメッセージIDを直接渡します。
+            バックエンドはメッセージIDを使用して対応するコンテンツを見つけ、直接音声情報を合成します。
+            `message_id`と`text`の両方が提供された場合、`message_id`が優先されます。
+          example: "5ad4cb98-f0c7-4085-b384-88c403be6290"
+        text:
+          type: string
+          description: 音声生成コンテンツ。
+          example: "Hello Dify"
+        user:
+          type: string
+          description: |
+            ユーザー識別子。開発者によって定義され、
+            アプリ内で一意である必要があります。
+          example: "abc-123"
+      required:
+        - user
+
+    AppInfoResponse:
+      type: object
+      description: アプリケーションの基本情報を定義します。
+      properties:
+        name:
+          type: string
+          description: アプリケーション名。
+        description:
+          type: string
+          description: アプリケーションの説明。
+        tags:
+          type: array
+          items:
+            type: string
+
+    AppParametersResponse:
+      type: object
+      description: アプリケーションのパラメータと設定を定義します。
+      properties:
+        opening_statement:
+          type: string
+          description: オープニングの挨拶文。
+        suggested_questions_after_answer:
+          type: object
+          description: 回答後の質問提案機能に関する設定。
+          properties:
+            enabled:
+              type: boolean
+              description: この機能が有効になっているかどうか。
+        speech_to_text:
+          type: object
+          description: 音声認識（Speech-to-Text）機能に関する設定。
+          properties:
+            enabled:
+              type: boolean
+              description: この機能が有効になっているかどうか。
+        text_to_speech:
+          type: object
+          description: 音声合成（Text-to-Speech）機能に関する設定。
+          properties:
+            enabled:
+              type: boolean
+              description: この機能が有効になっているかどうか。
+            voice:
+              type: string
+              description: 音声の種類。
+            language:
+              type: string
+              description: 言語。
+            autoPlay:
+              type: string
+              enum:
+                - enabled
+                - disabled
+              description: 自動再生。
+        retriever_resource:
+          type: object
+          description: 検索リソース表示に関する設定。
+          properties:
+            enabled:
+              type: boolean
+              description: この機能が有効になっているかどうか。
+        annotation_reply:
+          type: object
+          description: アノテーション返信機能に関する設定。
+          properties:
+            enabled:
+              type: boolean
+              description: この機能が有効になっているかどうか。
+        user_input_form:
+          type: array
+          description: ユーザー入力フォームの要素リスト。
+          items:
+            type: object
+            properties:
+              text-input:
+                type: object
+                description: テキスト入力フィールドの設定。
+                properties:
+                  label:
+                    type: string
+                  variable:
+                    type: string
+                  required:
+                    type: boolean
+                  default:
+                    type: string
+              paragraph:
+                type: object
+                description: パラグラフ入力フィールドの設定。
+                properties:
+                  label:
+                    type: string
+                  variable:
+                    type: string
+                  required:
+                    type: boolean
+                  default:
+                    type: string
+              select:
+                type: object
+                description: セレクトボックスフィールドの設定。
+                properties:
+                  label:
+                    type: string
+                  variable:
+                    type: string
+                  required:
+                    type: boolean
+                  default:
+                    type: string
+                  options:
+                    type: array
+                    items:
+                      type: string
+        file_upload:
+          type: object
+          description: ファイルアップロードに関する設定。
+          properties:
+            image:
+              type: object
+              description: 画像ファイルアップロードの設定。
+              properties:
+                enabled:
+                  type: boolean
+                  description: 画像アップロードが有効になっているかどうか。
+                number_limits:
+                  type: integer
+                  description: アップロード可能な画像の最大数。
+                detail:
+                  type: string
+                transfer_methods:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - remote_url
+                      - local_file
+        system_parameters:
+          type: object
+          description: システムのパラメータと制限。
+          properties:
+            file_size_limit:
+              type: integer
+              description: ドキュメントアップロードのサイズ制限（MB）。
+            image_file_size_limit:
+              type: integer
+              description: 画像ファイルアップロードのサイズ制限（MB）。
+            audio_file_size_limit:
+              type: integer
+              description: 音声ファイルアップロードのサイズ制限（MB）。
+            video_file_size_limit:
+              type: integer
+              description: ビデオファイルアップロードのサイズ制限（MB）。
+
+    ToolIconObject:
+      type: object
+      description: ツールアイコンのオブジェクト形式を定義します。
+      properties:
+        background:
+          type: string
+          description: 背景色（HEX形式）。
+        content:
+          type: string
+          description: 絵文字。
+
+    MetaResponse:
+      type: object
+      description: メタ情報を定義します。
+      properties:
+        tool_icons:
+          type: object
+          description: ツールアイコン。キーはツール名、値はアイコンのURLまたは`ToolIconObject`。
+          additionalProperties:
+            oneOf:
+              - type: string
+                format: uri
+                description: アイコンのURL。
+              - $ref: "#/components/schemas/ToolIconObject"
+
+    WebAppSettingResponse:
+      type: object
+      description: Webアプリケーションの設定を定義します。
+      properties:
+        title:
+          type: string
+          description: WebAppの名前。
+        chat_color_theme:
+          type: string
+          description: チャットのカラーテーマ（HEX形式）。
+        chat_color_theme_inverted:
+          type: boolean
+          description: チャットのカラーテーマを反転するかどうか。
+        icon_type:
+          type: string
+          description: アイコンのタイプ。'emoji'または'image'。
+          enum:
+            - emoji
+            - image
+        icon:
+          type: string
+          description: アイコン。`icon_type`が'emoji'の場合は絵文字、'image'の場合は画像URL。
+        icon_background:
+          type: string
+          description: 背景色（HEX形式）。
+        icon_url:
+          type: string
+          description: アイコンのURL。
+          format: uri
+          nullable: true
+        description:
+          type: string
+          description: 説明。
+        copyright:
+          type: string
+          description: 著作権情報。
+        privacy_policy:
+          type: string
+          description: プライバシーポリシーへのリンク。
+          format: uri
+        custom_disclaimer:
+          type: string
+          description: カスタム免責事項。
+        default_language:
+          type: string
+          description: デフォルト言語。
+        show_workflow_steps:
+          type: boolean
+          description: ワークフローの詳細を表示するかどうか。
+        use_icon_as_answer_icon:
+          type: boolean
+          description: WebAppアイコンをチャットで🤖に置き換えるかどうか。
+
+    ErrorResponse:
+      type: object
+      description: エラーレスポンスの一般的な構造を定義します。
+      properties:
+        status:
+          type: integer
+          description: HTTPステータスコード。
+        code:
+          type: string
+          description: エラーコード。
+        message:
+          type: string
+          description: エラーメッセージ。
+      required:
+        - status
+        - code
+        - message
+
+  responses:
+    UnauthorizedError:
+      description: 認証エラー。APIキーが無効です。
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          example:
+            status: 401
+            code: "unauthorized"
+            message: "Unauthorized."
+
+    NotFoundError:
+      description: リソースが見つかりません。リクエストされたリソースが存在しません。
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            ConversationNotFound:
+              value:
+                status: 404
+                code: "conversation_not_exists"
+                message: "Conversation not exists."
+
+    BadRequestError:
+      description: 不正なリクエスト。入力が無効であるか、アプリケーションの設定に問題があります。
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            InvalidParam:
+              value:
+                status: 400
+                code: "invalid_param"
+                message: "異常なパラメータ入力"
+            AppUnavailable:
+              value:
+                status: 400
+                code: "app_unavailable"
+                message: "アプリ構成が利用できません"
+            ProviderNotInitialize:
+              value:
+                status: 400
+                code: "provider_not_initialize"
+                message: "利用可能なモデル資格情報構成がありません"
+            ProviderQuotaExceeded:
+              value:
+                status: 400
+                code: "provider_quota_exceeded"
+                message: "モデル呼び出しクォータが不足しています"
+            ModelNotSupport:
+              value:
+                status: 400
+                code: "model_currently_not_support"
+                message: "現在のモデルが利用できません"
+            CompletionRequestError:
+              value:
+                status: 400
+                code: "completion_request_error"
+                message: "テキスト生成に失敗しました"
+            NoFileUploaded:
+              value:
+                status: 400
+                code: "no_file_uploaded"
+                message: "ファイルが提供されなければなりません"
+            TooManyFiles:
+              value:
+                status: 400
+                code: "too_many_files"
+                message: "現在は1つのファイルのみ受け付けます"
+            UnsupportedPreview:
+              value:
+                status: 400
+                code: "unsupported_preview"
+                message: "ファイルはプレビューをサポートしていません"
+            UnsupportedEstimate:
+              value:
+                status: 400
+                code: "unsupported_estimate"
+                message: "ファイルは推定をサポートしていません"
+            UnsupportedFileType:
+              value:
+                status: 400
+                code: "unsupported_file_type"
+                message: "サポートされていない拡張子、現在はドキュメントファイルのみ受け付けます"
+
+    RequestEntityTooLarge:
+      description: リクエストエンティティが大きすぎます。ファイルが大きすぎます。
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            FileTooLarge:
+              value:
+                status: 413
+                code: "file_too_large"
+                message: "ファイルが大きすぎます"
+
+    UnsupportedMediaType:
+      description: サポートされていないメディアタイプです。
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            UnsupportedFileType:
+              value:
+                status: 415
+                code: "unsupported_file_type"
+                message: "サポートされていない拡張子、現在はドキュメントファイルのみ受け付けます"
+
+    ServiceUnavailable:
+      description: サービスが利用できません。S3サービスまたは権限に問題があります。
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            S3ConnectionFailed:
+              value:
+                status: 503
+                code: "S3_connection_failed"
+                message: "S3接続に失敗しました"
+            S3PermissionsError:
+              value:
+                status: 503
+                code: "S3_permissions_error"
+                message: "S3権限エラー"
+
+  parameters:
+    user:
+      name: user
+      in: query
+      required: true
+      description: ユーザー識別子。
+      schema:
+        type: string
+        example: "abc-123"
+    conversation_id:
+      name: conversation_id
+      in: query
+      required: true
+      description: 会話ID。
+      schema:
+        type: string
+        format: uuid
+        example: "9a2a9e32-a5b6-4b2a-8c1d-1e2a3b4c5d6e"
+    message_id:
+      name: message_id
+      in: query
+      required: true
+      description: メッセージID。
+      schema:
+        type: string
+        format: uuid
+        example: "7b1d9e32-a5b6-4b2a-8c1d-1e2a3b4c5d6f"
+    limit:
+      name: limit
+      in: query
+      required: false
+      description: 返されるアイテムの最大数。デフォルトは20、最大100。
+      schema:
+        type: integer
+        default: 20
+        maximum: 100
+    first_id:
+      name: first_id
+      in: query
+      required: false
+      description: |
+        指定されたIDより古い/新しいメッセージを取得するために使用される、
+        ページングのためのID。
+        `limit`と合わせて使用されます。
+      schema:
+        type: string
+        example: "9a2a9e32-a5b6-4b2a-8c1d-1e2a3b4c5d6e"
+
+paths:
+  /chat-messages:
+    post:
+      summary: チャットメッセージを送信
+      operationId: chat
+      description: 新しいチャットメッセージをDifyアプリケーションに送信し、応答を取得します。
+      requestBody:
+        description: チャットメッセージの内容。
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatCompletionRequest"
+      responses:
+        "200":
+          description: チャット応答。`response_mode`が`blocking`の場合はJSON、`streaming`の場合はストリームで返されます。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatCompletionResponse"
+            text/event-stream:
+              schema:
+                $ref: "#/components/schemas/ChunkCompletionResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /files/upload:
+    post:
+      summary: ファイルをアップロード
+      operationId: uploadFile
+      description: チャットで使用するファイルをアップロードします。
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: アップロードするファイル。
+                user:
+                  type: string
+                  description: ユーザー識別子。
+              required:
+                - file
+                - user
+      responses:
+        "200":
+          description: ファイルアップロード成功。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileUploadResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "413":
+          $ref: "#/components/responses/RequestEntityTooLarge"
+        "415":
+          $ref: "#/components/responses/UnsupportedMediaType"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+
+  /stop-generate:
+    post:
+      summary: 生成を停止
+      operationId: stopGenerate
+      description: 実行中のチャットメッセージ生成を停止します。
+      requestBody:
+        description: 生成停止リクエスト。
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StopGenerateRequest"
+      responses:
+        "200":
+          description: 生成停止成功。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /messages/{message_id}/feedbacks:
+    post:
+      summary: メッセージのフィードバック
+      operationId: feedbackMessage
+      description: 特定のメッセージに対してフィードバック（高評価/低評価）を送信します。
+      parameters:
+        - $ref: "#/components/parameters/message_id"
+      requestBody:
+        description: メッセージフィードバックの内容。
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageFeedbackRequest"
+      responses:
+        "200":
+          description: フィードバック成功。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+
+  /messages/{message_id}/suggested-questions:
+    get:
+      summary: 提案される質問を取得
+      operationId: getSuggestedQuestions
+      description: 特定のメッセージに関連する提案される質問のリストを取得します。
+      parameters:
+        - $ref: "#/components/parameters/message_id"
+        - $ref: "#/components/parameters/user"
+      responses:
+        "200":
+          description: 提案される質問のリスト。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuggestedQuestionsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+
+  /messages:
+    get:
+      summary: メッセージ履歴を取得
+      operationId: getMessageHistory
+      description: 特定のユーザーのメッセージ履歴を取得します。
+      parameters:
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/first_id"
+      responses:
+        "200":
+          description: メッセージ履歴のリスト。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageHistoryResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /conversations:
+    get:
+      summary: 会話履歴を取得
+      operationId: getConversationHistory
+      description: 特定のユーザーの会話履歴を取得します。
+      parameters:
+        - $ref: "#/components/parameters/user"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/first_id"
+      responses:
+        "200":
+          description: 会話履歴のリスト。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /conversations/{conversation_id}/rename:
+    post:
+      summary: 会話名を変更
+      operationId: renameConversation
+      description: 特定の会話の名前を変更します。
+      parameters:
+        - $ref: "#/components/parameters/conversation_id"
+      requestBody:
+        description: 会話名変更リクエスト。
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameConversationRequest"
+      responses:
+        "200":
+          description: 会話名変更成功。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationItem"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+
+  /conversations/{conversation_id}/variables:
+    get:
+      summary: 会話変数を取得
+      operationId: getConversationVariables
+      description: 特定の会話に関連する変数リストを取得します。
+      parameters:
+        - $ref: "#/components/parameters/conversation_id"
+        - $ref: "#/components/parameters/user"
+      responses:
+        "200":
+          description: 会話変数のリスト。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationVariablesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/NotFoundError"
+
+  /audio-to-text:
+    post:
+      summary: 音声からテキストへ変換
+      operationId: audioToText
+      description: 音声ファイルをテキストに変換します。
+      requestBody:
+        description: 音声からテキストへの変換リクエスト。
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/AudioToTextRequest"
+      responses:
+        "200":
+          description: 音声からテキストへの変換成功。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AudioToTextResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "413":
+          $ref: "#/components/responses/RequestEntityTooLarge"
+        "415":
+          $ref: "#/components/responses/UnsupportedMediaType"
+
+  /text-to-audio:
+    post:
+      summary: テキストから音声へ変換
+      operationId: textToAudio
+      description: テキストを音声に変換します。
+      requestBody:
+        description: テキストから音声への変換リクエスト。
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TextToAudioRequest"
+      responses:
+        "200":
+          description: テキストから音声への変換成功。
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+                description: 音声ファイルの内容 (MPEG形式)。
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /app/info:
+    get:
+      summary: アプリ情報を取得
+      operationId: getAppInfo
+      description: Difyアプリケーションの基本情報を取得します。
+      responses:
+        "200":
+          description: アプリ情報。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppInfoResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /app/parameters:
+    get:
+      summary: アプリパラメータを取得
+      operationId: getAppParameters
+      description: Difyアプリケーションの様々な設定パラメータを取得します。
+      responses:
+        "200":
+          description: アプリパラメータ。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppParametersResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /app/web-app-settings:
+    get:
+      summary: Webアプリ設定を取得
+      operationId: getWebAppSettings
+      description: Dify Webアプリケーションの表示設定を取得します。
+      responses:
+        "200":
+          description: Webアプリ設定。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WebAppSettingResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+
+  /app/meta:
+    get:
+      summary: メタ情報を取得
+      operationId: getAppMeta
+      description: アプリケーションのメタ情報を取得します。
+      responses:
+        "200":
+          description: メタ情報。
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MetaResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"

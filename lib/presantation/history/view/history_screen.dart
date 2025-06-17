@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:flutter_e_learning/presantation/history/view_model/history_screen_view_model.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -32,11 +33,16 @@ class HistoryScreen extends HookConsumerWidget {
               ),
               SizedBox(height: 8),
               Text(
-                '問題文: ${state.historyContent}',
-                style: TextStyle(fontSize: 18),
+                '【問題文】',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
+              SizedBox(height: 8),
+              MarkdownBody(data: state.historyContent),
               Divider(height: 32),
-              Text('【あなたの回答】', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                '【あなたの回答】',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
               SizedBox(height: 8),
               if (state.answerCode != null && state.answerCode!.isNotEmpty)
                 CodeField(
@@ -107,19 +113,34 @@ class HistoryScreen extends HookConsumerWidget {
                   ],
                 ),
               Divider(height: 32),
-              Text('【フィードバック】', style: TextStyle(fontWeight: FontWeight.bold)),
               Text(
                 '正誤判定: ${state.feedbackResult}',
                 style: TextStyle(
                   color: state.feedbackResult == '正解'
                       ? Colors.green
                       : Colors.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
                 ),
               ),
-              Text('解説: ${state.feedbackExplanation}'),
-              Text('改善点: ${state.feedbackAdvice}'),
-              SizedBox(height: 4),
-              Text('模範コード:', style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(height: 8),
+              Text(
+                '【解説】',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              SizedBox(height: 8),
+              MarkdownBody(data: state.feedbackExplanation),
+              SizedBox(height: 8),
+              Text(
+                '【アドバイス】',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              MarkdownBody(data: state.feedbackAdvice),
+              SizedBox(height: 8),
+              Text(
+                '【サンプルコード】',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
               SizedBox(height: 8),
               CodeField(
                 controller: CodeController(
@@ -130,6 +151,7 @@ class HistoryScreen extends HookConsumerWidget {
                 expands: false,
                 maxLines: null,
                 textStyle: const TextStyle(fontFamily: 'monospace'),
+                gutterStyle: GutterStyle.none, // 行番号を非表示にする
               ),
             ],
           ),

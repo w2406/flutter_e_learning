@@ -1,5 +1,5 @@
+import 'package:flutter_e_learning/domain/history/feedback/value_object/feedback.dart';
 import 'package:flutter_e_learning/domain/history/history/value_object/answer.dart';
-import 'package:flutter_e_learning/domain/history/history/value_object/feedback.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '../../../../generated/domain/history/history/entity/history.freezed.dart';

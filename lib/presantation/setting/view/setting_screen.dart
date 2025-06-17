@@ -65,9 +65,12 @@ class SettingScreen extends HookConsumerWidget {
                       ),
                     );
                     if (confirmed == true) {
-                      ref
+                      await ref
                           .read(settingScreenViewModelProvider.notifier)
                           .loadQuestionFile();
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text('問題ファイルを読み込みました')));
                     }
                   },
                   child: Text('問題ファイルを読み込む'),
@@ -76,13 +79,6 @@ class SettingScreen extends HookConsumerWidget {
                 Text(
                   'バージョン: ${data.appVersion}',
                   style: TextStyle(color: Colors.grey[700]),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  data.isFileLoaded ? 'ファイル読込済み' : 'ファイル未読込',
-                  style: TextStyle(
-                    color: data.isFileLoaded ? Colors.green : Colors.red,
-                  ),
                 ),
               ],
             ),

@@ -297,5 +297,25 @@ final checkSolvedQuestionUseCaseProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CheckSolvedQuestionUseCaseRef = ProviderRef<CheckSolvedQuestionUseCase>;
+String _$getDifyChatMessageUseCaseHash() =>
+    r'0cbeb41ec107a8704f24613e07010a9c4537b4cf';
+
+/// See also [getDifyChatMessageUseCase].
+@ProviderFor(getDifyChatMessageUseCase)
+final getDifyChatMessageUseCaseProvider =
+    FutureProvider<GetDifyChatMessageUseCase>.internal(
+      getDifyChatMessageUseCase,
+      name: r'getDifyChatMessageUseCaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$getDifyChatMessageUseCaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetDifyChatMessageUseCaseRef =
+    FutureProviderRef<GetDifyChatMessageUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

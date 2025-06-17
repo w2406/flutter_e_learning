@@ -1,4 +1,5 @@
 import 'package:flutter_e_learning/common/provider/repository_provider.dart';
+import 'package:flutter_e_learning/usecase/dify/get_dify_chat_message.dart';
 import 'package:flutter_e_learning/usecase/history/add_history_usecase.dart';
 import 'package:flutter_e_learning/usecase/history/get_histories_usecase.dart';
 import 'package:flutter_e_learning/usecase/history/get_history_usecase.dart';
@@ -114,4 +115,10 @@ UpdateSolvedQuestionUseCase updateSolvedQuestionUseCase(Ref ref) {
 CheckSolvedQuestionUseCase checkSolvedQuestionUseCase(Ref ref) {
   final repository = ref.watch(solvedQuestionRepositoryProvider);
   return CheckSolvedQuestionUseCase(repository);
+}
+
+@Riverpod(keepAlive: true)
+Future<GetDifyChatMessageUseCase> getDifyChatMessageUseCase(Ref ref) async {
+  final repository = await ref.watch(difyChatMessageRepositoryProvider.future);
+  return GetDifyChatMessageUseCase(repository);
 }

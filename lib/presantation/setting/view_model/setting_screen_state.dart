@@ -7,7 +7,6 @@ abstract class SettingScreenState with _$SettingScreenState {
   const factory SettingScreenState({
     required String? apiKey,
     required String appVersion,
-    required bool isFileLoaded,
     String? fileName,
   }) = _SettingScreenState;
 }

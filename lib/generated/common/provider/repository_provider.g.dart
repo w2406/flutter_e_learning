@@ -113,11 +113,11 @@ final solvedQuestionRepositoryProvider =
 // ignore: unused_element
 typedef SolvedQuestionRepositoryRef = ProviderRef<SolvedQuestionRepository>;
 String _$apiKeyRepositoryImplHash() =>
-    r'46f9b83b23d9bf6e6ba1b3fc577f3f0490297386';
+    r'9ca71fb24ca6f89380040c0225289c82dab01b9b';
 
 /// See also [apiKeyRepositoryImpl].
 @ProviderFor(apiKeyRepositoryImpl)
-final apiKeyRepositoryImplProvider = Provider<ApiKeyRepositoryImpl>.internal(
+final apiKeyRepositoryImplProvider = Provider<ApiKeyRepository>.internal(
   apiKeyRepositoryImpl,
   name: r'apiKeyRepositoryImplProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -129,6 +129,26 @@ final apiKeyRepositoryImplProvider = Provider<ApiKeyRepositoryImpl>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ApiKeyRepositoryImplRef = ProviderRef<ApiKeyRepositoryImpl>;
+typedef ApiKeyRepositoryImplRef = ProviderRef<ApiKeyRepository>;
+String _$difyChatMessageRepositoryHash() =>
+    r'bb10b4443640375c2342a296340b9674077d6427';
+
+/// See also [difyChatMessageRepository].
+@ProviderFor(difyChatMessageRepository)
+final difyChatMessageRepositoryProvider =
+    FutureProvider<DifyChatMessageRepository>.internal(
+      difyChatMessageRepository,
+      name: r'difyChatMessageRepositoryProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$difyChatMessageRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DifyChatMessageRepositoryRef =
+    FutureProviderRef<DifyChatMessageRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

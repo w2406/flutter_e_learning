@@ -21,7 +21,6 @@ class SettingScreenViewModel extends _$SettingScreenViewModel {
     return SettingScreenState(
       apiKey: apiKey?.value,
       appVersion: appVersion.value,
-      isFileLoaded: false,
       fileName: null,
     );
   }
@@ -71,9 +70,6 @@ class SettingScreenViewModel extends _$SettingScreenViewModel {
             }).toList();
             await ref.read(updateSectionsUsecaseProvider).execute(sectionList);
             await ref.read(updateQuestionsUsecaseProvider).execute(questions);
-            state = AsyncValue.data(
-              state.value!.copyWith(isFileLoaded: true, fileName: file.name),
-            );
           } else {
             throw Exception(
               'question_sample.json形式（sections+questions）である必要があります',

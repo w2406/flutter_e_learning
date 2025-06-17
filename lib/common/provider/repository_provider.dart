@@ -1,10 +1,14 @@
 import 'package:flutter_e_learning/common/provider/common_provider.dart';
+import 'package:flutter_e_learning/domain/dify/dify_chat_message/repository/dify_chat_message_repository.dart';
+import 'package:flutter_e_learning/domain/history/feedback/repository/feedback_repository.dart';
 import 'package:flutter_e_learning/domain/history/history/repository/history_repository.dart';
 import 'package:flutter_e_learning/domain/progress/solved_question/reository/solved_question_repository.dart';
 import 'package:flutter_e_learning/domain/question/question/repository/question_respository.dart';
 import 'package:flutter_e_learning/domain/question/section/repository/section_repository.dart';
 import 'package:flutter_e_learning/domain/setting/api_key/repository/api_key_repository.dart';
 import 'package:flutter_e_learning/domain/setting/app_version/repository/app_version_repository.dart';
+import 'package:flutter_e_learning/infrastructure/repository/dify/dify_chat_message_repository_impl.dart';
+import 'package:flutter_e_learning/infrastructure/repository/history/feedback/feedback_repository_impl.dart';
 import 'package:flutter_e_learning/infrastructure/repository/history/history/history_repository_impl.dart';
 import 'package:flutter_e_learning/infrastructure/repository/progress/solved_question_repository_imp.dart';
 import 'package:flutter_e_learning/infrastructure/repository/question/question/question_repository_impl.dart';
@@ -50,6 +54,12 @@ SolvedQuestionRepository solvedQuestionRepository(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
-ApiKeyRepositoryImpl apiKeyRepositoryImpl(Ref ref) {
+ApiKeyRepository apiKeyRepositoryImpl(Ref ref) {
   return ApiKeyRepositoryImpl();
+}
+
+@Riverpod(keepAlive: true)
+Future<DifyChatMessageRepository> difyChatMessageRepository(Ref ref) async {
+  final apiClient = await ref.watch(apiClientProvider.future);
+  return DifyChatMessageRepositoryImpl(apiClient: apiClient);
 }
