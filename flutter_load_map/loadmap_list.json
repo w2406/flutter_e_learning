@@ -1,0 +1,125 @@
+{
+    "Learn the Basics of Dart": [
+        "Dart Pad",
+        "Variables",
+        "Built-in Types",
+        "Functions",
+        "Operators",
+        "Control Flow Statements"
+    ],
+    "Setup Development Environment": [
+        "Flutter CLI",
+        "VS Code",
+        "Android Studio",
+        "IntelliJ Idea",
+        "IDEs",
+        "FVM"
+    ],
+    "Widgets": [
+        "Responsive Widgets",
+        "Inherited Widgets",
+        "Stateless Widgets",
+        "Stateful Widgets",
+        "Styled Widgets",
+        "Material Widgets",
+        "Cupertino Widgets"
+    ],
+    "Working with Assets": [
+        "Fonts",
+        "Images",
+        "Other File Types"
+    ],
+    "Version Control Systems": [
+        "Git"
+    ],
+    "Repo Hosting Services": [
+        "GitHub"
+    ],
+    "Design Principles": [
+        "Dependency Injection",
+        "Design Patterns",
+        "SOLID Principles",
+        "OOP"
+    ],
+    "Package Manager": [
+        "pub.dev",
+        "flutter pub / dart pub"
+    ],
+    "Storage": [
+        "SQLite",
+        "Shared Preferences",
+        "Firebase"
+    ],
+    "Working with APIs": [
+        "JSON Serialize / Deserialize",
+        "Web Sockets",
+        "GraphQL",
+        "RESTful APIs"
+    ],
+    "Advanced Dart": [
+        "Core Libraries",
+        "Lists",
+        "Collections",
+        "Lambdas",
+        "Functional Programming",
+        "Isolates",
+        "Async / Await",
+        "Streams",
+        "Futures"
+    ],
+    "State Management": [
+        "ChangeNotifier",
+        "ValueNotifier",
+        "Redux",
+        "Riverpod",
+        "BLoC",
+        "Provider",
+        "GetX"
+    ],
+    "Reactive Programming": [
+        "RxDart"
+    ],
+    "Animations": [
+        "Curved Animation",
+        "Hero",
+        "Opacity",
+        "Animation Controller",
+        "Animated Builder",
+        "Animated Widget"
+    ],
+    "Testing": [
+        "Widget Testing",
+        "Unit Testing",
+        "Integration Testing",
+        "TDD",
+        "BDD"
+    ],
+    "CI / CD": [
+        "Fast Lane",
+        "Codemagic",
+        "Bitrise",
+        "GitHub Actions",
+        "Firebase App Dist"
+    ],
+    "Deployment": [
+        "App Store",
+        "Playstore",
+        "Guidelines & Protocols"
+    ],
+    "Analytics": [
+        "Segment",
+        "Mix Panel",
+        "Firebase Analytics",
+        "Google Analytics"
+    ],
+    "Dev Tools": [
+        "Flutter Inspector",
+        "Flutter Outline",
+        "Memory Allocation"
+    ],
+    "Flutter Internals": [
+        "Render Objects",
+        "3 Trees",
+        "Immutability"
+    ]
+}

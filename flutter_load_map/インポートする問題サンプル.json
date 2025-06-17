@@ -1,0 +1,1091 @@
+{
+  "sections": [
+    {
+      "id": "dart_basics",
+      "title": "Dartの基礎",
+      "description": "Dartプログラミング言語の基本的な概念と構文を学習します。"
+    },
+    {
+      "id": "dev_environment",
+      "title": "開発環境とツール",
+      "description": "Flutter開発に必要なツールと環境設定について学習します。"
+    },
+    {
+      "id": "widgets",
+      "title": "Flutterウィジェットの基本",
+      "description": "Flutter UI構築の根幹であるウィジェットについて学習します。"
+    },
+    {
+      "id": "assets",
+      "title": "アセットの利用",
+      "description": "画像やフォントなどの静的ファイルをアプリケーションで利用する方法を学習します。"
+    },
+    {
+      "id": "version_control",
+      "title": "バージョン管理システム",
+      "description": "ソースコードの変更履歴を管理するシステムについて学習します。"
+    },
+    {
+      "id": "repo_hosting_services",
+      "title": "リポジトリホスティングサービス",
+      "description": "Gitリポジトリをホストし、チーム開発を効率化するためのサービスについて学習します。"
+    },
+    {
+      "id": "design_principles",
+      "title": "設計原則",
+      "description": "ソフトウェアの保守性や拡張性を高めるための基本的な設計指針を学習します。"
+    },
+    {
+      "id": "package_management",
+      "title": "パッケージ管理",
+      "description": "外部ライブラリや依存関係を管理するツールについて学習します。"
+    },
+    {
+      "id": "storage",
+      "title": "データ永続化",
+      "description": "アプリケーション内でデータを永続的に保存する技術について学習します。"
+    },
+    {
+      "id": "api_integration",
+      "title": "API連携",
+      "description": "外部サービスと連携し、データを送受信する技術について学習します。"
+    },
+    {
+      "id": "advanced_dart",
+      "title": "Dart応用",
+      "description": "Dart言語のより高度な概念や機能について学習します。"
+    },
+    {
+      "id": "state_management",
+      "title": "状態管理",
+      "description": "Flutterアプリケーションにおける状態管理の様々な手法について学習します。"
+    },
+    {
+      "id": "animations",
+      "title": "アニメーション",
+      "description": "Flutterアプリに動きや視覚的な変化を加える方法について学習します。"
+    },
+    {
+      "id": "testing",
+      "title": "テスト",
+      "description": "Flutterアプリケーションのテスト手法について学習します。"
+    },
+    {
+      "id": "ci_cd",
+      "title": "CI/CD",
+      "description": "継続的インテグレーションと継続的デリバリー/デプロイメントについて学習します。"
+    },
+    {
+      "id": "deployment",
+      "title": "アプリの公開",
+      "description": "開発したアプリケーションをユーザーにリリースするプロセスについて学習します。"
+    },
+    {
+      "id": "analytics",
+      "title": "アナリティクス",
+      "description": "アプリケーションの利用状況やユーザー行動を分析する方法について学習します。"
+    },
+    {
+      "id": "dev_tools",
+      "title": "開発者ツール",
+      "description": "Flutter開発を支援するデバッグツールやユーティリティについて学習します。"
+    },
+    {
+      "id": "flutter_internals",
+      "title": "Flutter内部構造",
+      "description": "Flutterフレームワークの内部構造と動作原理について深く学習します。"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_dart_001",
+      "title": "Dartの変数宣言",
+      "questionText": "Dartで、コンパイル時に値が決定される定数を宣言するために使用するキーワードはどれですか？",
+      "sectionId": "dart_basics",
+      "choices": [
+        {
+          "label": "var",
+          "isCorrect": false
+        },
+        {
+          "label": "final",
+          "isCorrect": false
+        },
+        {
+          "label": "const",
+          "isCorrect": true
+        },
+        {
+          "label": "dynamic",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_dart_002",
+      "title": "Dartの組み込み型",
+      "questionText": "Dartにおいて、キーと値のペアを扱うための組み込み型はどれですか？",
+      "sectionId": "dart_basics",
+      "choices": [
+        {
+          "label": "List",
+          "isCorrect": false
+        },
+        {
+          "label": "Map",
+          "isCorrect": true
+        },
+        {
+          "label": "Set",
+          "isCorrect": false
+        },
+        {
+          "label": "Array",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_dart_003",
+      "title": "Dartの制御フロー",
+      "questionText": "与えられた条件に基づいて異なるコードブロックを実行するために使用されるDartの構文はどれですか？",
+      "sectionId": "dart_basics",
+      "choices": [
+        {
+          "label": "forループ",
+          "isCorrect": false
+        },
+        {
+          "label": "whileループ",
+          "isCorrect": false
+        },
+        {
+          "label": "if/else文",
+          "isCorrect": true
+        },
+        {
+          "label": "関数定義",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_dart_004_code",
+      "title": "Dart関数定義の例",
+      "questionText": "2つの整数を受け取り、その合計を返すDart関数の正しい定義を記述してください。",
+      "sectionId": "dart_basics"
+    },
+    {
+      "id": "q_dev_env_001",
+      "title": "Flutter CLI",
+      "questionText": "新しいFlutterプロジェクトを作成するためのコマンドはどれですか？",
+      "sectionId": "dev_environment",
+      "choices": [
+        {
+          "label": "`flutter run`",
+          "isCorrect": false
+        },
+        {
+          "label": "`flutter build`",
+          "isCorrect": false
+        },
+        {
+          "label": "`flutter create`",
+          "isCorrect": true
+        },
+        {
+          "label": "`flutter test`",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_dev_env_002",
+      "title": "IDEの定義",
+      "questionText": "IDEとは何の略称ですか？",
+      "sectionId": "dev_environment",
+      "choices": [
+        {
+          "label": "Integrated Development Environment",
+          "isCorrect": true
+        },
+        {
+          "label": "Interactive Design Editor",
+          "isCorrect": false
+        },
+        {
+          "label": "Intelligent Debugging Engine",
+          "isCorrect": false
+        },
+        {
+          "label": "Independent Data Explorer",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_dev_env_003",
+      "title": "Flutter SDKのバージョン管理",
+      "questionText": "ローカルマシン上で複数のFlutter SDKバージョンを管理し、プロジェクトごとに異なるバージョンを使用できるツールはどれですか？",
+      "sectionId": "dev_environment",
+      "choices": [
+        {
+          "label": "VS Code",
+          "isCorrect": false
+        },
+        {
+          "label": "Android Studio",
+          "isCorrect": false
+        },
+        {
+          "label": "FVM",
+          "isCorrect": true
+        },
+        {
+          "label": "GitHub Actions",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_widgets_001",
+      "title": "ウィジェットの基本",
+      "questionText": "FlutterアプリケーションのUIを構成する基本的な「部品」は何と呼ばれますか？",
+      "sectionId": "widgets",
+      "choices": [
+        {
+          "label": "コンポーネント",
+          "isCorrect": false
+        },
+        {
+          "label": "モジュール",
+          "isCorrect": false
+        },
+        {
+          "label": "ウィジェット",
+          "isCorrect": true
+        },
+        {
+          "label": "エレメント",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_widgets_002",
+      "title": "StatefulWidgetとStatelessWidget",
+      "questionText": "内部のデータが時間とともに変化し、それに応じてUIが再描画されるウィジェットはどちらですか？",
+      "sectionId": "widgets",
+      "choices": [
+        {
+          "label": "StatelessWidget",
+          "isCorrect": false
+        },
+        {
+          "label": "StatefulWidget",
+          "isCorrect": true
+        },
+        {
+          "label": "InheritedWidget",
+          "isCorrect": false
+        },
+        {
+          "label": "StyledWidget",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_widgets_003",
+      "title": "Material DesignとCupertino",
+      "questionText": "AppleのHuman Interface Guidelinesに準拠したiOS風のUIコンポーネントのセットはどれですか？",
+      "sectionId": "widgets",
+      "choices": [
+        {
+          "label": "Material Widgets",
+          "isCorrect": false
+        },
+        {
+          "label": "Cupertino Widgets",
+          "isCorrect": true
+        },
+        {
+          "label": "Responsive Widgets",
+          "isCorrect": false
+        },
+        {
+          "label": "Styled Widgets",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_widgets_004_code",
+      "title": "StatelessWidgetの構築",
+      "questionText": "シンプルなテキストを表示するStatelessWidgetの`build`メソッドの中身を記述してください。",
+      "sectionId": "widgets"
+    },
+    {
+      "id": "q_assets_001",
+      "title": "アセットの利用",
+      "questionText": "アプリケーション内でカスタムフォントを組み込み、利用するために設定するファイルはどれですか？",
+      "sectionId": "assets",
+      "choices": [
+        {
+          "label": "main.dart",
+          "isCorrect": false
+        },
+        {
+          "label": "pubspec.yaml",
+          "isCorrect": true
+        },
+        {
+          "label": "android/app/build.gradle",
+          "isCorrect": false
+        },
+        {
+          "label": "Info.plist",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_assets_002",
+      "title": "画像の表示",
+      "questionText": "インターネット上の画像をFlutterアプリケーションのUIに表示するために使用するウィジェットはどれですか？",
+      "sectionId": "assets",
+      "choices": [
+        {
+          "label": "Image.asset",
+          "isCorrect": false
+        },
+        {
+          "label": "Image.file",
+          "isCorrect": false
+        },
+        {
+          "label": "Image.network",
+          "isCorrect": true
+        },
+        {
+          "label": "Icon",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_version_control_001",
+      "title": "バージョン管理システム",
+      "questionText": "ソフトウェア開発において、ソースコードの変更履歴を追跡・管理するための、最も一般的な分散型バージョン管理システムはどれですか？",
+      "sectionId": "version_control",
+      "choices": [
+        {
+          "label": "SVN",
+          "isCorrect": false
+        },
+        {
+          "label": "Mercurial",
+          "isCorrect": false
+        },
+        {
+          "label": "Git",
+          "isCorrect": true
+        },
+        {
+          "label": "CVS",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_repo_hosting_001",
+      "title": "リポジトリホスティングサービス",
+      "questionText": "世界中で最も広く利用されているGitリポジトリホスティングサービスで、プルリクエストやCI/CD機能も統合されているものはどれですか？",
+      "sectionId": "repo_hosting_services",
+      "choices": [
+        {
+          "label": "GitLab",
+          "isCorrect": false
+        },
+        {
+          "label": "Bitbucket",
+          "isCorrect": false
+        },
+        {
+          "label": "GitHub",
+          "isCorrect": true
+        },
+        {
+          "label": "SourceForge",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_design_principles_001",
+      "title": "設計原則",
+      "questionText": "オブジェクトが依存する他のオブジェクトを、直接内部で生成するのではなく、外部から供給する設計パターンは何と呼ばれますか？",
+      "sectionId": "design_principles",
+      "choices": [
+        {
+          "label": "Observerパターン",
+          "isCorrect": false
+        },
+        {
+          "label": "Factoryパターン",
+          "isCorrect": false
+        },
+        {
+          "label": "Dependency Injection",
+          "isCorrect": true
+        },
+        {
+          "label": "Singletonパターン",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_design_principles_002",
+      "title": "SOLID原則",
+      "questionText": "SOLID原則の'O'が表す原則は何ですか？",
+      "sectionId": "design_principles",
+      "choices": [
+        {
+          "label": "開放/閉鎖原則（Open/Closed Principle）",
+          "isCorrect": true
+        },
+        {
+          "label": "オブジェクト指向の原則（Object-Oriented Principle）",
+          "isCorrect": false
+        },
+        {
+          "label": "操作性の原則（Operability Principle）",
+          "isCorrect": false
+        },
+        {
+          "label": "最適化の原則（Optimization Principle）",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_design_principles_003",
+      "title": "OOPの特徴",
+      "questionText": "オブジェクト指向プログラミングの主要な特徴の一つで、データと振る舞いを一つの単位にまとめる概念は何ですか？",
+      "sectionId": "design_principles",
+      "choices": [
+        {
+          "label": "継承",
+          "isCorrect": false
+        },
+        {
+          "label": "ポリモーフィズム",
+          "isCorrect": false
+        },
+        {
+          "label": "カプセル化",
+          "isCorrect": true
+        },
+        {
+          "label": "抽象化",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_package_mgmt_001",
+      "title": "パッケージマネージャー",
+      "questionText": "Flutterで依存関係を定義するファイルの名前は何ですか？",
+      "sectionId": "package_management",
+      "choices": [
+        {
+          "label": "main.dart",
+          "isCorrect": false
+        },
+        {
+          "label": "build.yaml",
+          "isCorrect": false
+        },
+        {
+          "label": "pubspec.yaml",
+          "isCorrect": true
+        },
+        {
+          "label": "config.json",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_package_mgmt_002_code",
+      "title": "パッケージの追加",
+      "questionText": "Flutterプロジェクトに`http`パッケージを追加するために、`pubspec.yaml`ファイルに追記する正しい内容を記述してください。",
+      "sectionId": "package_management"
+    },
+    {
+      "id": "q_storage_001",
+      "title": "データ永続化",
+      "questionText": "ユーザー設定などの少量の単純なデータをデバイスに永続的に保存するための、軽量なメカニズムはどれですか？",
+      "sectionId": "storage",
+      "choices": [
+        {
+          "label": "SQLite",
+          "isCorrect": false
+        },
+        {
+          "label": "Firebase Cloud Firestore",
+          "isCorrect": false
+        },
+        {
+          "label": "Shared Preferences",
+          "isCorrect": true
+        },
+        {
+          "label": "Realm",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_storage_002",
+      "title": "Firebaseのサービス",
+      "questionText": "Googleが提供するモバイルおよびウェブアプリケーション開発のためのプラットフォームで、認証やリアルタイムデータベースなどの多様なバックエンドサービスを統合的に提供するものは何ですか？",
+      "sectionId": "storage",
+      "choices": [
+        {
+          "label": "AWS Amplify",
+          "isCorrect": false
+        },
+        {
+          "label": "Microsoft Azure",
+          "isCorrect": false
+        },
+        {
+          "label": "Firebase",
+          "isCorrect": true
+        },
+        {
+          "label": "Heroku",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_storage_003_code",
+      "title": "Shared Preferencesの使用",
+      "questionText": "Flutterで`shared_preferences`パッケージを使用して、キー`username`に文字列`John Doe`を保存するコードを記述してください。",
+      "sectionId": "storage"
+    },
+    {
+      "id": "q_api_001",
+      "title": "APIとの連携",
+      "questionText": "クライアントとサーバー間で、持続的な双方向通信チャンネルを確立するためのプロトコルはどれですか？",
+      "sectionId": "api_integration",
+      "choices": [
+        {
+          "label": "HTTP",
+          "isCorrect": false
+        },
+        {
+          "label": "REST",
+          "isCorrect": false
+        },
+        {
+          "label": "Web Sockets",
+          "isCorrect": true
+        },
+        {
+          "label": "GraphQL",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_api_002",
+      "title": "GraphQLの利点",
+      "questionText": "GraphQLがRESTful APIと比較して解決できる主な問題点として挙げられるのはどれですか？",
+      "sectionId": "api_integration",
+      "choices": [
+        {
+          "label": "データのセキュリティ",
+          "isCorrect": false
+        },
+        {
+          "label": "APIエンドポイントの数",
+          "isCorrect": false
+        },
+        {
+          "label": "オーバーフェッチ/アンダーフェッチ",
+          "isCorrect": true
+        },
+        {
+          "label": "キャッシュの複雑さ",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_api_003_code",
+      "title": "JSONデシリアライズの例",
+      "questionText": "JSON文字列 `{\"name\": \"Alice\", \"age\": 30}` をDartの`Map<String, dynamic>`にデシリアライズするコードを記述してください。",
+      "sectionId": "api_integration"
+    },
+    {
+      "id": "q_advanced_dart_001",
+      "title": "非同期処理",
+      "questionText": "Dartで非同期処理を同期的なコードのように記述するための構文はどれですか？",
+      "sectionId": "advanced_dart",
+      "choices": [
+        {
+          "label": "try/catch",
+          "isCorrect": false
+        },
+        {
+          "label": "if/else",
+          "isCorrect": false
+        },
+        {
+          "label": "async/await",
+          "isCorrect": true
+        },
+        {
+          "label": "for/in",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_advanced_dart_002",
+      "title": "Streamsの用途",
+      "questionText": "時間の経過とともにゼロ個または複数の非同期イベント（データ）を生成するシーケンスを扱う際に利用されるDartの機能はどれですか？",
+      "sectionId": "advanced_dart",
+      "choices": [
+        {
+          "label": "Futures",
+          "isCorrect": false
+        },
+        {
+          "label": "Isolates",
+          "isCorrect": false
+        },
+        {
+          "label": "Streams",
+          "isCorrect": true
+        },
+        {
+          "label": "Callbacks",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_advanced_dart_003",
+      "title": "ラムダ関数",
+      "questionText": "Dartで、名前を持たない関数（無名関数）で、短い処理を一行で書くための構文はどれですか？",
+      "sectionId": "advanced_dart",
+      "choices": [
+        {
+          "label": "function() {}",
+          "isCorrect": false
+        },
+        {
+          "label": "=> expression",
+          "isCorrect": true
+        },
+        {
+          "label": "def func():",
+          "isCorrect": false
+        },
+        {
+          "label": "lambda x:",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_advanced_dart_004_code",
+      "title": "非同期処理の待機",
+      "questionText": "非同期関数`fetchData`の結果を待機して表示するDartコードで、適切なキーワードを記述してください。",
+      "sectionId": "advanced_dart"
+    },
+    {
+      "id": "q_state_mgmt_001",
+      "title": "状態管理ライブラリ",
+      "questionText": "Flutterの状態管理ライブラリ`Provider`から派生し、より安全で堅牢な状態管理ソリューションを提供するものはどれですか？",
+      "sectionId": "state_management",
+      "choices": [
+        {
+          "label": "Redux",
+          "isCorrect": false
+        },
+        {
+          "label": "BLoC",
+          "isCorrect": false
+        },
+        {
+          "label": "Riverpod",
+          "isCorrect": true
+        },
+        {
+          "label": "GetX",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_state_mgmt_002",
+      "title": "GetXの特徴",
+      "questionText": "Flutterアプリケーション開発のための高パフォーマンスなフレームワークで、状態管理、依存性注入、ルーティング管理を統合的に提供するものはどれですか？",
+      "sectionId": "state_management",
+      "choices": [
+        {
+          "label": "Provider",
+          "isCorrect": false
+        },
+        {
+          "label": "GetX",
+          "isCorrect": true
+        },
+        {
+          "label": "Redux",
+          "isCorrect": false
+        },
+        {
+          "label": "BLoC",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_state_mgmt_003_code",
+      "title": "ChangeNotifierの使用",
+      "questionText": "`ChangeNotifier`を継承したシンプルなカウンタークラスで、カウンターをインクリメントし、リスナーに通知するメソッドを記述してください。",
+      "sectionId": "state_management"
+    },
+    {
+      "id": "q_animations_001",
+      "title": "アニメーションの種類",
+      "questionText": "異なる画面間を移動する際に、共通のウィジェットを滑らかにアニメーションさせるための特殊なウィジェットはどれですか？",
+      "sectionId": "animations",
+      "choices": [
+        {
+          "label": "AnimatedContainer",
+          "isCorrect": false
+        },
+        {
+          "label": "Hero",
+          "isCorrect": true
+        },
+        {
+          "label": "Opacity",
+          "isCorrect": false
+        },
+        {
+          "label": "AnimatedBuilder",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_animations_002",
+      "title": "アニメーションの制御",
+      "questionText": "アニメーションの再生、停止、繰り返し、進行状況などを制御するためのオブジェクトはどれですか？",
+      "sectionId": "animations",
+      "choices": [
+        {
+          "label": "CurvedAnimation",
+          "isCorrect": false
+        },
+        {
+          "label": "AnimationController",
+          "isCorrect": true
+        },
+        {
+          "label": "Tween",
+          "isCorrect": false
+        },
+        {
+          "label": "AnimatedWidget",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_animations_003_code",
+      "title": "Opacityウィジェット",
+      "questionText": "テキストの不透明度を0.5に設定するために、`Opacity`ウィジェットで記述すべき内容を記述してください。",
+      "sectionId": "animations"
+    },
+    {
+      "id": "q_testing_001",
+      "title": "テストの種類",
+      "questionText": "FlutterアプリケーションのUIコンポーネントが単独で正しくレンダリングされ、ユーザーインタラクションに適切に反応するかをテストする種類は何ですか？",
+      "sectionId": "testing",
+      "choices": [
+        {
+          "label": "ユニットテスト",
+          "isCorrect": false
+        },
+        {
+          "label": "ウィジェットテスト",
+          "isCorrect": true
+        },
+        {
+          "label": "インテグレーションテスト",
+          "isCorrect": false
+        },
+        {
+          "label": "BDDテスト",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_testing_002",
+      "title": "BDDとは",
+      "questionText": "BDDは何の略ですか？",
+      "sectionId": "testing",
+      "choices": [
+        {
+          "label": "Bug-Driven Development",
+          "isCorrect": false
+        },
+        {
+          "label": "Behavior-Driven Development",
+          "isCorrect": true
+        },
+        {
+          "label": "Build-Driven Deployment",
+          "isCorrect": false
+        },
+        {
+          "label": "Business Document Design",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_ci_cd_001",
+      "title": "CI/CD",
+      "questionText": "開発者がコードの変更を頻繁に共有リポジトリに統合し、自動的にビルド、テスト、デプロイを行うことで、ソフトウェアの品質と開発プロセス全体の効率を大幅に向上させる手法の総称は何ですか？",
+      "sectionId": "ci_cd",
+      "choices": [
+        {
+          "label": "DevOps",
+          "isCorrect": false
+        },
+        {
+          "label": "Agile Development",
+          "isCorrect": false
+        },
+        {
+          "label": "CI/CD",
+          "isCorrect": true
+        },
+        {
+          "label": "Waterall Model",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_ci_cd_002",
+      "title": "Fastlaneの役割",
+      "questionText": "モバイルアプリのリリースプロセスを自動化するためのオープンソースツールスイートで、ビルド、署名、テスト、App StoreやGoogle Playへのアップロードといったタスクを自動化できるものはどれですか？",
+      "sectionId": "ci_cd",
+      "choices": [
+        {
+          "label": "Codemagic",
+          "isCorrect": false
+        },
+        {
+          "label": "Bitrise",
+          "isCorrect": false
+        },
+        {
+          "label": "Fastlane",
+          "isCorrect": true
+        },
+        {
+          "label": "GitHub Actions",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_ci_cd_003_code",
+      "title": "GitHub Actionsのワークフロー",
+      "questionText": "FlutterアプリのCI/CDにGitHub Actionsを利用する場合、コードのプッシュ時にワークフローをトリガーするための`workflow.yaml`ファイルにおける正しい記述を記述してください。",
+      "sectionId": "ci_cd"
+    },
+    {
+      "id": "q_deployment_001",
+      "title": "アプリの公開プラットフォーム",
+      "questionText": "Appleが運営するiOSアプリケーションの公式配信プラットフォームはどれですか？",
+      "sectionId": "deployment",
+      "choices": [
+        {
+          "label": "Google Play Store",
+          "isCorrect": false
+        },
+        {
+          "label": "App Store",
+          "isCorrect": true
+        },
+        {
+          "label": "Microsoft Store",
+          "isCorrect": false
+        },
+        {
+          "label": "Amazon Appstore",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_deployment_002",
+      "title": "ガイドラインとプロトコル",
+      "questionText": "iOSアプリ開発において、Appleが定めるUI/UXに関する設計指針は何と呼ばれますか？",
+      "sectionId": "deployment",
+      "choices": [
+        {
+          "label": "Material Design",
+          "isCorrect": false
+        },
+        {
+          "label": "Human Interface Guidelines",
+          "isCorrect": true
+        },
+        {
+          "label": "Fluent Design",
+          "isCorrect": false
+        },
+        {
+          "label": "Android Design Guidelines",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_analytics_001",
+      "title": "アナリティクスツール",
+      "questionText": "Google Firebaseが提供する無料のアプリ利用状況分析サービスで、インストール数、アクティブユーザー数、イベントデータなどを収集・レポートするものはどれですか？",
+      "sectionId": "analytics",
+      "choices": [
+        {
+          "label": "Google Analytics",
+          "isCorrect": false
+        },
+        {
+          "label": "Mixpanel",
+          "isCorrect": false
+        },
+        {
+          "label": "Firebase Analytics",
+          "isCorrect": true
+        },
+        {
+          "label": "Segment",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_analytics_002",
+      "title": "顧客データプラットフォーム",
+      "questionText": "顧客データを収集、クリーンアップ、統合し、様々なアナリティクスツールやマーケティングツールに一元的に連携するためのプラットフォームはどれですか？",
+      "sectionId": "analytics",
+      "choices": [
+        {
+          "label": "Google Analytics",
+          "isCorrect": false
+        },
+        {
+          "label": "Mixpanel",
+          "isCorrect": false
+        },
+        {
+          "label": "Segment",
+          "isCorrect": true
+        },
+        {
+          "label": "Firebase Crashlytics",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_dev_tools_001",
+      "title": "デバッグツール",
+      "questionText": "VS CodeやAndroid Studioに統合されているFlutterアプリケーションのデバッグツールで、UIツリーを視覚的に検査し、各ウィジェットのプロパティを確認できるものはどれですか？",
+      "sectionId": "dev_tools",
+      "choices": [
+        {
+          "label": "Flutter Outline",
+          "isCorrect": false
+        },
+        {
+          "label": "Flutter Inspector",
+          "isCorrect": true
+        },
+        {
+          "label": "Dart Analyzer",
+          "isCorrect": false
+        },
+        {
+          "label": "Performance Monitor",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_flutter_internals_001",
+      "title": "Flutterの内部構造",
+      "questionText": "Flutterのレンダリングパイプラインにおいて、実際の画面描画を担当するオブジェクトは何ですか？",
+      "sectionId": "flutter_internals",
+      "choices": [
+        {
+          "label": "Widget",
+          "isCorrect": false
+        },
+        {
+          "label": "Element",
+          "isCorrect": false
+        },
+        {
+          "label": "RenderObject",
+          "isCorrect": true
+        },
+        {
+          "label": "State",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "id": "q_flutter_internals_002",
+      "title": "不変性",
+      "questionText": "データやオブジェクトが一度作成されたら、その状態を後から変更できない特性を指す言葉は何ですか？",
+      "sectionId": "flutter_internals",
+      "choices": [
+        {
+          "label": "ミュータビリティ",
+          "isCorrect": false
+        },
+        {
+          "label": "イミュータビリティ",
+          "isCorrect": true
+        },
+        {
+          "label": "カプセル化",
+          "isCorrect": false
+        },
+        {
+          "label": "ポリモーフィズム",
+          "isCorrect": false
+        }
+      ]
+    }
+  ]
+}

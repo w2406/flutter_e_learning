@@ -1,0 +1,46 @@
+{
+    "sections": [
+        {
+            "id": "セクションID1",
+            "title": "セクションタイトル名",
+            "description": "セクションの説明"
+        },
+        {
+            "id": "セクションID2",
+            "title": "セクションタイトル名",
+            "description": "セクションの説明"
+        }
+    ],
+    "questions": [
+        {
+            "id": "q1",
+            "title": "問題のタイトル(選択肢形式)",
+            "questionText": "問題の説明",
+            "sectionId": "セクションID1",
+            "choices": [
+                {
+                    "label": "選択肢1",
+                    "isCorrect": false
+                },
+                {
+                    "label": "選択肢2",
+                    "isCorrect": true
+                },
+                {
+                    "label": "選択肢3",
+                    "isCorrect": false
+                },
+                {
+                    "label": "選択肢4",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": "q2",
+            "title": "問題のタイトル(コード形式)",
+            "questionText": "問題の説明",
+            "sectionId": "セクションID2"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "sections": [
+        "Learn the Basics of Dart",
+        "Setup Development Environment",
+        "Widgets",
+        "Working with Assets",
+        "Version Control Systems",
+        "Repo Hosting Services",
+        "Design Principles",
+        "Package Manager",
+        "Storage",
+        "Working with APIs",
+        "Advanced Dart",
+        "State Management",
+        "Reactive Programming",
+        "Animations",
+        "Testing",
+        "CI / CD",
+        "Deployment",
+        "Analytics",
+        "Dev Tools",
+        "Flutter Internals"
+    ]
+}
