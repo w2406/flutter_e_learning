@@ -73,6 +73,8 @@ class SettingScreenViewModel extends _$SettingScreenViewModel {
             }).toList();
             await ref.read(updateSectionsUsecaseProvider).execute(sectionList);
             await ref.read(updateQuestionsUsecaseProvider).execute(questions);
+            // ファイル名をstateに反映
+            state = AsyncValue.data(state.value!.copyWith(fileName: file.name));
           } else {
             throw Exception(
               'question_sample.json形式（sections+questions）である必要があります',

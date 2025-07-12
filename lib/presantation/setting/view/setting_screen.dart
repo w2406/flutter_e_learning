@@ -28,6 +28,17 @@ class SettingScreen extends HookConsumerWidget {
       data: (data) {
         final apiKeyController = TextEditingController(text: data.apiKey);
         final isApiKeyVisible = ValueNotifier(false);
+        // ValueNotifierの初期化をuseStateで管理し、TextEditingControllerの変更を反映させる
+        final isApiKeyNotEmpty = ValueNotifier(
+          apiKeyController.text.isNotEmpty,
+        );
+        // TextFieldの初期化後にリスナーを追加するため、WidgetsBindingでpost-frameに追加
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          isApiKeyNotEmpty.value = apiKeyController.text.isNotEmpty;
+        });
+        apiKeyController.addListener(() {
+          isApiKeyNotEmpty.value = apiKeyController.text.isNotEmpty;
+        });
         return Scaffold(
           backgroundColor: Colors.grey[50],
           appBar: AppBar(
@@ -123,38 +134,48 @@ class SettingScreen extends HookConsumerWidget {
                       const SizedBox(height: 16),
                       SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: apiKeyController.text.isEmpty
-                              ? null
-                              : () {
-                                  ref
-                                      .read(
-                                        settingScreenViewModelProvider.notifier,
-                                      )
-                                      .updateApiKey(apiKeyController.text);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'APIキーを適用しました: ${apiKeyController.text}',
-                                      ),
-                                    ),
-                                  );
-                                },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF1976D2),
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          child: const Text(
-                            'APIキーを適用',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                        child: ValueListenableBuilder<bool>(
+                          valueListenable: isApiKeyNotEmpty,
+                          builder: (context, enabled, _) {
+                            return ElevatedButton(
+                              onPressed: !enabled
+                                  ? null
+                                  : () {
+                                      ref
+                                          .read(
+                                            settingScreenViewModelProvider
+                                                .notifier,
+                                          )
+                                          .updateApiKey(apiKeyController.text);
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'APIキーを適用しました: ${apiKeyController.text}',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF1976D2),
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: const Text(
+                                'APIキーを適用',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],
