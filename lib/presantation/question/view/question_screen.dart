@@ -359,32 +359,7 @@ class _FeedbackSection extends StatelessWidget {
           const SizedBox(height: 8),
           MarkdownBody(data: ''),
           MarkdownBody(data: state.feedbackExplanation),
-          if (isCorrect) ...[
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.thumb_up, color: Colors.green, size: 20),
-                  const SizedBox(width: 8),
-                  const Expanded(
-                    child: Text(
-                      '完璧です！非常に簡潔で、Dartの標準的な書き方に沿っています。',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.green,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          // 正解時の追加フィードバックは削除
           const SizedBox(height: 16),
           const Text(
             '【アドバイス】',
