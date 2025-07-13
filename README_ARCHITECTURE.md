@@ -68,3 +68,11 @@ UI(View)とUIの状態(ViewMode)を分けることで関心の分離を行いま
         └── setting
 
 ```
+
+---
+
+## 画面作成からデータベース保存までのフロー例
+
+![フローサンプル](README_image/architecture/flow_sample.png)
+
+このように、UI→ViewModel→UseCase→Repository→Infrastructure(DB)の順で処理が流れ、責務が分離されています。
