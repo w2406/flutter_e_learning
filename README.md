@@ -15,6 +15,9 @@ Flutter初心者～中級者向けに、学習セクションごとにFlutterの
 
 ## 2. 使用技術
 
+### アーキテクチャ
+アーキテクチャについては[README_ARCHITECTURE.md](README_ARCHITECTURE.md)を参照してください。
+
 ### フロントエンド（アプリ）
 - Flutter（iOS / Android ※Webにも対応予定）
 - 状態管理：Riverpod
