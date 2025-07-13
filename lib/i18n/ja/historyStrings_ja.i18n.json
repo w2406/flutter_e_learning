@@ -1,0 +1,12 @@
+{
+    "historyScreen": {
+        "title": "履歴",
+        "question": "問題文:",
+        "yourAnswer": "あなたの回答",
+        "choiceAnswer": "選択肢から選んだ回答",
+        "judgement": "正誤判定: {result}",
+        "explanation": "【解説】",
+        "advice": "【アドバイス】",
+        "sampleCode": "【サンプルコード】"
+    }
+}

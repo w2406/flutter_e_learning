@@ -1,0 +1,15 @@
+{
+    "settingScreen": {
+        "title": "Settings",
+        "apiSetting": "API Setting",
+        "apiKey": "API Key",
+        "apiKeyHint": "Enter your dify API key",
+        "apiKeyApplied": "API key applied: {apiKey}",
+        "error": "Error: {error}",
+        "applyApiKey": "Apply API Key",
+        "other": "Other",
+        "loadQuestionFile": "Load Question File",
+        "loadQuestionFileSubtitle": "Android/iOS only",
+        "loadQuestionFileSnack": "Loaded question file: {file}"
+    }
+}

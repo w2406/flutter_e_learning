@@ -1,0 +1,14 @@
+{
+    "questionScreen": {
+        "title": "Question",
+        "yourAnswer": "Your Answer",
+        "correct": "Correct",
+        "incorrect": "Incorrect",
+        "explanation": "Explanation",
+        "advice": "Advice",
+        "sampleCode": "Sample Code",
+        "choiceAnswer": "Please select an option",
+        "judgement": "Result: {result}",
+        "error": "Error: {error}"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "homeScreen": {
+        "title": "Flutter Eラーニング",
+        "setting": "設定",
+        "welcome": "おかえりなさい！",
+        "continueLearning": "今日も学習を続けましょう",
+        "progress": "学習進捗",
+        "menu": "メニュー",
+        "sectionList": "セクション一覧",
+        "sectionListDescription": "学習コンテンツを確認",
+        "historyList": "学習履歴",
+        "historyListDescription": "過去の学習記録を確認",
+        "progressError": "進捗取得エラー"
+    }
+}

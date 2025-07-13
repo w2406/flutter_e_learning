@@ -1,0 +1,6 @@
+{
+    "sectionScreen": {
+        "title": "Section",
+        "error": "Error: {error}"
+    }
+}

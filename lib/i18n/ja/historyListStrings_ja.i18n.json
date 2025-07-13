@@ -1,0 +1,8 @@
+{
+    "historyListScreen": {
+        "title": "履歴一覧",
+        "error": "エラー: {error}",
+        "answeredAt": "解答日時: {answeredAt}",
+        "isCorrect": "正誤: {isCorrect}"
+    }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
+import 'package:flutter_e_learning/generated/i18n/strings.g.dart';
 import 'package:flutter_e_learning/presantation/question/view_model/question_screen_state.dart';
 import 'package:flutter_e_learning/presantation/question/view_model/question_screen_view_model.dart';
 // import 'package:flutter_highlight/themes/monokai-sublime.dart';
@@ -21,6 +22,7 @@ class QuestionScreen extends HookConsumerWidget {
     );
     final isLoading = useState(false);
     final scrollController = useScrollController();
+    final t = TranslationProvider.of(context).translations.questionStrings;
 
     void onAnswer(QuestionScreenState state) async {
       if (isLoading.value) return;
@@ -50,9 +52,9 @@ class QuestionScreen extends HookConsumerWidget {
           Scaffold(
             backgroundColor: Colors.grey[50],
             appBar: AppBar(
-              title: const Text(
-                '問題',
-                style: TextStyle(
+              title: Text(
+                t.questionScreen.title,
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -97,9 +99,9 @@ class QuestionScreen extends HookConsumerWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
-                          '問題文:',
-                          style: TextStyle(
+                        Text(
+                          t.questionScreen.explanation,
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF666666),
@@ -120,9 +122,9 @@ class QuestionScreen extends HookConsumerWidget {
                   const SizedBox(height: 24),
                   // 回答セクション
                   if (state.choices != null) ...[
-                    const Text(
-                      '選択肢から選ぶ',
-                      style: TextStyle(
+                    Text(
+                      t.questionScreen.choiceAnswer,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF333333),
@@ -148,9 +150,9 @@ class QuestionScreen extends HookConsumerWidget {
                       ),
                     ),
                   ] else ...[
-                    const Text(
-                      'コード回答欄',
-                      style: TextStyle(
+                    Text(
+                      t.questionScreen.yourAnswer,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF333333),
@@ -204,9 +206,9 @@ class QuestionScreen extends HookConsumerWidget {
                             ),
                             disabledBackgroundColor: Colors.grey[300],
                           ),
-                          child: const Text(
-                            '回答する',
-                            style: TextStyle(
+                          child: Text(
+                            t.questionScreen.yourAnswer,
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
                             ),
@@ -232,7 +234,13 @@ class QuestionScreen extends HookConsumerWidget {
       ),
       loading: () =>
           const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (e, st) => Scaffold(body: Center(child: Text('エラー: $e'))),
+      error: (e, st) => Scaffold(
+        body: Center(
+          child: Text(
+            t.questionScreen.error.replaceAll('{error}', e.toString()),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -315,6 +323,7 @@ class _FeedbackSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TranslationProvider.of(context).translations.questionStrings;
     final isCorrect = state.feedbackResult == '正解';
     return Container(
       padding: const EdgeInsets.all(20),
@@ -338,7 +347,10 @@ class _FeedbackSection extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                '正誤判定: ${state.feedbackResult}',
+                t.questionScreen.judgement.replaceAll(
+                  '{result}',
+                  state.feedbackResult,
+                ),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -348,9 +360,9 @@ class _FeedbackSection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          const Text(
-            '【解説】',
-            style: TextStyle(
+          Text(
+            t.questionScreen.explanation,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Color(0xFF333333),
@@ -361,9 +373,9 @@ class _FeedbackSection extends StatelessWidget {
           MarkdownBody(data: state.feedbackExplanation),
           // 正解時の追加フィードバックは削除
           const SizedBox(height: 16),
-          const Text(
-            '【アドバイス】',
-            style: TextStyle(
+          Text(
+            t.questionScreen.advice,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Color(0xFF333333),
@@ -372,9 +384,9 @@ class _FeedbackSection extends StatelessWidget {
           const SizedBox(height: 8),
           MarkdownBody(data: state.feedbackAdvice),
           const SizedBox(height: 16),
-          const Text(
-            '【サンプルコード】',
-            style: TextStyle(
+          Text(
+            t.questionScreen.sampleCode,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Color(0xFF333333),

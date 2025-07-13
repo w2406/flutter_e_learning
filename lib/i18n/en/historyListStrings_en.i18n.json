@@ -1,0 +1,8 @@
+{
+    "historyListScreen": {
+        "title": "History List",
+        "error": "Error: {error}",
+        "answeredAt": "Answered at: {answeredAt}",
+        "isCorrect": "Correct: {isCorrect}"
+    }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_learning/common/constants/route_paths.dart';
+import 'package:flutter_e_learning/generated/i18n/strings.g.dart';
 import 'package:flutter_e_learning/presantation/history_list/view_model/history_list_screen_view_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,9 +14,12 @@ class HistoryListScreen extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          '履歴一覧',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        title: Text(
+          context.i18n.historyListStrings.historyListScreen.title,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         backgroundColor: const Color(0xFF1976D2),
         elevation: 0,
@@ -48,7 +52,14 @@ class HistoryListScreen extends HookConsumerWidget {
           },
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, st) => Center(child: Text('エラー: $e')),
+        error: (e, st) => Center(
+          child: Text(
+            context.i18n.historyListStrings.historyListScreen.error.replaceAll(
+              '{error}',
+              e.toString(),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -94,7 +105,12 @@ class HistoryListScreen extends HookConsumerWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '解答日: $answeredAt',
+                      context
+                          .i18n
+                          .historyListStrings
+                          .historyListScreen
+                          .answeredAt
+                          .replaceAll('{answeredAt}', answeredAt),
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
@@ -115,7 +131,8 @@ class HistoryListScreen extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  isCorrect ? '正解' : '不正解',
+                  context.i18n.historyListStrings.historyListScreen.isCorrect
+                      .replaceAll('{isCorrect}', isCorrect.toString()),
                   style: TextStyle(
                     color: color,
                     fontWeight: FontWeight.bold,

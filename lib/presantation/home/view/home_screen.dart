@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_e_learning/common/constants/route_paths.dart';
 import 'package:flutter_e_learning/common/provider/common_provider.dart';
+import 'package:flutter_e_learning/generated/i18n/strings.g.dart';
 import 'package:flutter_e_learning/presantation/home/view_model/home_screen_view_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +12,7 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final t = TranslationProvider.of(context).translations.homeStrings;
     final state = ref.watch(homeScreenViewModelProvider);
 
     useEffect(() {
@@ -28,16 +30,19 @@ class HomeScreen extends HookConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text(
-          'Flutter Eラーニング',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        title: Text(
+          t.homeScreen.title,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         backgroundColor: const Color(0xFF1976D2),
         elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
-            tooltip: '設定',
+            tooltip: t.homeScreen.setting,
             onPressed: () {
               context.pushNamed(AppRoutes.setting);
             },
@@ -70,28 +75,28 @@ class HomeScreen extends HookConsumerWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    'おかえりなさい！',
-                    style: TextStyle(
+                    t.homeScreen.welcome,
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
-                    '今日も学習を続けましょう',
-                    style: TextStyle(fontSize: 16, color: Colors.white70),
+                    t.homeScreen.continueLearning,
+                    style: const TextStyle(fontSize: 16, color: Colors.white70),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 32),
             // 学習進捗セクション
-            const Text(
-              '学習進捗',
-              style: TextStyle(
+            Text(
+              t.homeScreen.progress,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF333333),
@@ -148,13 +153,13 @@ class HomeScreen extends HookConsumerWidget {
                 ),
               ),
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (e, st) => const Text('進捗取得エラー'),
+              error: (e, st) => Text(t.homeScreen.progressError),
             ),
             const SizedBox(height: 32),
             // アクションボタン
-            const Text(
-              'メニュー',
-              style: TextStyle(
+            Text(
+              t.homeScreen.menu,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF333333),
@@ -163,8 +168,8 @@ class HomeScreen extends HookConsumerWidget {
             const SizedBox(height: 16),
             _buildActionCard(
               icon: Icons.library_books,
-              title: 'セクション一覧',
-              subtitle: '学習コンテンツを確認',
+              title: t.homeScreen.sectionList,
+              subtitle: t.homeScreen.sectionListDescription,
               color: Colors.green,
               onTap: () {
                 context.pushNamed(AppRoutes.sectionList);
@@ -173,8 +178,8 @@ class HomeScreen extends HookConsumerWidget {
             const SizedBox(height: 12),
             _buildActionCard(
               icon: Icons.history,
-              title: '学習履歴',
-              subtitle: '過去の学習記録を確認',
+              title: t.homeScreen.historyList,
+              subtitle: t.homeScreen.historyListDescription,
               color: Colors.orange,
               onTap: () {
                 context.pushNamed(AppRoutes.historyList);

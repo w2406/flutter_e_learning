@@ -1,0 +1,12 @@
+{
+    "historyScreen": {
+        "title": "History",
+        "question": "Question:",
+        "yourAnswer": "Your Answer",
+        "choiceAnswer": "Selected Answer",
+        "judgement": "Result: {result}",
+        "explanation": "[Explanation]",
+        "advice": "[Advice]",
+        "sampleCode": "[Sample Code]"
+    }
+}

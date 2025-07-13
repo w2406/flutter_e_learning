@@ -1,0 +1,14 @@
+{
+    "questionScreen": {
+        "title": "問題",
+        "yourAnswer": "あなたの回答",
+        "correct": "正解",
+        "incorrect": "不正解",
+        "explanation": "解説",
+        "advice": "アドバイス",
+        "sampleCode": "サンプルコード",
+        "choiceAnswer": "選択肢から選んでください",
+        "judgement": "判定: {result}",
+        "error": "エラー: {error}"
+    }
+}

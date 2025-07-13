@@ -1,0 +1,15 @@
+{
+    "settingScreen": {
+        "title": "設定",
+        "apiSetting": "API設定",
+        "apiKey": "APIキー",
+        "apiKeyHint": "difyのAPIキーを入力する",
+        "apiKeyApplied": "APIキーを適用しました: {apiKey}",
+        "error": "エラー: {error}",
+        "applyApiKey": "APIキーを適用",
+        "other": "その他",
+        "loadQuestionFile": "問題ファイルを読み込む",
+        "loadQuestionFileSubtitle": "Android/iOSのみ",
+        "loadQuestionFileSnack": "問題ファイル「{file}」を読み込みました"
+    }
+}

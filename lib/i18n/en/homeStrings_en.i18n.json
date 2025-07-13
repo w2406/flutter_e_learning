@@ -1,0 +1,15 @@
+{
+    "homeScreen": {
+        "title": "Flutter E-Learning",
+        "setting": "Settings",
+        "welcome": "Welcome back!",
+        "continueLearning": "Let's continue learning today",
+        "progress": "Progress",
+        "menu": "Menu",
+        "sectionList": "Section List",
+        "sectionListDescription": "Check learning contents",
+        "historyList": "Learning History",
+        "historyListDescription": "Check your past learning records",
+        "progressError": "Failed to get progress"
+    }
+}

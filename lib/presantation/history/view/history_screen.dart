@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
+import 'package:flutter_e_learning/generated/i18n/strings.g.dart';
 import 'package:flutter_e_learning/presantation/history/view_model/history_screen_view_model.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
@@ -18,9 +19,12 @@ class HistoryScreen extends HookConsumerWidget {
       data: (state) => Scaffold(
         backgroundColor: Colors.grey[50],
         appBar: AppBar(
-          title: const Text(
-            '履歴',
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          title: Text(
+            context.i18n.historyStrings.historyScreen.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
           backgroundColor: const Color(0xFF1976D2),
           elevation: 0,
@@ -61,9 +65,9 @@ class HistoryScreen extends HookConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      '問題文:',
-                      style: TextStyle(
+                    Text(
+                      context.i18n.historyStrings.historyScreen.question,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF666666),
@@ -77,9 +81,9 @@ class HistoryScreen extends HookConsumerWidget {
               const SizedBox(height: 24),
               // 回答セクション
               if (state.answerCode != null && state.answerCode!.isNotEmpty) ...[
-                const Text(
-                  'あなたの回答',
-                  style: TextStyle(
+                Text(
+                  context.i18n.historyStrings.historyScreen.yourAnswer,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF333333),
@@ -108,9 +112,9 @@ class HistoryScreen extends HookConsumerWidget {
                   ),
                 ),
               ] else if (state.answerChoiceIndex != null) ...[
-                const Text(
-                  '選択肢から選んだ回答',
-                  style: TextStyle(
+                Text(
+                  context.i18n.historyStrings.historyScreen.choiceAnswer,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF333333),
@@ -183,9 +187,14 @@ class HistoryScreen extends HookConsumerWidget {
                             if (isCorrect)
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
-                                child: const Text(
-                                  '正解',
-                                  style: TextStyle(
+                                child: Text(
+                                  context
+                                      .i18n
+                                      .historyStrings
+                                      .historyScreen
+                                      .judgement
+                                      .replaceAll('{result}', '正解'),
+                                  style: const TextStyle(
                                     color: Colors.green,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -194,9 +203,14 @@ class HistoryScreen extends HookConsumerWidget {
                             if (isSelected && !isCorrect)
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
-                                child: const Text(
-                                  'あなたの選択',
-                                  style: TextStyle(
+                                child: Text(
+                                  context
+                                      .i18n
+                                      .historyStrings
+                                      .historyScreen
+                                      .judgement
+                                      .replaceAll('{result}', '不正解'),
+                                  style: const TextStyle(
                                     color: Colors.red,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -239,7 +253,8 @@ class HistoryScreen extends HookConsumerWidget {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          '正誤判定: ${state.feedbackResult}',
+                          context.i18n.historyStrings.historyScreen.judgement
+                              .replaceAll('{result}', state.feedbackResult),
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -251,9 +266,9 @@ class HistoryScreen extends HookConsumerWidget {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      '【解説】',
-                      style: TextStyle(
+                    Text(
+                      context.i18n.historyStrings.historyScreen.explanation,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF333333),
@@ -262,9 +277,9 @@ class HistoryScreen extends HookConsumerWidget {
                     const SizedBox(height: 8),
                     MarkdownBody(data: state.feedbackExplanation),
                     const SizedBox(height: 16),
-                    const Text(
-                      '【アドバイス】',
-                      style: TextStyle(
+                    Text(
+                      context.i18n.historyStrings.historyScreen.advice,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF333333),
@@ -273,9 +288,9 @@ class HistoryScreen extends HookConsumerWidget {
                     const SizedBox(height: 8),
                     MarkdownBody(data: state.feedbackAdvice),
                     const SizedBox(height: 16),
-                    const Text(
-                      '【サンプルコード】',
-                      style: TextStyle(
+                    Text(
+                      context.i18n.historyStrings.historyScreen.sampleCode,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF333333),
@@ -312,7 +327,7 @@ class HistoryScreen extends HookConsumerWidget {
       ),
       loading: () =>
           const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (e, st) => Scaffold(body: Center(child: Text('エラー: $e'))),
+      error: (e, st) => Scaffold(body: Center(child: Text('Error: $e'))),
     );
   }
 }
