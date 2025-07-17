@@ -1,169 +1,180 @@
-# Flutter e-Learning アプリ
+# Flutter e-Learning App
 
-Flutterで開発した学習アプリです。プログラミング学習に特化した問題出題システムを提供します。
+This is a Flutter-based e-learning application focused on programming practice. It provides a system for delivering both multiple-choice and code-input questions, with multilingual support and a clean architecture.
 
-## 機能
+## Overview
 
-### 基本機能
-- **問題出題**: 選択式・コード入力式の問題を出題
-- **履歴管理**: 学習履歴の表示・管理
-- **セクション管理**: 学習内容をセクション単位で管理
-- **設定画面**: アプリの各種設定
-- **多言語対応**: 日本語・英語に対応した国際化機能
+- **Purpose:** Programming learning app with question delivery, history management, and section-based content.
+- **Internationalization:** Supports Japanese and English (i18n via slang).
+- **Architecture:** MVVM + Clean Architecture + DDD, with clear layer separation for maintainability.
 
-### 技術的特徴
-- **状態管理**: Riverpod を使用したリアクティブな状態管理
-- **ナビゲーション**: GoRouter による宣言的ルーティング
-- **コードエディタ**: flutter_code_editor による本格的なコード編集機能
-- **外部API連携**: Dify APIと連携したAI機能（フィードバック生成等）
-- **国際化**: slang パッケージによる型安全な多言語対応
-- **クリーンアーキテクチャ**: レイヤー分離による保守性の高い設計
+## Features
 
-## 画面一覧
+- Multiple-choice and code-input questions
+- Learning history management
+- Section-based content organization
+- Settings screen
+- Multilingual support (Japanese/English)
+- AI-powered feedback (Dify API integration)
 
-| **ホーム画面** | **セクション一覧画面** | **問題画面（選択式）** | **問題画面（コード入力）** | **履歴詳細画面** | **設定画面**  |
+## User Interface
+
+| **Home** | **Section List** | **Question (Choice)** | **Question (Code Input)** | **History Detail** | **Settings** |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| ![ホーム画面](README_image/ホーム画面.png) | ![セクション一覧画面](README_image/セクション一覧画面.png) | ![選択式の問題画面](README_image/選択式の問題画面.png) | ![コード入力の問題画面](README_image/コード入力の問題画面.png) | ![履歴画面](README_image/履歴画面.png) | ![設定画面](README_image/設定画面.png) |
+| ![Home](README_image/ホーム画面.png) | ![Section List](README_image/セクション一覧画面.png) | ![Choice Question](README_image/選択式の問題画面.png) | ![Code Input Question](README_image/コード入力の問題画面.png) | ![History](README_image/履歴画面.png) | ![Settings](README_image/設定画面.png) |
 
+### **HomeScreen**
+File: `lib/presantation/home/view/home_screen.dart`
+Main dashboard, navigation entry point
+### **SectionListScreen**
+File: `lib/presantation/section_list/view/section_list_screen.dart`
+List and select learning sections
+### **SectionScreen**
+File: `lib/presantation/section/view/section_screen.dart`
+Details and questions for a selected section
+### **QuestionScreen**
+File: `lib/presantation/question/view/question_screen.dart`
+Deliver questions (choice/code input)
+  - Choice: Select from multiple options
+  - Code Input: Edit and run code with `flutter_code_editor`
+### **HistoryListScreen**
+File: `lib/presantation/history_list/view/history_list_screen.dart`
+List of learning history
+### **HistoryScreen**
+File: `lib/presantation/history/view/history_screen.dart`
+Details of a specific learning record
+### **SettingScreen**
+File: `lib/presantation/setting/view/setting_screen.dart`
+Application settings
 
-アプリケーションは以下の画面で構成されています：
+### Screen Flow
 
-### メイン画面
-- **ホーム画面** (`HomeScreen`): アプリのメイン画面。学習状況の概要とナビゲーション
-- **セクション一覧画面** (`SectionListScreen`): 学習セクションの一覧表示と選択
-- **セクション画面** (`SectionScreen`): 選択したセクションの詳細と問題一覧
+```mermaid
+flowchart TD
+    Home[HomeScreen] --> SectionList[SectionListScreen]
+    SectionList --> Section[SectionScreen]
+    Section --> Question[QuestionScreen]
+    Home --> Settings[SettingScreen]
+    Home --> HistoryList[HistoryListScreen]
+    HistoryList --> HistoryDetail[HistoryScreen]
+```
 
-### 学習関連画面
-- **問題画面** (`QuestionScreen`): 選択式・コード入力式の問題出題画面
-  - 選択式問題: 複数選択肢から回答を選択
-  - コード入力式問題: `flutter_code_editor`によるコード編集・実行
+The diagram above shows the main navigation flow of the app:
+- From the Home screen, users can navigate to the Section List, Settings, or History List.
+- From the Section List, users select a section to view its details.
+- From a Section, users can access the Question screen to answer questions.
+- From the History List, users can view details of a specific learning record in the History Detail screen.
+- This structure provides intuitive access to all major features from the Home screen.
 
-### 履歴・記録画面
-- **履歴一覧画面** (`HistoryListScreen`): 学習履歴の一覧表示
-- **履歴詳細画面** (`HistoryScreen`): 個別の学習履歴の詳細表示
+## Architecture
 
-### 設定画面
-- **設定画面** (`SettingScreen`): アプリケーションの各種設定
+This app uses MVVM, Clean Architecture, and DDD principles for high maintainability.
 
-### 画面遷移フロー
-- ホーム画面→セクション一覧画面→セクション画面→問題画面
-- ホーム画面→設定画面
-- ホーム画面→学習履歴一覧画面→学習履歴画面
-## 技術スタック
+### Layers
 
-### フロントエンド
-- **Flutter 3.8+**: モバイルアプリケーションフレームワーク
-- **Dart**: プログラミング言語
+```mermaid
+flowchart TD
+    Presentation[Presentation Layer] --> Usecase[Usecase Layer]
+    Usecase --> Domain[Domain Layer]
+    Infrastructure[Infrastructure Layer] --> Domain
+```
 
-### 状態管理・アーキテクチャ
-- **Riverpod (flutter_riverpod: ^2.6.1)**: 状態管理
-- **hooks_riverpod**: React Hooksスタイルの状態管理
-- **riverpod_generator & riverpod_annotation**: コード生成による型安全性
+The diagram above illustrates the dependency direction between layers:
+- The Presentation Layer depends on the Usecase Layer.
+- The Usecase Layer depends on the Domain Layer.
+- The Infrastructure Layer also depends on the Domain Layer and provides implementations for data access.
+- The Domain Layer is independent and contains core business logic and entities.
+This structure enforces separation of concerns and maintainability.
 
-### ナビゲーション
-- **go_router (^15.1.2)**: 宣言的ルーティング
-
-### UI・ユーザー体験
-- **flutter_code_editor (^0.3.3)**: コードエディタ機能
-- **flutter_highlight (^0.7.0)**: シンタックスハイライト
-- **flutter_markdown (^0.7.7+1)**: Markdown表示
-- **file_picker (^10.1.9)**: ファイル選択機能
-
-### 国際化（i18n）
-- **slang (^4.7.3)**: 型安全な多言語対応
-- **slang_flutter (^4.7.0)**: Flutter用slang拡張
-- **slang_build_runner (^4.7.0)**: 自動コード生成
-- **flutter_localizations**: Flutter標準の国際化サポート
-
-### データ管理
-- **sqflite (^2.4.2)**: ローカルデータベース（SQLite）
-- **path (^1.9.1)**: ファイルパス操作
-
-### ネットワーク・API
-- **dio (^5.8.0+1)**: HTTP クライアント
-- **retrofit (^4.4.2)**: タイプセーフなHTTP API クライアント
-- **retrofit_generator (^9.2.0)**: retrofit用コード生成
-
-### コード生成・開発支援
-- **build_runner (^2.5.4)**: コード生成ツール
-- **freezed (^3.0.6)**: イミュータブルクラス生成
-- **json_serializable (^6.9.5)**: JSON シリアライゼーション
-- **source_gen (^2.0.0)**: コード生成基盤
-
-### ユーティリティ
-- **package_info_plus (^8.3.0)**: アプリ情報取得
-- **flutter_hooks (^0.21.2)**: React Hooksスタイルのライフサイクル管理
-
-## アーキテクチャ
-
-このアプリケーションはMVVM + Clean Architecture + DDDを採用し、レイヤー分離による保守性の高い設計となっています。
-
-### layers
-- presantation layer (path: lib/presantation)
-画面や画面の状態が配置される場所です。MVVMでViewとViewModelがあります。
-- usecase layer (path: lib/usecase)
-ViewModelから呼び出されるユースケースを配置する場所です。
-- domain layer (path: lib/domain)
-ビジネスロジックや業務知識を表示するentityやvalue_objectが配置されている場所です。
-- infrastructure layer (path: lib/infrastructure)
-DBやAPIクライアントのクラスが配置される場所です。
-
-### 依存方向
-presantation layer → usecase layer → domain layer ← infrastructure layer
-
-### ディレクトリ構成
-
-以下のlayerで構成されています。
-
+### Directory Structure
 
 ```
 lib/
-├── common/          # 共通ユーティリティ（定数、ルーティング、DIプロバイダー）
-├── domain/          # ドメイン層（ビジネスロジック、エンティティ）
-├── generated/       # 自動生成ファイル（slang、riverpod等）
-├── i18n/           # 国際化リソース（日本語・英語）
-│   ├── en/         # 英語翻訳ファイル
-│   └── ja/         # 日本語翻訳ファイル
-├── infrastructure/ # インフラストラクチャ層（データソース、API）
-├── presantation/   # プレゼンテーション層（UI、状態管理）
-└── usecase/        # ユースケース層（アプリケーションロジック）
+├── common/          # Common utilities (constants, routing, DI providers)
+├── domain/          # Domain layer (business logic, entities)
+├── generated/       # Auto-generated files (slang, riverpod, etc.)
+├── i18n/            # i18n resources (ja/en)
+│   ├── en/          # English translations
+│   └── ja/          # Japanese translations
+├── infrastructure/  # Infrastructure (data sources, APIs)
+├── presantation/    # Presentation layer (UI, state management)
+└── usecase/         # Usecase layer (application logic)
 ```
 
-### アーキテクチャの詳細
+For more details, see [`README_ARCHITECTURE.md`](./README_ARCHITECTURE.md).
 
-詳細なアーキテクチャ情報については [`README_ARCHITECTURE.md`](./README_ARCHITECTURE.md) を参照してください。
+## Tech Stack
 
-## 開発セットアップ
+### Frontend
+- **Flutter 3.8+**: Mobile app framework
+- **Dart**: Programming language
 
-### 前提条件
-- Flutter SDK 3.8.0 以上
+### State Management & Architecture
+- **Riverpod (flutter_riverpod: ^2.6.1)**: State management
+- **hooks_riverpod**: React Hooks style state management
+- **riverpod_generator & riverpod_annotation**: Type-safe code generation
+
+### Navigation
+- **go_router (^15.1.2)**: Declarative routing
+
+### UI/UX
+- **flutter_code_editor (^0.3.3)**: Code editor
+- **flutter_highlight (^0.7.0)**: Syntax highlighting
+- **flutter_markdown (^0.7.7+1)**: Markdown rendering
+- **file_picker (^10.1.9)**: File picker
+
+### Internationalization (i18n)
+- **slang (^4.7.3)**: Type-safe i18n
+- **slang_flutter (^4.7.0)**: Flutter integration for slang
+- **slang_build_runner (^4.7.0)**: Code generation for i18n
+- **flutter_localizations**: Flutter standard i18n support
+
+### Data Management
+- **sqflite (^2.4.2)**: Local database (SQLite)
+- **path (^1.9.1)**: File path utilities
+
+### Networking & API
+- **dio (^5.8.0+1)**: HTTP client
+- **retrofit (^4.4.2)**: Type-safe HTTP API client
+- **retrofit_generator (^9.2.0)**: Code generation for retrofit
+
+### Code Generation & Dev Tools
+- **build_runner (^2.5.4)**: Code generation
+- **freezed (^3.0.6)**: Immutable class generation
+- **json_serializable (^6.9.5)**: JSON serialization
+- **source_gen (^2.0.0)**: Code generation base
+
+### Utilities
+- **package_info_plus (^8.3.0)**: App info
+- **flutter_hooks (^0.21.2)**: React Hooks style lifecycle
+
+## Development Setup
+
+### Prerequisites
+- Flutter SDK 3.8.0 or higher
 - Dart SDK
 
-### セットアップ手順
+### Setup Steps
 
-1. **依存関係のインストール**
+1. **Install dependencies**
    ```bash
    flutter pub get
    ```
-
-2. **コード生成の実行**
+2. **Run code generation**
    ```bash
    flutter pub run build_runner build
    ```
-
-3. **国際化ファイルの生成**
+3. **Generate i18n files**
    ```bash
-   # slangによる翻訳ファイルの自動生成
    flutter pub run slang build
    ```
-
-4. **アプリの実行**
+4. **Run the app**
    ```bash
    flutter run
    ```
 
-### 開発時の注意点
+### Development Notes
 
-- **i18n（国際化）**: 新しい画面やテキストを追加する際は、`lib/i18n/ja/` と `lib/i18n/en/` の両方に翻訳を追加してください
-- **コード生成**: データクラスやリポジトリの変更後は `flutter pub run build_runner build` を実行してください
-- **状態管理**: Riverpodを使用しているため、プロバイダーの変更時はコード生成が必要です
+- **i18n:** Add translations to both `lib/i18n/ja/` and `lib/i18n/en/` when adding new screens or text.
+- **Code generation:** Run `flutter pub run build_runner build` after changing data classes or repositories.
+- **State management:** Riverpod providers require code generation after changes.
